@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\GerenciamentodeClientes"
   ],
+  "SelectedNode": "\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj",
   "PreviewInSolutionExplorer": false
 }

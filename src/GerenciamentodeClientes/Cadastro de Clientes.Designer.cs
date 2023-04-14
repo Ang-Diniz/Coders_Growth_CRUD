@@ -32,94 +32,75 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            textBox1 = new TextBox();
-            maskedTextBox1 = new MaskedTextBox();
-            dateTimePicker1 = new DateTimePicker();
-            textBox2 = new TextBox();
-            btnCadastrar2 = new Button();
+            textCPF = new MaskedTextBox();
+            textEmail = new TextBox();
+            btnSalvar = new Button();
             btnCancelar = new Button();
             label5 = new Label();
+            label6 = new Label();
+            textNome = new TextBox();
+            textDatadeNascimento = new MaskedTextBox();
+            label7 = new Label();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.BorderStyle = BorderStyle.FixedSingle;
             label1.Location = new Point(12, 74);
             label1.Name = "label1";
-            label1.Size = new Size(55, 22);
+            label1.Size = new Size(0, 20);
             label1.TabIndex = 0;
-            label1.Text = "Nome:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.BorderStyle = BorderStyle.FixedSingle;
             label2.Location = new Point(12, 138);
             label2.Name = "label2";
-            label2.Size = new Size(38, 22);
+            label2.Size = new Size(36, 20);
             label2.TabIndex = 1;
             label2.Text = "CPF:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.BorderStyle = BorderStyle.FixedSingle;
             label3.Location = new Point(12, 269);
             label3.Name = "label3";
-            label3.Size = new Size(57, 22);
+            label3.Size = new Size(55, 20);
             label3.TabIndex = 2;
             label3.Text = "E-mail:";
-            label3.Click += label3_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.BorderStyle = BorderStyle.FixedSingle;
             label4.Location = new Point(12, 203);
             label4.Name = "label4";
-            label4.Size = new Size(147, 22);
+            label4.Size = new Size(0, 20);
             label4.TabIndex = 3;
-            label4.Text = "Data de nascimento:";
             // 
-            // textBox1
+            // textCPF
             // 
-            textBox1.Location = new Point(12, 99);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(373, 27);
-            textBox1.TabIndex = 4;
+            textCPF.Location = new Point(12, 163);
+            textCPF.Mask = "999,999,999-99";
+            textCPF.Name = "textCPF";
+            textCPF.Size = new Size(125, 27);
+            textCPF.TabIndex = 5;
             // 
-            // maskedTextBox1
+            // textEmail
             // 
-            maskedTextBox1.Location = new Point(12, 163);
-            maskedTextBox1.Mask = "999,999,999-99";
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(125, 27);
-            maskedTextBox1.TabIndex = 5;
+            textEmail.Location = new Point(12, 294);
+            textEmail.Name = "textEmail";
+            textEmail.Size = new Size(373, 27);
+            textEmail.TabIndex = 7;
             // 
-            // dateTimePicker1
+            // btnSalvar
             // 
-            dateTimePicker1.Location = new Point(12, 228);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 6;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(12, 294);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(373, 27);
-            textBox2.TabIndex = 7;
-            textBox2.TextChanged += textBox2_TextChanged;
-            // 
-            // btnCadastrar2
-            // 
-            btnCadastrar2.Location = new Point(10, 386);
-            btnCadastrar2.Name = "btnCadastrar2";
-            btnCadastrar2.Size = new Size(127, 46);
-            btnCadastrar2.TabIndex = 8;
-            btnCadastrar2.Text = "Cadastrar";
-            btnCadastrar2.UseVisualStyleBackColor = true;
+            btnSalvar.Location = new Point(10, 386);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(127, 46);
+            btnSalvar.TabIndex = 8;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += AoClicarEmAdicionar;
             // 
             // btnCancelar
             // 
@@ -142,18 +123,54 @@
             label5.TabIndex = 10;
             label5.Text = "Dados do cliente";
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 74);
+            label6.Name = "label6";
+            label6.Size = new Size(53, 20);
+            label6.TabIndex = 11;
+            label6.Text = "Nome:";
+            // 
+            // textNome
+            // 
+            textNome.Location = new Point(11, 97);
+            textNome.Name = "textNome";
+            textNome.Size = new Size(374, 27);
+            textNome.TabIndex = 12;
+            // 
+            // textDatadeNascimento
+            // 
+            textDatadeNascimento.Location = new Point(12, 226);
+            textDatadeNascimento.Mask = "  99/99/9999";
+            textDatadeNascimento.Name = "textDatadeNascimento";
+            textDatadeNascimento.Size = new Size(92, 27);
+            textDatadeNascimento.TabIndex = 13;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(11, 203);
+            label7.Name = "label7";
+            label7.Size = new Size(148, 20);
+            label7.TabIndex = 14;
+            label7.Text = "Data de Nascimento:";
+            label7.Click += label7_Click;
+            // 
             // TeladeCadastro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 444);
+            Controls.Add(label7);
+            Controls.Add(textDatadeNascimento);
+            Controls.Add(textNome);
+            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(btnCancelar);
-            Controls.Add(btnCadastrar2);
-            Controls.Add(textBox2);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(maskedTextBox1);
-            Controls.Add(textBox1);
+            Controls.Add(btnSalvar);
+            Controls.Add(textEmail);
+            Controls.Add(textCPF);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -171,12 +188,15 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private TextBox textBox1;
-        private MaskedTextBox maskedTextBox1;
-        private DateTimePicker dateTimePicker1;
-        private TextBox textBox2;
-        private Button btnCadastrar2;
+        private TextBox textNome;
+        private MaskedTextBox textCPF;
+        private DateTimePicker dtpDataDeNascimento;
+        private TextBox textEmail;
+        private Button btnSalvar;
         private Button btnCancelar;
         private Label label5;
+        private Label label6;
+        private MaskedTextBox textDatadeNascimento;
+        private Label label7;
     }
 }
