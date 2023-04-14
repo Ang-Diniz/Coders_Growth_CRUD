@@ -16,13 +16,20 @@ namespace GerenciamentodeClientes
         {
             InitializeComponent();
         }
-
+        List<Pessoa> pessoaList = new List<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
-            var cadastro = new TeladeCadastro();
-            cadastro.ShowDialog();
-        }
+            var cadastro = new TeladeCadastro(dtpData);
 
+            var resp = cadastro.ShowDialog();
+            if (resp == DialogResult.OK)
+            {
+                pessoaList.Add(cadastro.pessoa);
+
+                dtpData.DataSource = null;
+                dtpData.DataSource = pessoaList;
+            }
+        }
+   
     }
 }
-
