@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\GerenciamentodeClientes"
+    "\\src\\GerenciamentodeClientes",
+    "\\src\\GerenciamentodeClientes\\bin",
+    "\\src\\GerenciamentodeClientes\\obj"
   ],
-  "SelectedNode": "\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj",
+  "SelectedNode": "\\src\\GerenciamentodeClientes\\Tela Inicial.cs",
   "PreviewInSolutionExplorer": false
 }
