@@ -36,9 +36,14 @@ namespace GerenciamentodeClientes
 
         }
 
-        private int ObterProximoID()
+        static GerarID()
         {
             int id = 0;
+            id++;
+        }
+
+        private int ObterProximoID()
+        {
             return ++id;
         }
 
