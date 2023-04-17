@@ -16,3 +16,14 @@ C:\Codigo\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\Ger
 C:\Codigo\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.genruntimeconfig.cache
 C:\Codigo\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\ref\GerenciamentodeClientes.dll
 C:\Codigo\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.TelaInicial.resources
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.csproj.AssemblyReference.cache
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.TeladeCadastro.resources
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.TelaInicial.resources
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.csproj.GenerateResource.cache
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.AssemblyInfoInputs.cache
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.AssemblyInfo.cs
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.csproj.CoreCompileInputs.cache
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.dll
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\refint\GerenciamentodeClientes.dll
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.pdb
