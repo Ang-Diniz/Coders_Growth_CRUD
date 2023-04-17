@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,11 @@ namespace GerenciamentodeClientes
                 dtpData.DataSource = null;
                 dtpData.DataSource = pessoaList;
             }
+        }
+            private void AoClicarEmEditar(object sender, EventArgs e)
+            {
+
+            
         }
 
     }
