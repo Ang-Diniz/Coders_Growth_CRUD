@@ -100,7 +100,7 @@
             btnSalvar.TabIndex = 8;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
-            btnSalvar.Click += AoClicarEmAdicionar;
+            btnSalvar.Click += AoClicarEmSalvar;
             // 
             // btnCancelar
             // 
@@ -111,6 +111,7 @@
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += AoClicarEmCancelar;
             // 
             // label5
             // 
@@ -142,7 +143,7 @@
             // textDatadeNascimento
             // 
             textDatadeNascimento.Location = new Point(12, 226);
-            textDatadeNascimento.Mask = "  99/99/9999";
+            textDatadeNascimento.Mask = " 99 /99/ 9999  ";
             textDatadeNascimento.Name = "textDatadeNascimento";
             textDatadeNascimento.Size = new Size(92, 27);
             textDatadeNascimento.TabIndex = 13;
@@ -155,7 +156,6 @@
             label7.Size = new Size(148, 20);
             label7.TabIndex = 14;
             label7.Text = "Data de Nascimento:";
-            label7.Click += label7_Click;
             // 
             // TeladeCadastro
             // 
@@ -177,7 +177,6 @@
             Controls.Add(label1);
             Name = "TeladeCadastro";
             Text = "Tela de Cadastro";
-            Load += TeladeCadastro_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,9 @@ namespace GerenciamentodeClientes
         List<Pessoa> pessoaList = new List<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
-            var cadastro = new TeladeCadastro(dtpData);
+            var cadastro = new TeladeCadastro();
 
-            var resp = cadastro.ShowDialog();
+            var resp = cadastro.ShowDialog(null);
             if (resp == DialogResult.OK)
             {
                 pessoaList.Add(cadastro.pessoa);
@@ -30,6 +31,11 @@ namespace GerenciamentodeClientes
                 dtpData.DataSource = pessoaList;
             }
         }
-   
+            private void AoClicarEmEditar(object sender, EventArgs e)
+            {
+
+            
+        }
+
     }
 }
