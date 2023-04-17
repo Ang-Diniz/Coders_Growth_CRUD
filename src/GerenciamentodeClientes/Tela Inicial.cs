@@ -19,9 +19,9 @@ namespace GerenciamentodeClientes
         List<Pessoa> pessoaList = new List<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
-            var cadastro = new TeladeCadastro(dtpData);
+            var cadastro = new TeladeCadastro();
 
-            var resp = cadastro.ShowDialog();
+            var resp = cadastro.ShowDialog(null);
             if (resp == DialogResult.OK)
             {
                 pessoaList.Add(cadastro.pessoa);
@@ -31,12 +31,5 @@ namespace GerenciamentodeClientes
             }
         }
 
-        static int ID = 0;
-        public int GerarID()
-        {
-            ID++;
-            return ID;
-        }
-   
     }
 }

@@ -13,11 +13,8 @@ namespace GerenciamentodeClientes
     public partial class TeladeCadastro : Form
     {
         public Pessoa pessoa { get; set; }
-        DataGridView dtp_Data = new DataGridView();
-        TelaInicial t1 = new TelaInicial();
-        public TeladeCadastro(DataGridView dtpData)
+        public TeladeCadastro()
         {
-            dtp_Data = dtpData;
             InitializeComponent();
             if (pessoa == null)
             {
@@ -27,9 +24,7 @@ namespace GerenciamentodeClientes
 
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            
-            int IDE = t1.GerarID();
-            pessoa.Id = IDE; 
+            pessoa.Id = Pessoa.GerarID();
             pessoa.Nome = textNome.Text;
             pessoa.CPF = textCPF.Text;
             pessoa.Email = textEmail.Text;
@@ -39,7 +34,7 @@ namespace GerenciamentodeClientes
 
         }
 
-        private void AoClicarEmCancelar (object sender, EventArgs e)
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             DialogResult Resposta;
             Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -47,9 +42,9 @@ namespace GerenciamentodeClientes
             if (Resposta == DialogResult.Yes)
             {
                 this.Close();
-            }           
-            
+            }
+
         }
-     
+
     }
 }

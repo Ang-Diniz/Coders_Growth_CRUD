@@ -143,7 +143,7 @@
             // textDatadeNascimento
             // 
             textDatadeNascimento.Location = new Point(12, 226);
-            textDatadeNascimento.Mask = "  99/99/9999";
+            textDatadeNascimento.Mask = " 99 /99/ 9999  ";
             textDatadeNascimento.Name = "textDatadeNascimento";
             textDatadeNascimento.Size = new Size(92, 27);
             textDatadeNascimento.TabIndex = 13;
@@ -156,7 +156,6 @@
             label7.Size = new Size(148, 20);
             label7.TabIndex = 14;
             label7.Text = "Data de Nascimento:";
-            //label7.Click += label7_Click;
             // 
             // TeladeCadastro
             // 
