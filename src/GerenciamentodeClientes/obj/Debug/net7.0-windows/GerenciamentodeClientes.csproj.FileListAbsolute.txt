@@ -27,3 +27,10 @@ C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7
 C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.dll
 C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\refint\GerenciamentodeClientes.dll
 C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.pdb
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\bin\Debug\net7.0-windows\GerenciamentodeClientes.exe
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\bin\Debug\net7.0-windows\GerenciamentodeClientes.deps.json
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\bin\Debug\net7.0-windows\GerenciamentodeClientes.runtimeconfig.json
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\bin\Debug\net7.0-windows\GerenciamentodeClientes.dll
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\bin\Debug\net7.0-windows\GerenciamentodeClientes.pdb
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\GerenciamentodeClientes.genruntimeconfig.cache
+C:\Codigo\Coders Growth\Coders_Growth\src\GerenciamentodeClientes\obj\Debug\net7.0-windows\ref\GerenciamentodeClientes.dll

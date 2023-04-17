@@ -30,6 +30,13 @@ namespace GerenciamentodeClientes
                 dtpData.DataSource = pessoaList;
             }
         }
+
+        static int ID = 0;
+        public int GerarID()
+        {
+            ID++;
+            return ID;
+        }
    
     }
 }

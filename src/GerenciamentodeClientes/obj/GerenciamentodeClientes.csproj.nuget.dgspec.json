@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Codigo\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj": {}
+    "C:\\Codigo\\Coders Growth\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj": {}
   },
   "projects": {
-    "C:\\Codigo\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj": {
+    "C:\\Codigo\\Coders Growth\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Codigo\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj",
+        "projectUniqueName": "C:\\Codigo\\Coders Growth\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj",
         "projectName": "GerenciamentodeClientes",
-        "projectPath": "C:\\Codigo\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj",
+        "projectPath": "C:\\Codigo\\Coders Growth\\Coders_Growth\\src\\GerenciamentodeClientes\\GerenciamentodeClientes.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Codigo\\Coders_Growth\\src\\GerenciamentodeClientes\\obj\\",
+        "outputPath": "C:\\Codigo\\Coders Growth\\Coders_Growth\\src\\GerenciamentodeClientes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

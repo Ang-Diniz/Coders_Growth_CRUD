@@ -14,6 +14,7 @@ namespace GerenciamentodeClientes
     {
         public Pessoa pessoa { get; set; }
         DataGridView dtp_Data = new DataGridView();
+        TelaInicial t1 = new TelaInicial();
         public TeladeCadastro(DataGridView dtpData)
         {
             dtp_Data = dtpData;
@@ -24,9 +25,11 @@ namespace GerenciamentodeClientes
             }
         }
 
-        private void AoClicarEmAdicionar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            pessoa.Id = ObterProximoID(); 
+            
+            int IDE = t1.GerarID();
+            pessoa.Id = IDE; 
             pessoa.Nome = textNome.Text;
             pessoa.CPF = textCPF.Text;
             pessoa.Email = textEmail.Text;
@@ -36,12 +39,17 @@ namespace GerenciamentodeClientes
 
         }
 
-        private void GerarID()
+        private void AoClicarEmCancelar (object sender, EventArgs e)
         {
-            int id = 0;
-            ++id;
-            return id;
-        }
+            DialogResult Resposta;
+            Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+            if (Resposta == DialogResult.Yes)
+            {
+                this.Close();
+            }           
+            
+        }
+     
     }
 }
