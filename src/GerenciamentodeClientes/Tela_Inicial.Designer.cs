@@ -38,6 +38,7 @@
             // 
             // dtpData
             // 
+            dtpData.AllowUserToAddRows = false;
             dtpData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtpData.Location = new Point(12, 44);
             dtpData.Name = "dtpData";
@@ -75,6 +76,7 @@
             btnExcluir.TabIndex = 3;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += AoClicarEmExcluir;
             // 
             // label1
             // 

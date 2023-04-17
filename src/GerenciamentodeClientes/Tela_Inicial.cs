@@ -17,7 +17,8 @@ namespace GerenciamentodeClientes
         {
             InitializeComponent();
         }
-        List<Pessoa> pessoaList = new List<Pessoa>();
+
+        BindingList<Pessoa> pessoaList = new BindingList<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             var cadastro = new TeladeCadastro();
@@ -31,10 +32,17 @@ namespace GerenciamentodeClientes
                 dtpData.DataSource = pessoaList;
             }
         }
-            private void AoClicarEmEditar(object sender, EventArgs e)
-            {
+        private void AoClicarEmEditar(object sender, EventArgs e)
+        {
+            /*dtpData.CurrentCell.RowIndex;
+            dtpData.Rows.*/
+        }
 
-            
+        private void AoClicarEmExcluir(object sender, EventArgs e)
+        {
+            int index = dtpData.CurrentCell.RowIndex;
+            dtpData.Rows.RemoveAt(index);
+            MessageBox.Show("Um cliente foi removido", "AVISO", MessageBoxButtons.OK);
         }
 
     }
