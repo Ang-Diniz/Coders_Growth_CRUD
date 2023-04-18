@@ -189,7 +189,6 @@
         private Label label4;
         private TextBox textNome;
         private MaskedTextBox textCPF;
-        private DateTimePicker dtpDataDeNascimento;
         private TextBox textEmail;
         private Button btnSalvar;
         private Button btnCancelar;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +22,7 @@ namespace GerenciamentodeClientes
         BindingList<Pessoa> pessoaList = new BindingList<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
-            var cadastro = new TeladeCadastro();
+            var cadastro = new TeladeCadastro(null);
 
             var resp = cadastro.ShowDialog(null);
             if (resp == DialogResult.OK)
@@ -34,15 +35,24 @@ namespace GerenciamentodeClientes
         }
         private void AoClicarEmEditar(object sender, EventArgs e)
         {
-            /*dtpData.CurrentCell.RowIndex;
-            dtpData.Rows.*/
+            var index = dtpData.CurrentCell.RowIndex;
+            var pessoaSelecionada = dtpData.Rows[index].DataBoundItem as Pessoa;
+
+            var telaEdicao = new TeladeCadastro(pessoaSelecionada);
+            var resp = telaEdicao.ShowDialog();
+            if (resp == DialogResult.OK)
+            {
+                pessoaList[index] = telaEdicao.pessoa;
+
+                dtpData.DataSource = null;
+                dtpData.DataSource = pessoaList;
+            }
         }
 
         private void AoClicarEmExcluir(object sender, EventArgs e)
         {
-            int index = dtpData.CurrentCell.RowIndex;
-            dtpData.Rows.RemoveAt(index);
-            MessageBox.Show("Um cliente foi removido", "AVISO", MessageBoxButtons.OK);
+
+
         }
 
     }

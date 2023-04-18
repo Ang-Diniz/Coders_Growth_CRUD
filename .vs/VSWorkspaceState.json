@@ -1,11 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
     "\\src\\GerenciamentodeClientes",
     "\\src\\GerenciamentodeClientes\\bin",
     "\\src\\GerenciamentodeClientes\\obj"
   ],
-  "SelectedNode": "\\src\\GerenciamentodeClientes\\Cadastro_de_Clientes.cs",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
