@@ -37,7 +37,7 @@ namespace GerenciamentodeClientes
         }
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            if (pessoa.Id == 0)
+            if (pessoa.Id == Decimal.Zero)
             {
                 pessoa.Id = Pessoa.GerarID();
             }

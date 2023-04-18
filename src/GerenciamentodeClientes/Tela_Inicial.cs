@@ -29,31 +29,25 @@ namespace GerenciamentodeClientes
             {
                 pessoaList.Add(cadastro.pessoa);
 
-                dtpData.DataSource = null;
-                dtpData.DataSource = pessoaList;
+                Data_Grid_View1.DataSource = null;
+                Data_Grid_View1.DataSource = pessoaList;
             }
         }
         private void AoClicarEmEditar(object sender, EventArgs e)
         {
-            var index = dtpData.CurrentCell.RowIndex;
-            var pessoaSelecionada = dtpData.Rows[index].DataBoundItem as Pessoa;
+            var index = Data_Grid_View1.CurrentCell.RowIndex;
+            var pessoaSelecionada = Data_Grid_View1.Rows[index].DataBoundItem as Pessoa;
 
             var telaEdicao = new TeladeCadastro(pessoaSelecionada);
             var resp = telaEdicao.ShowDialog();
             if (resp == DialogResult.OK)
             {
-                pessoaList[index] = telaEdicao.pessoa;
-
-                dtpData.DataSource = null;
-                dtpData.DataSource = pessoaList;
+                Data_Grid_View1.DataSource = null;
+                Data_Grid_View1.DataSource = pessoaList;
             }
         }
 
-        private void AoClicarEmExcluir(object sender, EventArgs e)
-        {
-
-
-        }
-
     }
+
 }
+
