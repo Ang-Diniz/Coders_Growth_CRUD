@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dtpData = new DataGridView();
+            Data_Grid_View1 = new DataGridView();
             btnCadastrar = new Button();
             btnEditar = new Button();
             btnExcluir = new Button();
             label1 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dtpData).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Data_Grid_View1).BeginInit();
             SuspendLayout();
             // 
-            // dtpData
+            // Data_Grid_View1
             // 
-            dtpData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtpData.Location = new Point(12, 44);
-            dtpData.Name = "dtpData";
-            dtpData.RowHeadersWidth = 51;
-            dtpData.RowTemplate.Height = 29;
-            dtpData.Size = new Size(974, 379);
-            dtpData.TabIndex = 0;
+            Data_Grid_View1.AllowUserToAddRows = false;
+            Data_Grid_View1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Data_Grid_View1.Location = new Point(12, 44);
+            Data_Grid_View1.Name = "dtpData";
+            Data_Grid_View1.RowHeadersWidth = 51;
+            Data_Grid_View1.RowTemplate.Height = 29;
+            Data_Grid_View1.Size = new Size(974, 379);
+            Data_Grid_View1.TabIndex = 0;
             // 
             // btnCadastrar
             // 
@@ -75,6 +76,7 @@
             btnExcluir.TabIndex = 3;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            
             // 
             // label1
             // 
@@ -95,17 +97,17 @@
             Controls.Add(btnExcluir);
             Controls.Add(btnEditar);
             Controls.Add(btnCadastrar);
-            Controls.Add(dtpData);
+            Controls.Add(Data_Grid_View1);
             Name = "TelaInicial";
             Text = "Tela_Inicial";
-            ((System.ComponentModel.ISupportInitialize)dtpData).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Data_Grid_View1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dtpData;
+        private DataGridView Data_Grid_View1;
         private Button btnCadastrar;
         private Button btnEditar;
         private Button btnExcluir;

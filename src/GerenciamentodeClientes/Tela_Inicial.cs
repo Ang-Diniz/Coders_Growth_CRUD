@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,25 +18,36 @@ namespace GerenciamentodeClientes
         {
             InitializeComponent();
         }
-        List<Pessoa> pessoaList = new List<Pessoa>();
+
+        BindingList<Pessoa> pessoaList = new BindingList<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
-            var cadastro = new TeladeCadastro();
+            var cadastro = new TeladeCadastro(null);
 
             var resp = cadastro.ShowDialog(null);
             if (resp == DialogResult.OK)
             {
                 pessoaList.Add(cadastro.pessoa);
 
-                dtpData.DataSource = null;
-                dtpData.DataSource = pessoaList;
+                Data_Grid_View1.DataSource = null;
+                Data_Grid_View1.DataSource = pessoaList;
             }
         }
-            private void AoClicarEmEditar(object sender, EventArgs e)
-            {
+        private void AoClicarEmEditar(object sender, EventArgs e)
+        {
+            var index = Data_Grid_View1.CurrentCell.RowIndex;
+            var pessoaSelecionada = Data_Grid_View1.Rows[index].DataBoundItem as Pessoa;
 
-            
+            var telaEdicao = new TeladeCadastro(pessoaSelecionada);
+            var resp = telaEdicao.ShowDialog();
+            if (resp == DialogResult.OK)
+            {
+                Data_Grid_View1.DataSource = null;
+                Data_Grid_View1.DataSource = pessoaList;
+            }
         }
 
     }
+
 }
+
