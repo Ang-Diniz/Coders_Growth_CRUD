@@ -32,7 +32,7 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            textCPF = new MaskedTextBox();
+            mskCPF = new MaskedTextBox();
             textEmail = new TextBox();
             btnSalvar = new Button();
             btnCancelar = new Button();
@@ -77,13 +77,13 @@
             label4.Size = new Size(0, 20);
             label4.TabIndex = 3;
             // 
-            // textCPF
+            // mskCPF
             // 
-            textCPF.Location = new Point(12, 163);
-            textCPF.Mask = "999,999,999-99";
-            textCPF.Name = "textCPF";
-            textCPF.Size = new Size(125, 27);
-            textCPF.TabIndex = 5;
+            mskCPF.Location = new Point(12, 163);
+            mskCPF.Mask = "999,999,999-99";
+            mskCPF.Name = "mskCPF";
+            mskCPF.Size = new Size(125, 27);
+            mskCPF.TabIndex = 5;
             // 
             // textEmail
             // 
@@ -170,7 +170,7 @@
             Controls.Add(btnCancelar);
             Controls.Add(btnSalvar);
             Controls.Add(textEmail);
-            Controls.Add(textCPF);
+            Controls.Add(mskCPF);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -188,7 +188,7 @@
         private Label label3;
         private Label label4;
         private TextBox textNome;
-        private MaskedTextBox textCPF;
+        private MaskedTextBox mskCPF;
         private TextBox textEmail;
         private Button btnSalvar;
         private Button btnCancelar;
