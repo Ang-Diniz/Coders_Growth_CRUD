@@ -11,7 +11,7 @@ namespace GerenciamentodeClientes
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public string DatadeNascimento { get; set; }
+        public DateTime DatadeNascimento { get; set; }
         public string CPF { get; set; }
 
         public static int ReferenciaID = valorInicialID;

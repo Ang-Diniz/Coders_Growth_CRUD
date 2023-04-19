@@ -39,8 +39,8 @@
             label5 = new Label();
             label6 = new Label();
             textNome = new TextBox();
-            textDatadeNascimento = new MaskedTextBox();
             label7 = new Label();
+            DateTimeDataDeNascimento = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -140,14 +140,6 @@
             textNome.Size = new Size(374, 27);
             textNome.TabIndex = 12;
             // 
-            // textDatadeNascimento
-            // 
-            textDatadeNascimento.Location = new Point(12, 226);
-            textDatadeNascimento.Mask = " 99 /99/ 9999  ";
-            textDatadeNascimento.Name = "textDatadeNascimento";
-            textDatadeNascimento.Size = new Size(92, 27);
-            textDatadeNascimento.TabIndex = 13;
-            // 
             // label7
             // 
             label7.AutoSize = true;
@@ -157,13 +149,23 @@
             label7.TabIndex = 14;
             label7.Text = "Data de Nascimento:";
             // 
+            // DateTimeDataDeNascimento
+            // 
+            DateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
+            DateTimeDataDeNascimento.Location = new Point(12, 226);
+            DateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
+            DateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
+            DateTimeDataDeNascimento.Name = "DateTimeDataDeNascimento";
+            DateTimeDataDeNascimento.Size = new Size(157, 27);
+            DateTimeDataDeNascimento.TabIndex = 16;
+            // 
             // TeladeCadastro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 444);
+            Controls.Add(DateTimeDataDeNascimento);
             Controls.Add(label7);
-            Controls.Add(textDatadeNascimento);
             Controls.Add(textNome);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -194,7 +196,7 @@
         private Button btnCancelar;
         private Label label5;
         private Label label6;
-        private MaskedTextBox textDatadeNascimento;
         private Label label7;
+        private DateTimePicker DateTimeDataDeNascimento;
     }
 }

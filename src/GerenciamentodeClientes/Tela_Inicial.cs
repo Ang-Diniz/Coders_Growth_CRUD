@@ -19,7 +19,7 @@ namespace GerenciamentodeClientes
             InitializeComponent();
         }
 
-        BindingList<Pessoa> pessoaList = new BindingList<Pessoa>();
+        List<Pessoa> pessoaList = new List<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             var cadastro = new TeladeCadastro(null);
