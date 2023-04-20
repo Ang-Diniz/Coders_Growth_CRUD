@@ -44,44 +44,55 @@ namespace GerenciamentodeClientes
 
             //ValidarEmail
             string email = textEmail.Text;
-            var rgx = new Regex(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$");
-
             try
             {
-                if (!rgx.IsMatch(email))
+                if (!Regex.IsMatch(email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(email))
                 {
                     throw new Exception("ERRO");
                 }
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Email Inválido", ex.Message);
+                MessageBox.Show("Email Inválido. Porfavor insira um endereço de e-mail válido.", ex.Message);
                 return false;
             }
 
             //ValidarData
             DateTime DataSelecionada = new DateTime();
-            DateTime DataAtual = DateTime.Now;
-            TimeSpan DataLimite = DataSelecionada - DataAtual;
+            if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out DataSelecionada))
+            {
+                MessageBox.Show("Data de nascimento inválida", "AVISO", MessageBoxButtons.OK);
+                return false;
+            }
 
-            if (DataLimite.TotalDays < (15*365))
+            if (DateTime.Now.Year - DataSelecionada.Year < 15)
             {
                 MessageBox.Show("Você precisa ter mais de 15 anos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else
+
+            //ValidarNome
+            string nome = textNome.Text.Trim();
+            if (string.IsNullOrEmpty(nome) || !Regex.IsMatch(nome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
-                pessoa.DatadeNascimento = DateTimeDataDeNascimento.Value;
+                MessageBox.Show("O campo nome deve conter apenas letras e espaços.", "AVISO");
+                return false;
+            }
+
+            //ValidarCPF
+            string CPF = mskCPF.Text.Trim();
+            if (string.IsNullOrEmpty(CPF) || !Regex.IsMatch(CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            {
+                MessageBox.Show("CPF inválido.", "AVISO");
+                return false;
             }
             return true;
         }
 
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            var result = ValidaoGeral();
 
-            if (result == true)
+            if (ValidaoGeral())
             {
                 if (pessoa.Id == Decimal.Zero)
                 {
@@ -93,6 +104,10 @@ namespace GerenciamentodeClientes
                 pessoa.DatadeNascimento = DateTimeDataDeNascimento.Value;
 
                 DialogResult = DialogResult.OK;
+            }
+            else
+            {
+                MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO");
             }
 
         }
