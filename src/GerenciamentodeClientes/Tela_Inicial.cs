@@ -34,7 +34,8 @@ namespace GerenciamentodeClientes
                     Data_Grid_View1.DataSource = null;
                     Data_Grid_View1.DataSource = pessoaList;
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception)
             {
                 throw new Exception("Erro inesperado, contate o administrador do sistema.");
             }
@@ -54,7 +55,8 @@ namespace GerenciamentodeClientes
                     Data_Grid_View1.DataSource = pessoaList;
                 }
 
-            }catch (Exception ex)
+            }
+            catch (Exception)
             {
                 throw new Exception("Erro inesperado, contate o administrador do sistema.");
             }
