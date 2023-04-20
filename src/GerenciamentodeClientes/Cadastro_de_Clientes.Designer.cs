@@ -28,20 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            label5 = new Label();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
+            textNome = new TextBox();
             mskCPF = new MaskedTextBox();
+            DateTimeDataDeNascimento = new DateTimePicker();
             textEmail = new TextBox();
             btnSalvar = new Button();
             btnCancelar = new Button();
-            label5 = new Label();
             label6 = new Label();
-            textNome = new TextBox();
             label7 = new Label();
-            DateTimeDataDeNascimento = new DateTimePicker();
             SuspendLayout();
+            //
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BorderStyle = BorderStyle.Fixed3D;
+            label5.ForeColor = SystemColors.HotTrack;
+            label5.Location = new Point(12, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(124, 22);
+            label5.TabIndex = 10;
+            label5.Text = "Dados do cliente";
             // 
             // label1
             // 
@@ -77,6 +88,13 @@
             label4.Size = new Size(0, 20);
             label4.TabIndex = 3;
             // 
+            // textNome
+            // 
+            textNome.Location = new Point(11, 97);
+            textNome.Name = "textNome";
+            textNome.Size = new Size(374, 27);
+            textNome.TabIndex = 12;
+            //
             // mskCPF
             // 
             mskCPF.Location = new Point(12, 163);
@@ -85,6 +103,16 @@
             mskCPF.Size = new Size(125, 27);
             mskCPF.TabIndex = 5;
             // 
+            // DateTimeDataDeNascimento
+            // 
+            DateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
+            DateTimeDataDeNascimento.Location = new Point(12, 226);
+            DateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
+            DateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
+            DateTimeDataDeNascimento.Name = "DateTimeDataDeNascimento";
+            DateTimeDataDeNascimento.Size = new Size(157, 27);
+            DateTimeDataDeNascimento.TabIndex = 16;
+            //
             // textEmail
             // 
             textEmail.Location = new Point(12, 294);
@@ -113,17 +141,6 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += AoClicarEmCancelar;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BorderStyle = BorderStyle.Fixed3D;
-            label5.ForeColor = SystemColors.HotTrack;
-            label5.Location = new Point(12, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(124, 22);
-            label5.TabIndex = 10;
-            label5.Text = "Dados do cliente";
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -133,13 +150,6 @@
             label6.TabIndex = 11;
             label6.Text = "Nome:";
             // 
-            // textNome
-            // 
-            textNome.Location = new Point(11, 97);
-            textNome.Name = "textNome";
-            textNome.Size = new Size(374, 27);
-            textNome.TabIndex = 12;
-            // 
             // label7
             // 
             label7.AutoSize = true;
@@ -148,16 +158,6 @@
             label7.Size = new Size(148, 20);
             label7.TabIndex = 14;
             label7.Text = "Data de Nascimento:";
-            // 
-            // DateTimeDataDeNascimento
-            // 
-            DateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
-            DateTimeDataDeNascimento.Location = new Point(12, 226);
-            DateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
-            DateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
-            DateTimeDataDeNascimento.Name = "DateTimeDataDeNascimento";
-            DateTimeDataDeNascimento.Size = new Size(157, 27);
-            DateTimeDataDeNascimento.TabIndex = 16;
             // 
             // TeladeCadastro
             // 
@@ -185,6 +185,7 @@
 
         #endregion
 
+        private Label label5;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -194,7 +195,6 @@
         private TextBox textEmail;
         private Button btnSalvar;
         private Button btnCancelar;
-        private Label label5;
         private Label label6;
         private Label label7;
         private DateTimePicker DateTimeDataDeNascimento;
