@@ -73,16 +73,9 @@ namespace GerenciamentodeClientes
         {
             //ValidarEmail
             string email = textEmail.Text;
-            try
+            if (!Regex.IsMatch(email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(email))
             {
-                if (!Regex.IsMatch(email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(email))
-                {
-                    throw new Exception("ERRO");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Email Inválido. Porfavor insira um endereço de e-mail válido.", ex.Message);
+                MessageBox.Show("Email Inválido. Porfavor insira um endereço de e-mail válido.", "AVISO");
                 return false;
             }
 
@@ -90,7 +83,7 @@ namespace GerenciamentodeClientes
             DateTime DataSelecionada = new DateTime();
             if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out DataSelecionada))
             {
-                MessageBox.Show("Data de nascimento inválida", "AVISO", MessageBoxButtons.OK);
+                MessageBox.Show("Data de nascimento inválida", "AVISO");
                 return false;
             }
 
