@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Reflection.Metadata;
+﻿using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
@@ -31,6 +18,7 @@ namespace GerenciamentodeClientes
                 preencherInputDaTela(pessoaSelecionada);
             }
         }
+
         private void preencherInputDaTela(Pessoa pessoaSelecionada)
         {
             textNome.Text = pessoa.Nome;
@@ -40,6 +28,7 @@ namespace GerenciamentodeClientes
 
             DialogResult = DialogResult.OK;
         }
+
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
@@ -70,44 +59,45 @@ namespace GerenciamentodeClientes
             }
 
         }
+
         public bool ValidacaoGeral()
         {
             var Campo_Nome = textNome.Text.Trim();
             if (string.IsNullOrEmpty(Campo_Nome) || !Regex.IsMatch(Campo_Nome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
-                MessageBox.Show("Nome inválido. O campo nome deve conter apenas letras e espaços.", "AVISO");
+                MessageBox.Show("Nome inválido. O campo nome deve conter apenas letras e espaços.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             var Campo_CPF = mskCPF.Text.Trim();
             if (string.IsNullOrEmpty(Campo_CPF) || !Regex.IsMatch(Campo_CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
             {
-                MessageBox.Show("CPF inválido.", "AVISO");
+                MessageBox.Show("CPF inválido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             var Campo_DataSelecionada = new DateTime();
             if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out Campo_DataSelecionada))
             {
-                MessageBox.Show("Data de nascimento inválida.", "AVISO");
                 return false;
             }
 
             if (DateTime.Now.Year - Campo_DataSelecionada.Year < Pessoa.valorMinimoIdade)
             {
-                MessageBox.Show("Você precisa ter mais de 15 anos.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 15 anos para se cadastrar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             var Campo_Email = textEmail.Text;
             if (!Regex.IsMatch(Campo_Email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(Campo_Email))
             {
-                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido.", "AVISO");
+                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             return true;
         }
+
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
@@ -119,14 +109,11 @@ namespace GerenciamentodeClientes
                 {
                     this.Close();
                 }
-
             }
             catch (Exception)
             {
-
                 throw new Exception("Erro inesperado, contate o administrador do sistema.");
             }
-
         }
     }
 }

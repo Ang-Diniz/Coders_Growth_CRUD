@@ -42,7 +42,7 @@
             label6 = new Label();
             label7 = new Label();
             SuspendLayout();
-            //
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -94,7 +94,7 @@
             textNome.Name = "textNome";
             textNome.Size = new Size(374, 27);
             textNome.TabIndex = 12;
-            //
+            // 
             // mskCPF
             // 
             mskCPF.Location = new Point(12, 163);
@@ -112,7 +112,7 @@
             DateTimeDataDeNascimento.Name = "DateTimeDataDeNascimento";
             DateTimeDataDeNascimento.Size = new Size(157, 27);
             DateTimeDataDeNascimento.TabIndex = 16;
-            //
+            // 
             // textEmail
             // 
             textEmail.Location = new Point(12, 294);
