@@ -69,8 +69,8 @@ namespace GerenciamentodeClientes
                 var index2 = Data_Grid_View1.CurrentCell.RowIndex;
 
                 DialogResult resp;
-                resp = MessageBox.Show("Tem Certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (resp == DialogResult.OK)
+                resp = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resp == DialogResult.Yes)
                 {
                     Data_Grid_View1.Rows.RemoveAt(index2);
                     Data_Grid_View1.DataSource = (pessoaList.ToList());
