@@ -8,10 +8,11 @@ namespace GerenciamentodeClientes
     {
         public const int valorInicialID = 0;
         public const int incrementoID = 1;
+        public const int valorMinimoIdade = 15;
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public string DatadeNascimento { get; set; }
+        public DateTime DatadeNascimento { get; set; }
         public string CPF { get; set; }
 
         public static int ReferenciaID = valorInicialID;

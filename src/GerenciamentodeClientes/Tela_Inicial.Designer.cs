@@ -41,7 +41,7 @@
             Data_Grid_View1.AllowUserToAddRows = false;
             Data_Grid_View1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Data_Grid_View1.Location = new Point(12, 44);
-            Data_Grid_View1.Name = "dtpData";
+            Data_Grid_View1.Name = "Data_Grid_View1";
             Data_Grid_View1.RowHeadersWidth = 51;
             Data_Grid_View1.RowTemplate.Height = 29;
             Data_Grid_View1.Size = new Size(974, 379);
@@ -76,7 +76,6 @@
             btnExcluir.TabIndex = 3;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
-            
             // 
             // label1
             // 

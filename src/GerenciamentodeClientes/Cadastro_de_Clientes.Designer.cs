@@ -28,20 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            label5 = new Label();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            textCPF = new MaskedTextBox();
+            textNome = new TextBox();
+            mskCPF = new MaskedTextBox();
+            DateTimeDataDeNascimento = new DateTimePicker();
             textEmail = new TextBox();
             btnSalvar = new Button();
             btnCancelar = new Button();
-            label5 = new Label();
             label6 = new Label();
-            textNome = new TextBox();
-            textDatadeNascimento = new MaskedTextBox();
             label7 = new Label();
             SuspendLayout();
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BorderStyle = BorderStyle.Fixed3D;
+            label5.ForeColor = SystemColors.HotTrack;
+            label5.Location = new Point(12, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(124, 22);
+            label5.TabIndex = 10;
+            label5.Text = "Dados do cliente";
             // 
             // label1
             // 
@@ -77,13 +88,30 @@
             label4.Size = new Size(0, 20);
             label4.TabIndex = 3;
             // 
-            // textCPF
+            // textNome
             // 
-            textCPF.Location = new Point(12, 163);
-            textCPF.Mask = "999,999,999-99";
-            textCPF.Name = "textCPF";
-            textCPF.Size = new Size(125, 27);
-            textCPF.TabIndex = 5;
+            textNome.Location = new Point(11, 97);
+            textNome.Name = "textNome";
+            textNome.Size = new Size(374, 27);
+            textNome.TabIndex = 12;
+            // 
+            // mskCPF
+            // 
+            mskCPF.Location = new Point(12, 163);
+            mskCPF.Mask = "999,999,999-99";
+            mskCPF.Name = "mskCPF";
+            mskCPF.Size = new Size(125, 27);
+            mskCPF.TabIndex = 5;
+            // 
+            // DateTimeDataDeNascimento
+            // 
+            DateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
+            DateTimeDataDeNascimento.Location = new Point(12, 226);
+            DateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
+            DateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
+            DateTimeDataDeNascimento.Name = "DateTimeDataDeNascimento";
+            DateTimeDataDeNascimento.Size = new Size(157, 27);
+            DateTimeDataDeNascimento.TabIndex = 16;
             // 
             // textEmail
             // 
@@ -113,17 +141,6 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += AoClicarEmCancelar;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BorderStyle = BorderStyle.Fixed3D;
-            label5.ForeColor = SystemColors.HotTrack;
-            label5.Location = new Point(12, 9);
-            label5.Name = "label5";
-            label5.Size = new Size(124, 22);
-            label5.TabIndex = 10;
-            label5.Text = "Dados do cliente";
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -132,21 +149,6 @@
             label6.Size = new Size(53, 20);
             label6.TabIndex = 11;
             label6.Text = "Nome:";
-            // 
-            // textNome
-            // 
-            textNome.Location = new Point(11, 97);
-            textNome.Name = "textNome";
-            textNome.Size = new Size(374, 27);
-            textNome.TabIndex = 12;
-            // 
-            // textDatadeNascimento
-            // 
-            textDatadeNascimento.Location = new Point(12, 226);
-            textDatadeNascimento.Mask = " 99 /99/ 9999  ";
-            textDatadeNascimento.Name = "textDatadeNascimento";
-            textDatadeNascimento.Size = new Size(92, 27);
-            textDatadeNascimento.TabIndex = 13;
             // 
             // label7
             // 
@@ -162,15 +164,15 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 444);
+            Controls.Add(DateTimeDataDeNascimento);
             Controls.Add(label7);
-            Controls.Add(textDatadeNascimento);
             Controls.Add(textNome);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(btnCancelar);
             Controls.Add(btnSalvar);
             Controls.Add(textEmail);
-            Controls.Add(textCPF);
+            Controls.Add(mskCPF);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -183,18 +185,18 @@
 
         #endregion
 
+        private Label label5;
         private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
         private TextBox textNome;
-        private MaskedTextBox textCPF;
+        private MaskedTextBox mskCPF;
         private TextBox textEmail;
         private Button btnSalvar;
         private Button btnCancelar;
-        private Label label5;
         private Label label6;
-        private MaskedTextBox textDatadeNascimento;
         private Label label7;
+        private DateTimePicker DateTimeDataDeNascimento;
     }
 }

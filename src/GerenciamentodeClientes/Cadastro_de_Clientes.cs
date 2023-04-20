@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
@@ -26,41 +18,102 @@ namespace GerenciamentodeClientes
                 preencherInputDaTela(pessoaSelecionada);
             }
         }
+
         private void preencherInputDaTela(Pessoa pessoaSelecionada)
         {
             textNome.Text = pessoa.Nome;
-            textCPF.Text = pessoa.CPF;
+            mskCPF.Text = pessoa.CPF;
             textEmail.Text = pessoa.Email;
-            textDatadeNascimento.Text = pessoa.DatadeNascimento;
+            DateTimeDataDeNascimento.Value = pessoa.DatadeNascimento;
 
             DialogResult = DialogResult.OK;
         }
+
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            if (pessoa.Id == Decimal.Zero)
+            try
             {
-                pessoa.Id = Pessoa.GerarID();
+                if (ValidacaoGeral())
+                {
+                    if (pessoa.Id == Decimal.Zero)
+                    {
+                        pessoa.Id = Pessoa.GerarID();
+                    }
+                    pessoa.Nome = textNome.Text;
+                    pessoa.CPF = mskCPF.Text;
+                    pessoa.Email = textEmail.Text;
+                    pessoa.DatadeNascimento = DateTimeDataDeNascimento.Value;
+
+                    DialogResult = DialogResult.OK;
+                }
+
+                else
+                {
+                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO");
+                }
             }
-            pessoa.Nome = textNome.Text;
-            pessoa.CPF = textCPF.Text;
-            pessoa.Email = textEmail.Text;
-            pessoa.DatadeNascimento = textDatadeNascimento.Text;
+            catch (Exception)
+            {
 
-            DialogResult = DialogResult.OK;
+                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+            }
 
+        }
+
+        public bool ValidacaoGeral()
+        {
+            var Campo_Nome = textNome.Text.Trim();
+            if (string.IsNullOrEmpty(Campo_Nome) || !Regex.IsMatch(Campo_Nome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
+            {
+                MessageBox.Show("Nome inválido. O campo nome deve conter apenas letras e espaços.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            var Campo_CPF = mskCPF.Text.Trim();
+            if (string.IsNullOrEmpty(Campo_CPF) || !Regex.IsMatch(Campo_CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            {
+                MessageBox.Show("CPF inválido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            var Campo_DataSelecionada = new DateTime();
+            if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out Campo_DataSelecionada))
+            {
+                return false;
+            }
+
+            if (DateTime.Now.Year - Campo_DataSelecionada.Year < Pessoa.valorMinimoIdade)
+            {
+                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 15 anos para se cadastrar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            var Campo_Email = textEmail.Text;
+            if (!Regex.IsMatch(Campo_Email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(Campo_Email))
+            {
+                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
-            DialogResult Resposta;
-            Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (Resposta == DialogResult.Yes)
+            try
             {
-                this.Close();
+                DialogResult Resposta;
+                Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (Resposta == DialogResult.Yes)
+                {
+                    this.Close();
+                }
             }
-
+            catch (Exception)
+            {
+                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+            }
         }
-
     }
 }
