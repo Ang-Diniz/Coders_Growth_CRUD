@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Reflection.Metadata;
 
 namespace GerenciamentodeClientes
 {
@@ -39,9 +40,37 @@ namespace GerenciamentodeClientes
 
             DialogResult = DialogResult.OK;
         }
+        private void AoClicarEmSalvar(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ValidaoGeral())
+                {
+                    if (pessoa.Id == Decimal.Zero)
+                    {
+                        pessoa.Id = Pessoa.GerarID();
+                    }
+                    pessoa.Nome = textNome.Text;
+                    pessoa.CPF = mskCPF.Text;
+                    pessoa.Email = textEmail.Text;
+                    pessoa.DatadeNascimento = DateTimeDataDeNascimento.Value;
+
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+            }
+
+        }
         public bool ValidaoGeral()
         {
-
             //ValidarEmail
             string email = textEmail.Text;
             try
@@ -88,40 +117,26 @@ namespace GerenciamentodeClientes
             }
             return true;
         }
-
-        private void AoClicarEmSalvar(object sender, EventArgs e)
-        {
-
-            if (ValidaoGeral())
-            {
-                if (pessoa.Id == Decimal.Zero)
-                {
-                    pessoa.Id = Pessoa.GerarID();
-                }
-                pessoa.Nome = textNome.Text;
-                pessoa.CPF = mskCPF.Text;
-                pessoa.Email = textEmail.Text;
-                pessoa.DatadeNascimento = DateTimeDataDeNascimento.Value;
-
-                DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO");
-            }
-
-        }
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
-            DialogResult Resposta;
-            Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (Resposta == DialogResult.Yes)
+            try
             {
-                this.Close();
+                DialogResult Resposta;
+                Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (Resposta == DialogResult.Yes)
+                {
+                    this.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Erro inesperado, contate o administrador do sistema.");
             }
 
-        }
 
+        }
     }
 }
