@@ -62,6 +62,25 @@ namespace GerenciamentodeClientes
             }
 
         }
+        private void AoClicarEmExcluir(object sender, EventArgs e)
+        {
+            try
+            {
+                var index2 = Data_Grid_View1.CurrentCell.RowIndex;
+
+                DialogResult resp;
+                resp = MessageBox.Show("Tem Certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (resp == DialogResult.OK)
+                {
+                    Data_Grid_View1.Rows.RemoveAt(index2);
+                    Data_Grid_View1.DataSource = (pessoaList.ToList());
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+            }
+        }
     }
 }
 
