@@ -81,10 +81,10 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.BorderStyle = BorderStyle.Fixed3D;
-            label1.Location = new Point(469, 9);
+            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(445, 8);
             label1.Name = "label1";
-            label1.Size = new Size(81, 22);
+            label1.Size = new Size(127, 31);
             label1.TabIndex = 4;
             label1.Text = "Tela Inicial";
             // 

@@ -24,7 +24,7 @@ namespace GerenciamentodeClientes
             textNome.Text = pessoa.Nome;
             mskCPF.Text = pessoa.CPF;
             textEmail.Text = pessoa.Email;
-            DateTimeDataDeNascimento.Value = pessoa.DatadeNascimento;
+            DateTimeDataDeNascimento.Value = pessoa.dataDeNascimento;
 
             DialogResult = DialogResult.OK;
         }
@@ -42,14 +42,14 @@ namespace GerenciamentodeClientes
                     pessoa.Nome = textNome.Text;
                     pessoa.CPF = mskCPF.Text;
                     pessoa.Email = textEmail.Text;
-                    pessoa.DatadeNascimento = DateTimeDataDeNascimento.Value;
+                    pessoa.dataDeNascimento = DateTimeDataDeNascimento.Value;
 
                     DialogResult = DialogResult.OK;
                 }
 
                 else
                 {
-                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO");
+                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception)
@@ -62,34 +62,34 @@ namespace GerenciamentodeClientes
 
         public bool ValidacaoGeral()
         {
-            var Campo_Nome = textNome.Text.Trim();
-            if (string.IsNullOrEmpty(Campo_Nome) || !Regex.IsMatch(Campo_Nome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
+            var campo_Nome = textNome.Text.Trim();
+            if (string.IsNullOrEmpty(campo_Nome) || !Regex.IsMatch(campo_Nome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
                 MessageBox.Show("Nome inválido. O campo nome deve conter apenas letras e espaços.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            var Campo_CPF = mskCPF.Text.Trim();
-            if (string.IsNullOrEmpty(Campo_CPF) || !Regex.IsMatch(Campo_CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            var campo_CPF = mskCPF.Text.Trim();
+            if (string.IsNullOrEmpty(campo_CPF) || !Regex.IsMatch(campo_CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
             {
                 MessageBox.Show("CPF inválido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            var Campo_DataSelecionada = new DateTime();
-            if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out Campo_DataSelecionada))
+            var campo_dataSelecionada = new DateTime();
+            if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out campo_dataSelecionada))
             {
                 return false;
             }
 
-            if (DateTime.Now.Year - Campo_DataSelecionada.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - campo_dataSelecionada.Year < Pessoa.valorMinimoIdade)
             {
                 MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 15 anos para se cadastrar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            var Campo_Email = textEmail.Text;
-            if (!Regex.IsMatch(Campo_Email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(Campo_Email))
+            var campo_Email = textEmail.Text;
+            if (!Regex.IsMatch(campo_Email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(campo_Email))
             {
                 MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nEx.: seunome@gmail.com", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -102,10 +102,10 @@ namespace GerenciamentodeClientes
         {
             try
             {
-                DialogResult Resposta;
-                Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respostaBtnCancelar;
+                respostaBtnCancelar = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (Resposta == DialogResult.Yes)
+                if (respostaBtnCancelar == DialogResult.Yes)
                 {
                     this.Close();
                 }

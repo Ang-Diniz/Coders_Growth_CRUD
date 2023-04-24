@@ -19,15 +19,15 @@ namespace GerenciamentodeClientes
             InitializeComponent();
         }
 
-        BindingList<Pessoa> pessoaList = new BindingList<Pessoa>();
+        List<Pessoa> pessoaList = new List<Pessoa>();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
             {
                 var cadastro = new TeladeCadastro(null);
 
-                var resp = cadastro.ShowDialog(null);
-                if (resp == DialogResult.OK)
+                var respostaBtnCadastrar = cadastro.ShowDialog(null);
+                if (respostaBtnCadastrar == DialogResult.OK)
                 {
                     pessoaList.Add(cadastro.pessoa);
 
@@ -48,8 +48,8 @@ namespace GerenciamentodeClientes
                 var pessoaSelecionada = Data_Grid_View1.Rows[index].DataBoundItem as Pessoa;
 
                 var telaEdicao = new TeladeCadastro(pessoaSelecionada);
-                var resp = telaEdicao.ShowDialog();
-                if (resp == DialogResult.OK)
+                var respostaBtnEditar = telaEdicao.ShowDialog();
+                if (respostaBtnEditar == DialogResult.OK)
                 {
                     Data_Grid_View1.DataSource = null;
                     Data_Grid_View1.DataSource = pessoaList;
@@ -69,9 +69,9 @@ namespace GerenciamentodeClientes
                 var index2 = Data_Grid_View1.CurrentCell.RowIndex;
                 var pessoaSelecionada = Data_Grid_View1.Rows[index2].DataBoundItem as Pessoa;
 
-                DialogResult resp;
-                resp = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (resp == DialogResult.Yes)
+                DialogResult respostaBtnExcluir;
+                respostaBtnExcluir = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respostaBtnExcluir == DialogResult.Yes)
                 {
                     pessoaList.Remove(pessoaSelecionada);
 
@@ -79,7 +79,6 @@ namespace GerenciamentodeClientes
                     Data_Grid_View1.DataSource = pessoaList;
 
                 }
-
             }
             catch (Exception)
             {
