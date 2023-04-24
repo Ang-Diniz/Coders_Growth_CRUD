@@ -84,14 +84,14 @@ namespace GerenciamentodeClientes
 
             if (DateTime.Now.Year - Campo_DataSelecionada.Year < Pessoa.valorMinimoIdade)
             {
-                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 15 anos para se cadastrar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 15 anos para se cadastrar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             var Campo_Email = textEmail.Text;
             if (!Regex.IsMatch(Campo_Email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(Campo_Email))
             {
-                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nEx.: seunome@gmail.com", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 

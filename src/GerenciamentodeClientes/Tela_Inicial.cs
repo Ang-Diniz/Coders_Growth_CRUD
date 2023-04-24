@@ -67,14 +67,19 @@ namespace GerenciamentodeClientes
             try
             {
                 var index2 = Data_Grid_View1.CurrentCell.RowIndex;
+                var pessoaSelecionada = Data_Grid_View1.Rows[index2].DataBoundItem as Pessoa;
 
                 DialogResult resp;
                 resp = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resp == DialogResult.Yes)
                 {
-                    Data_Grid_View1.Rows.RemoveAt(index2);
-                    Data_Grid_View1.DataSource = (pessoaList.ToList());
+                    pessoaList.Remove(pessoaSelecionada);
+
+                    Data_Grid_View1.DataSource = null;
+                    Data_Grid_View1.DataSource = pessoaList;
+
                 }
+
             }
             catch (Exception)
             {
