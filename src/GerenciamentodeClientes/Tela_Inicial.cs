@@ -21,7 +21,7 @@ namespace GerenciamentodeClientes
 
         List<Pessoa> pessoaList = new List<Pessoa>();
         DialogResult respostaEventosTelaInicial;
-        private void ao_Clicar_Em_Cadastrar(object sender, EventArgs e)
+        private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
             {
@@ -32,57 +32,70 @@ namespace GerenciamentodeClientes
                 {
                     pessoaList.Add(cadastro.pessoa);
 
-                    Data_Grid_View1.DataSource = null;
-                    Data_Grid_View1.DataSource = pessoaList;
+                    DataGridViewTelaInicial.DataSource = null;
+                    DataGridViewTelaInicial.DataSource = pessoaList;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+                MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
-        private void ao_Clicar_Em_Editar(object sender, EventArgs e)
+        private void AoClicarEmEditar(object sender, EventArgs e)
         {
             try
             {
-                var index = Data_Grid_View1.CurrentCell.RowIndex;
-                var pessoaSelecionada = Data_Grid_View1.Rows[index].DataBoundItem as Pessoa;
-                var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
-                respostaEventosTelaInicial = telaEdicao.ShowDialog();
 
-                if (respostaEventosTelaInicial == DialogResult.OK)
+                if (pessoaList.Count == Decimal.Zero)
                 {
-                    Data_Grid_View1.DataSource = null;
-                    Data_Grid_View1.DataSource = pessoaList;
+                    MessageBox.Show("Nenhum cliente para editar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else
+                {
+                    var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
+                    var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
+                    var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
+                    respostaEventosTelaInicial = telaEdicao.ShowDialog();
 
+                    if (respostaEventosTelaInicial == DialogResult.OK)
+                    {
+                        DataGridViewTelaInicial.DataSource = null;
+                        DataGridViewTelaInicial.DataSource = pessoaList;
+                    }
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+                MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
 
         }
-        private void ao_Clicar_Em_Excluir(object sender, EventArgs e)
+        private void AoClicarEmExcluir(object sender, EventArgs e)
         {
             try
             {
-                var index = Data_Grid_View1.CurrentCell.RowIndex;
-                var pessoaSelecionada = Data_Grid_View1.Rows[index].DataBoundItem as Pessoa;
-                respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (respostaEventosTelaInicial == DialogResult.Yes)
+                if (pessoaList.Count == Decimal.Zero)
                 {
-                    pessoaList.Remove(pessoaSelecionada);
+                    MessageBox.Show("Nenhum cliente para exlcuir.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
+                    var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
+                    respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                    Data_Grid_View1.DataSource = null;
-                    Data_Grid_View1.DataSource = pessoaList;
+                    if (respostaEventosTelaInicial == DialogResult.Yes)
+                    {
+                        pessoaList.Remove(pessoaSelecionada);
 
+                        DataGridViewTelaInicial.DataSource = null;
+                        DataGridViewTelaInicial.DataSource = pessoaList;
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+                MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
     }

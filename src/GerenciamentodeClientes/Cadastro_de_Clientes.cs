@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
@@ -6,31 +7,31 @@ namespace GerenciamentodeClientes
     {
         public Pessoa pessoa { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public TelaDeCadastro(Pessoa pessoaSelecionada)
+        public TelaDeCadastro(Pessoa PessoaSelecionada)
         {
             InitializeComponent();
-            if (pessoaSelecionada == null)
+            if (PessoaSelecionada == null)
             {
                 pessoa = new Pessoa();
             }
             else
             {
-                pessoa = pessoaSelecionada;
-                preencher_Input_Da_Tela(pessoaSelecionada);
+                pessoa = PessoaSelecionada;
+                PreencherInputDaTela(PessoaSelecionada);
             }
         }
 
-        private void preencher_Input_Da_Tela(Pessoa pessoaSelecionada)
+        private void PreencherInputDaTela(Pessoa PessoaSelecionada)
         {
             textNome.Text = pessoa.Nome;
             mskCPF.Text = pessoa.CPF;
             textEmail.Text = pessoa.Email;
-            dateTimeDataDeNascimento.Value = pessoa.dataDeNascimento;
+            dateTimeDataDeNascimento.Value = pessoa.DataDeNascimento;
 
             DialogResult = DialogResult.OK;
         }
 
-        private void ao_Clicar_Em_Salvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
             {
@@ -38,12 +39,12 @@ namespace GerenciamentodeClientes
                 {
                     if (pessoa.Id == Decimal.Zero)
                     {
-                        pessoa.Id = Pessoa.s_gerarID();
+                        pessoa.Id = Pessoa.GerarID();
                     }
                     pessoa.Nome = textNome.Text;
                     pessoa.CPF = mskCPF.Text;
                     pessoa.Email = textEmail.Text;
-                    pessoa.dataDeNascimento = dateTimeDataDeNascimento.Value;
+                    pessoa.DataDeNascimento = dateTimeDataDeNascimento.Value;
 
                     DialogResult = DialogResult.OK;
                 }
@@ -53,14 +54,12 @@ namespace GerenciamentodeClientes
                     MessageBox.Show("Preencha corretamento todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+                MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
 
         }
-
         public bool ValidacaoGeral()
         {
             var campoNome = textNome.Text.Trim();
@@ -90,20 +89,19 @@ namespace GerenciamentodeClientes
             }
 
             var campoEmail = textEmail.Text;
-            if (!Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(campoEmail))
+            if (string.IsNullOrEmpty(campoEmail) || !Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
             {
-                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nEx.: seunome@gmail.com"., "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nExemplo: seunome@gmail.com", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             return true;
         }
 
-        private void ao_Clicar_Em_Cancelar(object sender, EventArgs e)
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
             {
-
                 respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (respostaEventosCadastroClientes == DialogResult.Yes)
@@ -111,9 +109,9 @@ namespace GerenciamentodeClientes
                     this.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+                MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
     }

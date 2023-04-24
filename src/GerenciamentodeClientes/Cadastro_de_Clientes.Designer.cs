@@ -35,7 +35,7 @@
             label4 = new Label();
             textNome = new TextBox();
             mskCPF = new MaskedTextBox();
-            DateTimeDataDeNascimento = new DateTimePicker();
+            dateTimeDataDeNascimento = new DateTimePicker();
             textEmail = new TextBox();
             btnSalvar = new Button();
             btnCancelar = new Button();
@@ -60,7 +60,7 @@
             label1.Location = new Point(12, 74);
             label1.Name = "label1";
             label1.Size = new Size(0, 20);
-            label1.TabIndex = 0;
+            label1.TabIndex = 12;
             // 
             // label2
             // 
@@ -93,7 +93,7 @@
             textNome.Location = new Point(11, 97);
             textNome.Name = "textNome";
             textNome.Size = new Size(374, 27);
-            textNome.TabIndex = 12;
+            textNome.TabIndex = 0;
             // 
             // mskCPF
             // 
@@ -111,7 +111,7 @@
             dateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
             dateTimeDataDeNascimento.Name = "dateTimeDataDeNascimento";
             dateTimeDataDeNascimento.Size = new Size(157, 27);
-            dateTimeDataDeNascimento.TabIndex = 16;
+            dateTimeDataDeNascimento.TabIndex = 6;
             // 
             // textEmail
             // 
@@ -128,7 +128,7 @@
             btnSalvar.TabIndex = 8;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
-            btnSalvar.Click += ao_Clicar_Em_Salvar;
+            btnSalvar.Click += AoClicarEmSalvar;
             // 
             // btnCancelar
             // 
@@ -139,7 +139,7 @@
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += ao_Clicar_Em_Cancelar;
+            btnCancelar.Click += AoClicarEmCancelar;
             // 
             // label6
             // 
