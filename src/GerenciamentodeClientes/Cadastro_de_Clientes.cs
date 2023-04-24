@@ -1,30 +1,32 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
-    public partial class TeladeCadastro : Form
+    public partial class TelaDeCadastro : Form
     {
         public Pessoa pessoa { get; set; }
-        public TeladeCadastro(Pessoa pessoaSelecionada)
+        DialogResult respostaEventosCadastroClientes;
+        public TelaDeCadastro(Pessoa PessoaSelecionada)
         {
             InitializeComponent();
-            if (pessoaSelecionada == null)
+            if (PessoaSelecionada == null)
             {
                 pessoa = new Pessoa();
             }
             else
             {
-                pessoa = pessoaSelecionada;
-                preencherInputDaTela(pessoaSelecionada);
+                pessoa = PessoaSelecionada;
+                PreencherInputDaTela(PessoaSelecionada);
             }
         }
 
-        private void preencherInputDaTela(Pessoa pessoaSelecionada)
+        private void PreencherInputDaTela(Pessoa PessoaSelecionada)
         {
             textNome.Text = pessoa.Nome;
             mskCPF.Text = pessoa.CPF;
             textEmail.Text = pessoa.Email;
-            DateTimeDataDeNascimento.Value = pessoa.DatadeNascimento;
+            dateTimeDataDeNascimento.Value = pessoa.DataDeNascimento;
 
             DialogResult = DialogResult.OK;
         }
@@ -42,56 +44,54 @@ namespace GerenciamentodeClientes
                     pessoa.Nome = textNome.Text;
                     pessoa.CPF = mskCPF.Text;
                     pessoa.Email = textEmail.Text;
-                    pessoa.DatadeNascimento = DateTimeDataDeNascimento.Value;
+                    pessoa.DataDeNascimento = dateTimeDataDeNascimento.Value;
 
                     DialogResult = DialogResult.OK;
                 }
 
                 else
                 {
-                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO");
+                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+                MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
 
         }
-
         public bool ValidacaoGeral()
         {
-            var Campo_Nome = textNome.Text.Trim();
-            if (string.IsNullOrEmpty(Campo_Nome) || !Regex.IsMatch(Campo_Nome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
+            var campoNome = textNome.Text.Trim();
+            if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
                 MessageBox.Show("Nome inválido. O campo nome deve conter apenas letras e espaços.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            var Campo_CPF = mskCPF.Text.Trim();
-            if (string.IsNullOrEmpty(Campo_CPF) || !Regex.IsMatch(Campo_CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            var campoCPF = mskCPF.Text.Trim();
+            if (string.IsNullOrEmpty(campoCPF) || !Regex.IsMatch(campoCPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
             {
                 MessageBox.Show("CPF inválido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            var Campo_DataSelecionada = new DateTime();
-            if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out Campo_DataSelecionada))
+            var campoDataSelecionada = new DateTime();
+            if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
             {
                 return false;
             }
 
-            if (DateTime.Now.Year - Campo_DataSelecionada.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
             {
-                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 15 anos para se cadastrar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            var Campo_Email = textEmail.Text;
-            if (!Regex.IsMatch(Campo_Email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(Campo_Email))
+            var campoEmail = textEmail.Text;
+            if (string.IsNullOrEmpty(campoEmail) || !Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
             {
-                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nExemplo: seunome@gmail.com", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -102,17 +102,16 @@ namespace GerenciamentodeClientes
         {
             try
             {
-                DialogResult Resposta;
-                Resposta = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (Resposta == DialogResult.Yes)
+                if (respostaEventosCadastroClientes == DialogResult.Yes)
                 {
                     this.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception("Erro inesperado, contate o administrador do sistema.");
+                MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
     }

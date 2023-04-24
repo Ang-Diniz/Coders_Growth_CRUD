@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Data_Grid_View1 = new DataGridView();
+            DataGridViewTelaInicial = new DataGridView();
             btnCadastrar = new Button();
             btnEditar = new Button();
             btnExcluir = new Button();
             label1 = new Label();
-            ((System.ComponentModel.ISupportInitialize)Data_Grid_View1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewTelaInicial).BeginInit();
             SuspendLayout();
             // 
-            // Data_Grid_View1
+            // DataGridViewTelaInicial
             // 
-            Data_Grid_View1.AllowUserToAddRows = false;
-            Data_Grid_View1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Data_Grid_View1.Location = new Point(12, 44);
-            Data_Grid_View1.Name = "Data_Grid_View1";
-            Data_Grid_View1.RowHeadersWidth = 51;
-            Data_Grid_View1.RowTemplate.Height = 29;
-            Data_Grid_View1.Size = new Size(974, 379);
-            Data_Grid_View1.TabIndex = 0;
+            DataGridViewTelaInicial.AllowUserToAddRows = false;
+            DataGridViewTelaInicial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataGridViewTelaInicial.Location = new Point(12, 44);
+            DataGridViewTelaInicial.Name = "DataGridViewTelaInicial";
+            DataGridViewTelaInicial.RowHeadersWidth = 51;
+            DataGridViewTelaInicial.RowTemplate.Height = 29;
+            DataGridViewTelaInicial.Size = new Size(974, 379);
+            DataGridViewTelaInicial.TabIndex = 0;
             // 
             // btnCadastrar
             // 
@@ -76,14 +76,15 @@
             btnExcluir.TabIndex = 3;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += AoClicarEmExcluir;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.BorderStyle = BorderStyle.Fixed3D;
-            label1.Location = new Point(469, 9);
+            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(445, 8);
             label1.Name = "label1";
-            label1.Size = new Size(81, 22);
+            label1.Size = new Size(127, 31);
             label1.TabIndex = 4;
             label1.Text = "Tela Inicial";
             // 
@@ -96,17 +97,17 @@
             Controls.Add(btnExcluir);
             Controls.Add(btnEditar);
             Controls.Add(btnCadastrar);
-            Controls.Add(Data_Grid_View1);
+            Controls.Add(DataGridViewTelaInicial);
             Name = "TelaInicial";
             Text = "Tela_Inicial";
-            ((System.ComponentModel.ISupportInitialize)Data_Grid_View1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)DataGridViewTelaInicial).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView Data_Grid_View1;
+        private DataGridView DataGridViewTelaInicial;
         private Button btnCadastrar;
         private Button btnEditar;
         private Button btnExcluir;

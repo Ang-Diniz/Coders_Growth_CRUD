@@ -1,6 +1,6 @@
 ﻿namespace GerenciamentodeClientes
 {
-    partial class TeladeCadastro
+    partial class TelaDeCadastro
     {
         /// <summary>
         /// Required designer variable.
@@ -35,7 +35,7 @@
             label4 = new Label();
             textNome = new TextBox();
             mskCPF = new MaskedTextBox();
-            DateTimeDataDeNascimento = new DateTimePicker();
+            dateTimeDataDeNascimento = new DateTimePicker();
             textEmail = new TextBox();
             btnSalvar = new Button();
             btnCancelar = new Button();
@@ -60,7 +60,7 @@
             label1.Location = new Point(12, 74);
             label1.Name = "label1";
             label1.Size = new Size(0, 20);
-            label1.TabIndex = 0;
+            label1.TabIndex = 12;
             // 
             // label2
             // 
@@ -93,7 +93,7 @@
             textNome.Location = new Point(11, 97);
             textNome.Name = "textNome";
             textNome.Size = new Size(374, 27);
-            textNome.TabIndex = 12;
+            textNome.TabIndex = 0;
             // 
             // mskCPF
             // 
@@ -105,13 +105,13 @@
             // 
             // DateTimeDataDeNascimento
             // 
-            DateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
-            DateTimeDataDeNascimento.Location = new Point(12, 226);
-            DateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
-            DateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
-            DateTimeDataDeNascimento.Name = "DateTimeDataDeNascimento";
-            DateTimeDataDeNascimento.Size = new Size(157, 27);
-            DateTimeDataDeNascimento.TabIndex = 16;
+            dateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
+            dateTimeDataDeNascimento.Location = new Point(12, 226);
+            dateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
+            dateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
+            dateTimeDataDeNascimento.Name = "dateTimeDataDeNascimento";
+            dateTimeDataDeNascimento.Size = new Size(157, 27);
+            dateTimeDataDeNascimento.TabIndex = 6;
             // 
             // textEmail
             // 
@@ -164,7 +164,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 444);
-            Controls.Add(DateTimeDataDeNascimento);
+            Controls.Add(dateTimeDataDeNascimento);
             Controls.Add(label7);
             Controls.Add(textNome);
             Controls.Add(label6);
@@ -197,6 +197,6 @@
         private Button btnCancelar;
         private Label label6;
         private Label label7;
-        private DateTimePicker DateTimeDataDeNascimento;
+        private DateTimePicker dateTimeDataDeNascimento;
     }
 }
