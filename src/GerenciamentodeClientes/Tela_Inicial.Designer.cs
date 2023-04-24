@@ -55,7 +55,7 @@
             btnCadastrar.TabIndex = 1;
             btnCadastrar.Text = "Cadastro";
             btnCadastrar.UseVisualStyleBackColor = true;
-            btnCadastrar.Click += AoClicarEmCadastrar;
+            btnCadastrar.Click += ao_Clicar_Em_Cadastrar;
             // 
             // btnEditar
             // 
@@ -65,7 +65,7 @@
             btnEditar.TabIndex = 2;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = true;
-            btnEditar.Click += AoClicarEmEditar;
+            btnEditar.Click += ao_Clicar_Em_Editar;
             // 
             // btnExcluir
             // 
@@ -76,7 +76,7 @@
             btnExcluir.TabIndex = 3;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
-            btnExcluir.Click += AoClicarEmExcluir;
+            btnExcluir.Click += ao_Clicar_Em_Excluir;
             // 
             // label1
             // 

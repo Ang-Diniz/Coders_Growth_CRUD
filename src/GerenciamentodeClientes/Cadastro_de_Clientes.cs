@@ -2,10 +2,11 @@
 
 namespace GerenciamentodeClientes
 {
-    public partial class TeladeCadastro : Form
+    public partial class TelaDeCadastro : Form
     {
         public Pessoa pessoa { get; set; }
-        public TeladeCadastro(Pessoa pessoaSelecionada)
+        DialogResult respostaEventosCadastroClientes;
+        public TelaDeCadastro(Pessoa pessoaSelecionada)
         {
             InitializeComponent();
             if (pessoaSelecionada == null)
@@ -15,21 +16,21 @@ namespace GerenciamentodeClientes
             else
             {
                 pessoa = pessoaSelecionada;
-                preencherInputDaTela(pessoaSelecionada);
+                preencher_Input_Da_Tela(pessoaSelecionada);
             }
         }
 
-        private void preencherInputDaTela(Pessoa pessoaSelecionada)
+        private void preencher_Input_Da_Tela(Pessoa pessoaSelecionada)
         {
             textNome.Text = pessoa.Nome;
             mskCPF.Text = pessoa.CPF;
             textEmail.Text = pessoa.Email;
-            DateTimeDataDeNascimento.Value = pessoa.dataDeNascimento;
+            dateTimeDataDeNascimento.Value = pessoa.dataDeNascimento;
 
             DialogResult = DialogResult.OK;
         }
 
-        private void AoClicarEmSalvar(object sender, EventArgs e)
+        private void ao_Clicar_Em_Salvar(object sender, EventArgs e)
         {
             try
             {
@@ -37,19 +38,19 @@ namespace GerenciamentodeClientes
                 {
                     if (pessoa.Id == Decimal.Zero)
                     {
-                        pessoa.Id = Pessoa.GerarID();
+                        pessoa.Id = Pessoa.s_gerarID();
                     }
                     pessoa.Nome = textNome.Text;
                     pessoa.CPF = mskCPF.Text;
                     pessoa.Email = textEmail.Text;
-                    pessoa.dataDeNascimento = DateTimeDataDeNascimento.Value;
+                    pessoa.dataDeNascimento = dateTimeDataDeNascimento.Value;
 
                     DialogResult = DialogResult.OK;
                 }
 
                 else
                 {
-                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception)
@@ -62,50 +63,50 @@ namespace GerenciamentodeClientes
 
         public bool ValidacaoGeral()
         {
-            var campo_Nome = textNome.Text.Trim();
-            if (string.IsNullOrEmpty(campo_Nome) || !Regex.IsMatch(campo_Nome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
+            var campoNome = textNome.Text.Trim();
+            if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
                 MessageBox.Show("Nome inválido. O campo nome deve conter apenas letras e espaços.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            var campo_CPF = mskCPF.Text.Trim();
-            if (string.IsNullOrEmpty(campo_CPF) || !Regex.IsMatch(campo_CPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+            var campoCPF = mskCPF.Text.Trim();
+            if (string.IsNullOrEmpty(campoCPF) || !Regex.IsMatch(campoCPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
             {
                 MessageBox.Show("CPF inválido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            var campo_dataSelecionada = new DateTime();
-            if (!DateTime.TryParse(DateTimeDataDeNascimento.Text, out campo_dataSelecionada))
+            var campoDataSelecionada = new DateTime();
+            if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
             {
                 return false;
             }
 
-            if (DateTime.Now.Year - campo_dataSelecionada.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
             {
-                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 15 anos para se cadastrar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
-            var campo_Email = textEmail.Text;
-            if (!Regex.IsMatch(campo_Email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(campo_Email))
+            var campoEmail = textEmail.Text;
+            if (!Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$") || string.IsNullOrEmpty(campoEmail))
             {
-                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nEx.: seunome@gmail.com", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nEx.: seunome@gmail.com"., "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             return true;
         }
 
-        private void AoClicarEmCancelar(object sender, EventArgs e)
+        private void ao_Clicar_Em_Cancelar(object sender, EventArgs e)
         {
             try
             {
-                DialogResult respostaBtnCancelar;
-                respostaBtnCancelar = MessageBox.Show("Deseja mesmo cancelar ?", "Cancelar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (respostaBtnCancelar == DialogResult.Yes)
+                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (respostaEventosCadastroClientes == DialogResult.Yes)
                 {
                     this.Close();
                 }

@@ -20,14 +20,15 @@ namespace GerenciamentodeClientes
         }
 
         List<Pessoa> pessoaList = new List<Pessoa>();
-        private void AoClicarEmCadastrar(object sender, EventArgs e)
+        DialogResult respostaEventosTelaInicial;
+        private void ao_Clicar_Em_Cadastrar(object sender, EventArgs e)
         {
             try
             {
-                var cadastro = new TeladeCadastro(null);
+                var cadastro = new TelaDeCadastro(null);
+                respostaEventosTelaInicial = cadastro.ShowDialog(null);
 
-                var respostaBtnCadastrar = cadastro.ShowDialog(null);
-                if (respostaBtnCadastrar == DialogResult.OK)
+                if (respostaEventosTelaInicial == DialogResult.OK)
                 {
                     pessoaList.Add(cadastro.pessoa);
 
@@ -40,16 +41,16 @@ namespace GerenciamentodeClientes
                 throw new Exception("Erro inesperado, contate o administrador do sistema.");
             }
         }
-        private void AoClicarEmEditar(object sender, EventArgs e)
+        private void ao_Clicar_Em_Editar(object sender, EventArgs e)
         {
             try
             {
                 var index = Data_Grid_View1.CurrentCell.RowIndex;
                 var pessoaSelecionada = Data_Grid_View1.Rows[index].DataBoundItem as Pessoa;
+                var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
+                respostaEventosTelaInicial = telaEdicao.ShowDialog();
 
-                var telaEdicao = new TeladeCadastro(pessoaSelecionada);
-                var respostaBtnEditar = telaEdicao.ShowDialog();
-                if (respostaBtnEditar == DialogResult.OK)
+                if (respostaEventosTelaInicial == DialogResult.OK)
                 {
                     Data_Grid_View1.DataSource = null;
                     Data_Grid_View1.DataSource = pessoaList;
@@ -62,16 +63,15 @@ namespace GerenciamentodeClientes
             }
 
         }
-        private void AoClicarEmExcluir(object sender, EventArgs e)
+        private void ao_Clicar_Em_Excluir(object sender, EventArgs e)
         {
             try
             {
-                var index2 = Data_Grid_View1.CurrentCell.RowIndex;
-                var pessoaSelecionada = Data_Grid_View1.Rows[index2].DataBoundItem as Pessoa;
+                var index = Data_Grid_View1.CurrentCell.RowIndex;
+                var pessoaSelecionada = Data_Grid_View1.Rows[index].DataBoundItem as Pessoa;
+                respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                DialogResult respostaBtnExcluir;
-                respostaBtnExcluir = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (respostaBtnExcluir == DialogResult.Yes)
+                if (respostaEventosTelaInicial == DialogResult.Yes)
                 {
                     pessoaList.Remove(pessoaSelecionada);
 

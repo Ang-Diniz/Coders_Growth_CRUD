@@ -1,6 +1,6 @@
 ﻿namespace GerenciamentodeClientes
 {
-    partial class TeladeCadastro
+    partial class TelaDeCadastro
     {
         /// <summary>
         /// Required designer variable.
@@ -105,13 +105,13 @@
             // 
             // DateTimeDataDeNascimento
             // 
-            DateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
-            DateTimeDataDeNascimento.Location = new Point(12, 226);
-            DateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
-            DateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
-            DateTimeDataDeNascimento.Name = "DateTimeDataDeNascimento";
-            DateTimeDataDeNascimento.Size = new Size(157, 27);
-            DateTimeDataDeNascimento.TabIndex = 16;
+            dateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
+            dateTimeDataDeNascimento.Location = new Point(12, 226);
+            dateTimeDataDeNascimento.MaxDate = new DateTime(2023, 12, 31, 0, 0, 0, 0);
+            dateTimeDataDeNascimento.MinDate = new DateTime(1940, 1, 1, 0, 0, 0, 0);
+            dateTimeDataDeNascimento.Name = "dateTimeDataDeNascimento";
+            dateTimeDataDeNascimento.Size = new Size(157, 27);
+            dateTimeDataDeNascimento.TabIndex = 16;
             // 
             // textEmail
             // 
@@ -128,7 +128,7 @@
             btnSalvar.TabIndex = 8;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
-            btnSalvar.Click += AoClicarEmSalvar;
+            btnSalvar.Click += ao_Clicar_Em_Salvar;
             // 
             // btnCancelar
             // 
@@ -139,7 +139,7 @@
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += AoClicarEmCancelar;
+            btnCancelar.Click += ao_Clicar_Em_Cancelar;
             // 
             // label6
             // 
@@ -164,7 +164,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(397, 444);
-            Controls.Add(DateTimeDataDeNascimento);
+            Controls.Add(dateTimeDataDeNascimento);
             Controls.Add(label7);
             Controls.Add(textNome);
             Controls.Add(label6);
@@ -197,6 +197,6 @@
         private Button btnCancelar;
         private Label label6;
         private Label label7;
-        private DateTimePicker DateTimeDataDeNascimento;
+        private DateTimePicker dateTimeDataDeNascimento;
     }
 }
