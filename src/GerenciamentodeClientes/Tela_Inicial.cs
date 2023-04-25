@@ -18,8 +18,6 @@ namespace GerenciamentodeClientes
         {
             InitializeComponent();
         }
-
-        List<Pessoa> pessoaList = new List<Pessoa>();
         DialogResult respostaEventosTelaInicial;
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
@@ -30,10 +28,10 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    pessoaList.Add(cadastro.pessoa);
+                    PessoaListSingleton.Instancia.PessoaList.Add(cadastro.pessoa);
 
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = pessoaList;
+                    DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
                 }
             }
             catch (Exception ex)
@@ -45,8 +43,7 @@ namespace GerenciamentodeClientes
         {
             try
             {
-
-                if (pessoaList.Count == Decimal.Zero)
+                if (PessoaListSingleton.Instancia.PessoaList.Count == Decimal.Zero)
                 {
                     MessageBox.Show("Nenhum cliente para editar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -60,7 +57,7 @@ namespace GerenciamentodeClientes
                     if (respostaEventosTelaInicial == DialogResult.OK)
                     {
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = pessoaList;
+                        DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
                     }
                 }
             }
@@ -68,13 +65,12 @@ namespace GerenciamentodeClientes
             {
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
-
         }
         private void AoClicarEmExcluir(object sender, EventArgs e)
         {
             try
             {
-                if (pessoaList.Count == Decimal.Zero)
+                if (PessoaListSingleton.Instancia.PessoaList.Count == Decimal.Zero)
                 {
                     MessageBox.Show("Nenhum cliente para exlcuir.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -86,10 +82,10 @@ namespace GerenciamentodeClientes
 
                     if (respostaEventosTelaInicial == DialogResult.Yes)
                     {
-                        pessoaList.Remove(pessoaSelecionada);
+                        PessoaListSingleton.Instancia.PessoaList.Remove(pessoaSelecionada);
 
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = pessoaList;
+                        DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
                     }
                 }
             }
