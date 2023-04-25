@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciamentodeClientes
 {
-    public class Repository : IRepository
+    public class RepositorioClientes : InterfaceCliente
     {
         public List<Pessoa> ObterTodos()
         {
@@ -18,8 +18,7 @@ namespace GerenciamentodeClientes
         }
         public Pessoa ObterPorId(int id)
         {
-            Pessoa pessoa = 
-            PessoaListSingleton.Instancia.PessoaList.
+            Pessoa pessoa = PessoaListSingleton.Instancia.PessoaList.
             ToList().
             Find(pessoa => pessoa.Id == id);
 

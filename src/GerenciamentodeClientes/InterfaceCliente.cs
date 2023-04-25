@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciamentodeClientes
 {
-    public interface IRepository 
+    public interface InterfaceCliente 
     {
         public List<Pessoa> ObterTodos();
 

@@ -19,7 +19,7 @@ namespace GerenciamentodeClientes
           InitializeComponent();
         }
         DialogResult respostaEventosTelaInicial;
-        Repository repositorio = new Repository();
+        RepositorioClientes repositorioCliente = new RepositorioClientes();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -29,10 +29,10 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    repositorio.Criar(cadastro.pessoa);
+                    repositorioCliente.Criar(cadastro.pessoa);
 
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = repositorio.ObterTodos();
+                    DataGridViewTelaInicial.DataSource = repositorioCliente.ObterTodos();
                 }
             }
             catch (Exception ex)
@@ -52,13 +52,14 @@ namespace GerenciamentodeClientes
                 {
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
                     var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
+                    repositorioCliente.Atualizar(pessoaSelecionada.Id, pessoaSelecionada);
                     var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
                     respostaEventosTelaInicial = telaEdicao.ShowDialog();
 
                     if (respostaEventosTelaInicial == DialogResult.OK)
                     {
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
+                        DataGridViewTelaInicial.DataSource = repositorioCliente.ObterTodos();
                     }
                 }
             }
@@ -83,10 +84,10 @@ namespace GerenciamentodeClientes
 
                     if (respostaEventosTelaInicial == DialogResult.Yes)
                     {
-                        repositorio.Remover(pessoaSelecionada.Id);
+                        repositorioCliente.Remover(pessoaSelecionada.Id);
 
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = repositorio.ObterTodos();
+                        DataGridViewTelaInicial.DataSource = repositorioCliente.ObterTodos();
                     }
                 }
             }
