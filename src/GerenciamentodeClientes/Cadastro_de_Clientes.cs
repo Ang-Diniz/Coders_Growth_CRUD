@@ -61,18 +61,20 @@ namespace GerenciamentodeClientes
             var erros = new List<string>();
 
             var campoNome = textNome.Text.Trim();
+            var campoCPF = mskCPF.Text.Trim();
+            var campoDataSelecionada = new DateTime();
+            var campoEmail = textEmail.Text;
+
             if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
                 erros.Add("Nome inválido. O campo nome deve conter apenas letras e espaços.\n");
             }
-
-            var campoCPF = mskCPF.Text.Trim();
+            
             if (string.IsNullOrEmpty(campoCPF) || !Regex.IsMatch(campoCPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
             {
                 erros.Add("CPF inválido. Por favor insira um CPF válido.\n");
             }
-
-            var campoDataSelecionada = new DateTime();
+            
             if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
             {
                 return false;
@@ -82,8 +84,7 @@ namespace GerenciamentodeClientes
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }
-
-            var campoEmail = textEmail.Text;
+            
             if (string.IsNullOrEmpty(campoEmail) || !Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
             {
                 erros.Add("Email Inválido. Por favor insira um endereço de e-mail válido. \nExemplo: seunome@gmail.com\n");
@@ -96,44 +97,6 @@ namespace GerenciamentodeClientes
             }
             return true;
         }
-
-        //public bool ValidacaoGeral()
-        //{
-        //    var campoNome = textNome.Text.Trim();
-        //    if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
-        //    {
-        //        MessageBox.Show("Nome inválido. O campo nome deve conter apenas letras e espaços.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return false;
-        //    }
-
-        //    var campoCPF = mskCPF.Text.Trim();
-        //    if (string.IsNullOrEmpty(campoCPF) || !Regex.IsMatch(campoCPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
-        //    {
-        //        MessageBox.Show("CPF inválido.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return false;
-        //    }
-
-        //    var campoDataSelecionada = new DateTime();
-        //    if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
-        //    {
-        //        return false;
-        //    }
-
-        //    if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
-        //    {
-        //        MessageBox.Show("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return false;
-        //    }
-
-        //    var campoEmail = textEmail.Text;
-        //    if (string.IsNullOrEmpty(campoEmail) || !Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
-        //    {
-        //        MessageBox.Show("Email Inválido. Por favor insira um endereço de e-mail válido. \nExemplo: seunome@gmail.com", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
