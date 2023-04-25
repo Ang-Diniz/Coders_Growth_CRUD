@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciamentodeClientes
 {
-    public class RepositorioClientes : InterfaceCliente
+    public class RepositorioPessoaLista : InterfacePessoa
     {
         public List<Pessoa> ObterTodos()
         {
@@ -19,7 +19,6 @@ namespace GerenciamentodeClientes
         public Pessoa ObterPorId(int id)
         {
             Pessoa pessoa = PessoaListSingleton.Instancia.PessoaList.
-            ToList().
             Find(pessoa => pessoa.Id == id);
 
             return pessoa;
@@ -29,14 +28,9 @@ namespace GerenciamentodeClientes
             var clienteARemover = ObterPorId(id);
             PessoaListSingleton.Instancia.PessoaList.Remove(clienteARemover);
         }
-        public void Atualizar(int id, Pessoa pessoaAtualizada)
+        public void Atualizar(Pessoa pessoaAtualizada)
         {
-            int index = PessoaListSingleton.Instancia.PessoaList.FindIndex(pessoa => pessoa.Id == id);
 
-            if (index != -1)
-            {
-                PessoaListSingleton.Instancia.PessoaList[index] = pessoaAtualizada;
-            }
         }
     }
 }

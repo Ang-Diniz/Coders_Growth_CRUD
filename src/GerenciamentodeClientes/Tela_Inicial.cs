@@ -16,10 +16,10 @@ namespace GerenciamentodeClientes
     {
         public TelaInicial()
         {
-          InitializeComponent();
+            InitializeComponent();
         }
         DialogResult respostaEventosTelaInicial;
-        RepositorioClientes repositorioCliente = new RepositorioClientes();
+        RepositorioPessoaLista repositorioCliente = new RepositorioPessoaLista();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -52,7 +52,8 @@ namespace GerenciamentodeClientes
                 {
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
                     var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
-                    repositorioCliente.Atualizar(pessoaSelecionada.Id, pessoaSelecionada);
+                    var pessoaId = repositorioCliente.ObterPorId(pessoaSelecionada.Id);
+                    repositorioCliente.Atualizar(pessoaId);
                     var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
                     respostaEventosTelaInicial = telaEdicao.ShowDialog();
 

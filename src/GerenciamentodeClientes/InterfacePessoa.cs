@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace GerenciamentodeClientes
 {
-    public interface InterfaceCliente 
+    public interface InterfacePessoa 
     {
         public List<Pessoa> ObterTodos();
-
         public void Criar(Pessoa pessoaNova);
-
+        public Pessoa ObterPorId(int id);
         public void Remover(int id);
-
-        public void Atualizar(int id, Pessoa pessoaAtualizada);
+        public void Atualizar(Pessoa pessoaAtualizada);
     }
 }
