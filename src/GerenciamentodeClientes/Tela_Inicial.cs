@@ -16,9 +16,10 @@ namespace GerenciamentodeClientes
     {
         public TelaInicial()
         {
-            InitializeComponent();
+          InitializeComponent();
         }
         DialogResult respostaEventosTelaInicial;
+        Repository repositorio = new Repository();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -28,10 +29,10 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    PessoaListSingleton.Instancia.PessoaList.Add(cadastro.pessoa);
+                    repositorio.Criar(cadastro.pessoa);
 
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
+                    DataGridViewTelaInicial.DataSource = repositorio.ObterTodos();
                 }
             }
             catch (Exception ex)
@@ -82,10 +83,10 @@ namespace GerenciamentodeClientes
 
                     if (respostaEventosTelaInicial == DialogResult.Yes)
                     {
-                        PessoaListSingleton.Instancia.PessoaList.Remove(pessoaSelecionada);
+                        repositorio.Remover(pessoaSelecionada.Id);
 
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
+                        DataGridViewTelaInicial.DataSource = repositorio.ObterTodos();
                     }
                 }
             }
