@@ -69,12 +69,12 @@ namespace GerenciamentodeClientes
             {
                 erros.Add("Nome inválido. O campo nome deve conter apenas letras e espaços.\n");
             }
-            
+
             if (string.IsNullOrEmpty(campoCPF) || !Regex.IsMatch(campoCPF, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
             {
                 erros.Add("CPF inválido. Por favor insira um CPF válido.\n");
             }
-            
+
             if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
             {
                 return false;
@@ -84,7 +84,7 @@ namespace GerenciamentodeClientes
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }
-            
+
             if (string.IsNullOrEmpty(campoEmail) || !Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
             {
                 erros.Add("Email Inválido. Por favor insira um endereço de e-mail válido. \nExemplo: seunome@gmail.com\n");
