@@ -7,7 +7,6 @@ namespace GerenciamentodeClientes
     {
         public Pessoa pessoa { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public Pessoa PessoaSelecionada { get; set; }
         public TelaDeCadastro(Pessoa PessoaSelecionada)
         {
             InitializeComponent();

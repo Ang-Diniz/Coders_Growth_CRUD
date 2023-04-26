@@ -53,12 +53,11 @@ namespace GerenciamentodeClientes
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
                     var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
                     var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
-                    telaEdicao.PessoaSelecionada = pessoaSelecionada;
+                    repositorioPessoaLista.Atualizar(pessoaSelecionada);
                     respostaEventosTelaInicial = telaEdicao.ShowDialog();
 
                     if (respostaEventosTelaInicial == DialogResult.OK)
                     {
-                        repositorioPessoaLista.Atualizar(telaEdicao.PessoaSelecionada);
                         DataGridViewTelaInicial.DataSource = null;
                         DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
                     }

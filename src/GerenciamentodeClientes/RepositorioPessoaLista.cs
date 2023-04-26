@@ -30,14 +30,12 @@ namespace GerenciamentodeClientes
         }
         public void Atualizar(Pessoa pessoaAtualizada)
         {
-            Pessoa pessoaParaAtualizar = ObterPorId(pessoaAtualizada.Id);
+            var pessoaParaAtualizar = ObterPorId(pessoaAtualizada.Id);
 
             pessoaParaAtualizar.Nome = pessoaAtualizada.Nome;
             pessoaParaAtualizar.Email = pessoaAtualizada.Email;
             pessoaParaAtualizar.CPF = pessoaAtualizada.CPF;
             pessoaParaAtualizar.DataDeNascimento = pessoaAtualizada.DataDeNascimento;
-
-            PessoaListSingleton.Instancia.PessoaList = ObterTodos();
         }
     }
 }
