@@ -29,10 +29,12 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
+
                     repositorioPessoaLista.Criar(cadastro.pessoa);
 
                     DataGridViewTelaInicial.DataSource = null;
                     DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
+
                 }
             }
             catch (Exception ex)
@@ -59,6 +61,7 @@ namespace GerenciamentodeClientes
                     if (respostaEventosTelaInicial == DialogResult.OK)
                     {
                         DataGridViewTelaInicial.DataSource = null;
+
                         DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
                     }
                 }
@@ -84,10 +87,12 @@ namespace GerenciamentodeClientes
 
                     if (respostaEventosTelaInicial == DialogResult.Yes)
                     {
+
                         repositorioPessoaLista.Remover(pessoaSelecionada.Id);
 
                         DataGridViewTelaInicial.DataSource = null;
                         DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
+
                     }
                 }
             }
