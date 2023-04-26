@@ -1,2 +1,44 @@
-.vs
+# Visual Studio temporary files
 .vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+
+# NuGet packages
+*/packages/*
+*.nupkg
+!.nuget/packages/repositories.config
+
+# Windows Forms Designer generated files
+*.resx
+
+# Visual Studio code editor settings
+*.sln.docstates
+
+# Resharper cache files
+*/resharper*/**/cache/
+
+# Local configuration files
+*.config
+*.config.user
+
+# Other generated files
+[Tt]humbs.db
+*.bak
+*.cache
+*.vspscc
+*.vssscc
+*.log
+*.ncrunch*
+*.dotCover
+*.docstates

@@ -46,13 +46,12 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.BorderStyle = BorderStyle.Fixed3D;
-            label5.ForeColor = SystemColors.HotTrack;
-            label5.Location = new Point(12, 9);
+            label5.ForeColor = SystemColors.ControlDarkDark;
+            label5.Location = new Point(119, 9);
             label5.Name = "label5";
-            label5.Size = new Size(124, 22);
+            label5.Size = new Size(143, 20);
             label5.TabIndex = 10;
-            label5.Text = "Dados do cliente";
+            label5.Text = "Cadastro de clientes";
             // 
             // label1
             // 
@@ -103,7 +102,7 @@
             mskCPF.Size = new Size(125, 27);
             mskCPF.TabIndex = 5;
             // 
-            // DateTimeDataDeNascimento
+            // dateTimeDataDeNascimento
             // 
             dateTimeDataDeNascimento.Format = DateTimePickerFormat.Short;
             dateTimeDataDeNascimento.Location = new Point(12, 226);
@@ -122,23 +121,26 @@
             // 
             // btnSalvar
             // 
+            btnSalvar.BackColor = SystemColors.HotTrack;
+            btnSalvar.ForeColor = Color.White;
             btnSalvar.Location = new Point(10, 386);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(127, 46);
             btnSalvar.TabIndex = 8;
             btnSalvar.Text = "Salvar";
-            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.UseVisualStyleBackColor = false;
             btnSalvar.Click += AoClicarEmSalvar;
             // 
             // btnCancelar
             // 
-            btnCancelar.ForeColor = Color.Red;
+            btnCancelar.BackColor = Color.FromArgb(192, 0, 0);
+            btnCancelar.ForeColor = Color.White;
             btnCancelar.Location = new Point(258, 386);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(127, 46);
             btnCancelar.TabIndex = 9;
             btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += AoClicarEmCancelar;
             // 
             // label6
@@ -159,7 +161,7 @@
             label7.TabIndex = 14;
             label7.Text = "Data de Nascimento:";
             // 
-            // TeladeCadastro
+            // TelaDeCadastro
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -177,7 +179,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "TeladeCadastro";
+            Name = "TelaDeCadastro";
             Text = "Tela de Cadastro";
             ResumeLayout(false);
             PerformLayout();

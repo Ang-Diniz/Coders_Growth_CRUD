@@ -49,42 +49,48 @@
             // 
             // btnCadastrar
             // 
+            btnCadastrar.BackColor = SystemColors.HotTrack;
+            btnCadastrar.ForeColor = Color.White;
             btnCadastrar.Location = new Point(469, 434);
             btnCadastrar.Name = "btnCadastrar";
             btnCadastrar.Size = new Size(133, 60);
             btnCadastrar.TabIndex = 1;
             btnCadastrar.Text = "Cadastro";
-            btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.UseVisualStyleBackColor = false;
             btnCadastrar.Click += AoClicarEmCadastrar;
             // 
             // btnEditar
             // 
+            btnEditar.BackColor = SystemColors.HotTrack;
+            btnEditar.ForeColor = Color.White;
             btnEditar.Location = new Point(632, 434);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(133, 60);
             btnEditar.TabIndex = 2;
             btnEditar.Text = "Editar";
-            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += AoClicarEmEditar;
             // 
             // btnExcluir
             // 
-            btnExcluir.ForeColor = Color.Red;
+            btnExcluir.BackColor = Color.FromArgb(192, 0, 0);
+            btnExcluir.ForeColor = Color.White;
             btnExcluir.Location = new Point(797, 434);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(133, 60);
             btnExcluir.TabIndex = 3;
             btnExcluir.Text = "Excluir";
-            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.UseVisualStyleBackColor = false;
             btnExcluir.Click += AoClicarEmExcluir;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(445, 8);
+            label1.Font = new Font("Segoe UI Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ControlDarkDark;
+            label1.Location = new Point(427, 10);
             label1.Name = "label1";
-            label1.Size = new Size(127, 31);
+            label1.Size = new Size(109, 31);
             label1.TabIndex = 4;
             label1.Text = "Tela Inicial";
             // 
