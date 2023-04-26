@@ -19,6 +19,7 @@ namespace GerenciamentodeClientes
             InitializeComponent();
         }
         DialogResult respostaEventosTelaInicial;
+        RepositorioPessoaLista repositorioPessoaLista = new RepositorioPessoaLista();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -28,10 +29,10 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    PessoaListSingleton.Instancia.PessoaList.Add(cadastro.pessoa);
+                    repositorioPessoaLista.Criar(cadastro.pessoa);
 
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
+                    DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
                 }
             }
             catch (Exception ex)
@@ -52,12 +53,13 @@ namespace GerenciamentodeClientes
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
                     var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
                     var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
+                    repositorioPessoaLista.Atualizar(pessoaSelecionada);
                     respostaEventosTelaInicial = telaEdicao.ShowDialog();
 
                     if (respostaEventosTelaInicial == DialogResult.OK)
                     {
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
+                        DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
                     }
                 }
             }
@@ -82,10 +84,10 @@ namespace GerenciamentodeClientes
 
                     if (respostaEventosTelaInicial == DialogResult.Yes)
                     {
-                        PessoaListSingleton.Instancia.PessoaList.Remove(pessoaSelecionada);
+                        repositorioPessoaLista.Remover(pessoaSelecionada.Id);
 
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = PessoaListSingleton.Instancia.PessoaList;
+                        DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
                     }
                 }
             }
