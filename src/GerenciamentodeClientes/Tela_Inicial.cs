@@ -61,7 +61,6 @@ namespace GerenciamentodeClientes
                     if (respostaEventosTelaInicial == DialogResult.OK)
                     {
                         DataGridViewTelaInicial.DataSource = null;
-
                         DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
                     }
                 }
