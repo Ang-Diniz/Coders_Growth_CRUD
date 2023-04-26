@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciamentodeClientes
 {
-    public interface InterfacePessoa 
+    public interface IPessoa 
     {
         public List<Pessoa> ObterTodos();
         public void Criar(Pessoa pessoaNova);

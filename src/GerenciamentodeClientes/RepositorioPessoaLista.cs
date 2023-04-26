@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GerenciamentodeClientes
 {
-    public class RepositorioPessoaLista : InterfacePessoa
+    public class RepositorioPessoaLista : IPessoa
     {
         public List<Pessoa> ObterTodos()
         {
@@ -30,7 +30,14 @@ namespace GerenciamentodeClientes
         }
         public void Atualizar(Pessoa pessoaAtualizada)
         {
+            Pessoa pessoaParaAtualizar = ObterPorId(pessoaAtualizada.Id);
 
+            pessoaParaAtualizar.Nome = pessoaAtualizada.Nome;
+            pessoaParaAtualizar.Email = pessoaAtualizada.Email;
+            pessoaParaAtualizar.CPF = pessoaAtualizada.CPF;
+            pessoaParaAtualizar.DataDeNascimento = pessoaAtualizada.DataDeNascimento;
+
+            PessoaListSingleton.Instancia.PessoaList = ObterTodos();
         }
     }
 }
