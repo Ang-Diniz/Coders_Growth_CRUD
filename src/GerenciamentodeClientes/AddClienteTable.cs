@@ -1,6 +1,7 @@
 ﻿using FluentMigrator;
 using System;
 using System.Collections.Generic;
+
 namespace GerenciamentodeClientes
 {
     [Migration(20230427101000)]

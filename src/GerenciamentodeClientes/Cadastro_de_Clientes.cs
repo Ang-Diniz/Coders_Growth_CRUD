@@ -16,10 +16,10 @@ namespace GerenciamentodeClientes
             else
             {
                 cliente = ClienteSelecionada;
-                PreencherInputDaTela(ClienteSelecionada);
+                PreencherInputDaTela();
             }
         }
-        private void PreencherInputDaTela(Pessoa ClienteSelecionada)
+        private void PreencherInputDaTela()
         {
             textNome.Text = cliente.Nome;
             mskCPF.Text = cliente.CPF;
@@ -61,7 +61,6 @@ namespace GerenciamentodeClientes
 
             var campoNome = textNome.Text.Trim();
             var campoCPF = mskCPF.Text.Trim();
-            var campoDataSelecionada = new DateTime();
             var campoEmail = textEmail.Text;
 
             if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
@@ -74,12 +73,7 @@ namespace GerenciamentodeClientes
                 erros.Add("CPF inválido. Por favor insira um CPF válido.\n");
             }
 
-            if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
-            {
-                return false;
-            }
-
-            if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - dateTimeDataDeNascimento.Value.Year < Pessoa.valorMinimoIdade)
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }

@@ -39,6 +39,7 @@
             // DataGridViewTelaInicial
             // 
             DataGridViewTelaInicial.AllowUserToAddRows = false;
+            DataGridViewTelaInicial.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DataGridViewTelaInicial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DataGridViewTelaInicial.Location = new Point(12, 44);
             DataGridViewTelaInicial.Name = "DataGridViewTelaInicial";
