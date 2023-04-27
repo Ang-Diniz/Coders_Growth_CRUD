@@ -5,27 +5,27 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
-        public Pessoa pessoa { get; set; }
+        public Cliente cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public TelaDeCadastro(Pessoa PessoaSelecionada)
+        public TelaDeCadastro(Cliente ClienteSelecionada)
         {
             InitializeComponent();
-            if (PessoaSelecionada == null)
+            if (ClienteSelecionada == null)
             {
-                pessoa = new Pessoa();
+                cliente = new Cliente();
             }
             else
             {
-                pessoa = PessoaSelecionada;
-                PreencherInputDaTela(PessoaSelecionada);
+                cliente = ClienteSelecionada;
+                PreencherInputDaTela(ClienteSelecionada);
             }
         }
-        private void PreencherInputDaTela(Pessoa PessoaSelecionada)
+        private void PreencherInputDaTela(Cliente ClienteSelecionada)
         {
-            textNome.Text = pessoa.Nome;
-            mskCPF.Text = pessoa.CPF;
-            textEmail.Text = pessoa.Email;
-            dateTimeDataDeNascimento.Value = pessoa.DataDeNascimento;
+            textNome.Text = cliente.Nome;
+            mskCPF.Text = cliente.CPF;
+            textEmail.Text = cliente.Email;
+            dateTimeDataDeNascimento.Value = cliente.DataDeNascimento;
 
             DialogResult = DialogResult.OK;
         }
@@ -35,14 +35,14 @@ namespace GerenciamentodeClientes
             {
                 if (ValidacaoGeral())
                 {
-                    if (pessoa.Id == Decimal.Zero)
+                    if (cliente.Id == Decimal.Zero)
                     {
-                        pessoa.Id = Pessoa.GerarID();
+                        cliente.Id = Cliente.GerarID();
                     }
-                    pessoa.Nome = textNome.Text;
-                    pessoa.CPF = mskCPF.Text;
-                    pessoa.Email = textEmail.Text;
-                    pessoa.DataDeNascimento = dateTimeDataDeNascimento.Value;
+                    cliente.Nome = textNome.Text;
+                    cliente.CPF = mskCPF.Text;
+                    cliente.Email = textEmail.Text;
+                    cliente.DataDeNascimento = dateTimeDataDeNascimento.Value;
 
                     DialogResult = DialogResult.OK;
                 }
@@ -80,7 +80,7 @@ namespace GerenciamentodeClientes
                 return false;
             }
 
-            if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - campoDataSelecionada.Year < Cliente.valorMinimoIdade)
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }
@@ -101,7 +101,7 @@ namespace GerenciamentodeClientes
         {
             try
             {
-                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (respostaEventosCadastroClientes == DialogResult.Yes)
                 {

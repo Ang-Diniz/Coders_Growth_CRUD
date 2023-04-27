@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace GerenciamentodeClientes
+﻿namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
@@ -19,7 +7,7 @@ namespace GerenciamentodeClientes
             InitializeComponent();
         }
         DialogResult respostaEventosTelaInicial;
-        RepositorioPessoaLista repositorioPessoaLista = new RepositorioPessoaLista();
+        RepositorioClienteLista repositorioClienteLista = new RepositorioClienteLista();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -29,12 +17,10 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-
-                    repositorioPessoaLista.Criar(cadastro.pessoa);
+                    repositorioClienteLista.Criar(cadastro.cliente);
 
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
-
+                    DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
                 }
             }
             catch (Exception ex)
@@ -46,22 +32,22 @@ namespace GerenciamentodeClientes
         {
             try
             {
-                if (PessoaListSingleton.Instancia.PessoaList.Count == Decimal.Zero)
+                if (ClienteListSingleton.Instancia.ClienteList.Count == Decimal.Zero)
                 {
                     MessageBox.Show("Nenhum cliente para editar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
-                    var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
-                    repositorioPessoaLista.Atualizar(pessoaSelecionada);
+                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Cliente;
+                    var telaEdicao = new TelaDeCadastro(clienteSelecionado);
+                    repositorioClienteLista.Atualizar(clienteSelecionado);
                     respostaEventosTelaInicial = telaEdicao.ShowDialog();
 
                     if (respostaEventosTelaInicial == DialogResult.OK)
                     {
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
+                        DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
                     }
                 }
             }
@@ -74,24 +60,22 @@ namespace GerenciamentodeClientes
         {
             try
             {
-                if (PessoaListSingleton.Instancia.PessoaList.Count == Decimal.Zero)
+                if (ClienteListSingleton.Instancia.ClienteList.Count == Decimal.Zero)
                 {
                     MessageBox.Show("Nenhum cliente para exlcuir.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
+                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Cliente;
                     respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (respostaEventosTelaInicial == DialogResult.Yes)
                     {
-
-                        repositorioPessoaLista.Remover(pessoaSelecionada.Id);
+                        repositorioClienteLista.Remover(clienteSelecionado.Id);
 
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
-
+                        DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
                     }
                 }
             }

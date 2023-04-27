@@ -5,6 +5,7 @@ using FluentMigrator.Runner;
 using FluentMigrator.Runner.Initialization;
 
 using Microsoft.Extensions.DependencyInjection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GerenciamentodeClientes
 {
@@ -32,10 +33,10 @@ namespace GerenciamentodeClientes
                 .ConfigureRunner(rb => rb
                     // Add SQLite support to FluentMigrator
                     .AddSqlServer2016()
-                    // Set the connection string
-                    .WithGlobalConnectionString("server=INVENT089;database=GerenciamentoDeClientes;Persist Security Info=True;User ID=sa;Password=sap@123")
+                // Set the connection string
+                    .WithGlobalConnectionString("Pessoas")
                     // Define the assembly containing the migrations
-                    .ScanIn(typeof(AddLogTable).Assembly).For.Migrations())
+                    .ScanIn(typeof(AddClienteTable).Assembly).For.Migrations())
                 // Enable logging to console in the FluentMigrator way
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 // Build the service provider
