@@ -4,7 +4,7 @@ using System.Diagnostics.Eventing.Reader;
 
 namespace GerenciamentodeClientes
 {
-    public class Cliente
+    public class Pessoa
     {
         public const int valorInicialId = 0;
         public const int incrementoId = 1;
@@ -18,7 +18,7 @@ namespace GerenciamentodeClientes
         public static int referenciaId = valorInicialId;
         public static int GerarID()
         {
-            return Cliente.referenciaId += incrementoId;
+            return Pessoa.referenciaId += incrementoId;
         }
     }
 }

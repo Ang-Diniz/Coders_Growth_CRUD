@@ -39,7 +39,7 @@
                 else
                 {
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Cliente;
+                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
                     var telaEdicao = new TelaDeCadastro(clienteSelecionado);
                     repositorioClienteLista.Atualizar(clienteSelecionado);
                     respostaEventosTelaInicial = telaEdicao.ShowDialog();
@@ -67,7 +67,7 @@
                 else
                 {
                     var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Cliente;
+                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
                     respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (respostaEventosTelaInicial == DialogResult.Yes)

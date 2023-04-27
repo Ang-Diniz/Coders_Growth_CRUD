@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GerenciamentodeClientes
+﻿namespace GerenciamentodeClientes
 {
     public class ClienteListSingleton
     {
         private static ClienteListSingleton instancia;
-        private List<Cliente> clienteList;
+        private List<Pessoa> clienteList;
         private ClienteListSingleton()
         {
-            clienteList = new List<Cliente>();
+            clienteList = new List<Pessoa>();
         }
         public static ClienteListSingleton Instancia
         {
@@ -25,7 +19,7 @@ namespace GerenciamentodeClientes
                 return instancia;
             }
         }
-        public List<Cliente> ClienteList 
+        public List<Pessoa> ClienteList 
         { 
           get { return clienteList; } 
           set { clienteList = value; }

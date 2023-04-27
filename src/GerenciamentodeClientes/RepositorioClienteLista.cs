@@ -2,17 +2,17 @@
 {
     public class RepositorioClienteLista : ICliente
     {
-        public List<Cliente> ObterTodos()
+        public List<Pessoa> ObterTodos()
         {
             return ClienteListSingleton.Instancia.ClienteList;
         }
-        public void Criar(Cliente clienteNovo)
+        public void Criar(Pessoa clienteNovo)
         {
             ClienteListSingleton.Instancia.ClienteList.Add(clienteNovo);
         }
-        public Cliente ObterPorId(int id)
+        public Pessoa ObterPorId(int id)
         {
-            Cliente cliente = ClienteListSingleton.Instancia.ClienteList.
+            Pessoa cliente = ClienteListSingleton.Instancia.ClienteList.
             Find(cliente => cliente.Id == id);
 
             return cliente;
@@ -22,7 +22,7 @@
             var clienteARemover = ObterPorId(id);
             ClienteListSingleton.Instancia.ClienteList.Remove(clienteARemover);
         }
-        public void Atualizar(Cliente clienteAtualizada)
+        public void Atualizar(Pessoa clienteAtualizada)
         {
             var clienteParaAtualizar = ObterPorId(clienteAtualizada.Id);
 

@@ -15,7 +15,6 @@ namespace GerenciamentodeClientes
                 .WithColumn("Email").AsString().NotNullable()
                 .WithColumn("DataDeNascimento").AsDateTime().NotNullable();
         }
-
         public override void Down()
         {
             Delete.Table("Cliente");

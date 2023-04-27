@@ -1,18 +1,17 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
-        public Cliente cliente { get; set; }
+        public Pessoa cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public TelaDeCadastro(Cliente ClienteSelecionada)
+        public TelaDeCadastro(Pessoa ClienteSelecionada)
         {
             InitializeComponent();
             if (ClienteSelecionada == null)
             {
-                cliente = new Cliente();
+                cliente = new Pessoa();
             }
             else
             {
@@ -20,7 +19,7 @@ namespace GerenciamentodeClientes
                 PreencherInputDaTela(ClienteSelecionada);
             }
         }
-        private void PreencherInputDaTela(Cliente ClienteSelecionada)
+        private void PreencherInputDaTela(Pessoa ClienteSelecionada)
         {
             textNome.Text = cliente.Nome;
             mskCPF.Text = cliente.CPF;
@@ -37,7 +36,7 @@ namespace GerenciamentodeClientes
                 {
                     if (cliente.Id == Decimal.Zero)
                     {
-                        cliente.Id = Cliente.GerarID();
+                        cliente.Id = Pessoa.GerarID();
                     }
                     cliente.Nome = textNome.Text;
                     cliente.CPF = mskCPF.Text;
@@ -80,7 +79,7 @@ namespace GerenciamentodeClientes
                 return false;
             }
 
-            if (DateTime.Now.Year - campoDataSelecionada.Year < Cliente.valorMinimoIdade)
+            if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }

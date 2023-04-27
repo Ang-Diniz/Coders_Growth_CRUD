@@ -1,12 +1,6 @@
-using System;
 using System.Configuration;
-using System.Linq;
-
 using FluentMigrator.Runner;
-using FluentMigrator.Runner.Initialization;
-
 using Microsoft.Extensions.DependencyInjection;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GerenciamentodeClientes
 {
