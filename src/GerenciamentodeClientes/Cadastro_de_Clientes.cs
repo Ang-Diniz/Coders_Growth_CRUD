@@ -1,31 +1,30 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
-        public Pessoa pessoa { get; set; }
+        public Pessoa cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public TelaDeCadastro(Pessoa PessoaSelecionada)
+        public TelaDeCadastro(Pessoa ClienteSelecionada)
         {
             InitializeComponent();
-            if (PessoaSelecionada == null)
+            if (ClienteSelecionada == null)
             {
-                pessoa = new Pessoa();
+                cliente = new Pessoa();
             }
             else
             {
-                pessoa = PessoaSelecionada;
-                PreencherInputDaTela(PessoaSelecionada);
+                cliente = ClienteSelecionada;
+                PreencherInputDaTela();
             }
         }
-        private void PreencherInputDaTela(Pessoa PessoaSelecionada)
+        private void PreencherInputDaTela()
         {
-            textNome.Text = pessoa.Nome;
-            mskCPF.Text = pessoa.CPF;
-            textEmail.Text = pessoa.Email;
-            dateTimeDataDeNascimento.Value = pessoa.DataDeNascimento;
+            textNome.Text = cliente.Nome;
+            mskCPF.Text = cliente.CPF;
+            textEmail.Text = cliente.Email;
+            dateTimeDataDeNascimento.Value = cliente.DataDeNascimento;
 
             DialogResult = DialogResult.OK;
         }
@@ -35,14 +34,14 @@ namespace GerenciamentodeClientes
             {
                 if (ValidacaoGeral())
                 {
-                    if (pessoa.Id == Decimal.Zero)
+                    if (cliente.Id == Decimal.Zero)
                     {
-                        pessoa.Id = Pessoa.GerarID();
+                        cliente.Id = Pessoa.GerarID();
                     }
-                    pessoa.Nome = textNome.Text;
-                    pessoa.CPF = mskCPF.Text;
-                    pessoa.Email = textEmail.Text;
-                    pessoa.DataDeNascimento = dateTimeDataDeNascimento.Value;
+                    cliente.Nome = textNome.Text;
+                    cliente.CPF = mskCPF.Text;
+                    cliente.Email = textEmail.Text;
+                    cliente.DataDeNascimento = dateTimeDataDeNascimento.Value;
 
                     DialogResult = DialogResult.OK;
                 }
@@ -62,7 +61,6 @@ namespace GerenciamentodeClientes
 
             var campoNome = textNome.Text.Trim();
             var campoCPF = mskCPF.Text.Trim();
-            var campoDataSelecionada = new DateTime();
             var campoEmail = textEmail.Text;
 
             if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
@@ -75,12 +73,7 @@ namespace GerenciamentodeClientes
                 erros.Add("CPF inválido. Por favor insira um CPF válido.\n");
             }
 
-            if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
-            {
-                return false;
-            }
-
-            if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - dateTimeDataDeNascimento.Value.Year < Pessoa.valorMinimoIdade)
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }
@@ -101,7 +94,7 @@ namespace GerenciamentodeClientes
         {
             try
             {
-                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (respostaEventosCadastroClientes == DialogResult.Yes)
                 {
