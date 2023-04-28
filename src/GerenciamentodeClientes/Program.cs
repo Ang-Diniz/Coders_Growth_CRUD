@@ -6,7 +6,6 @@ namespace GerenciamentodeClientes
 {
     class Program
     {
-        private static string ConnectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
         static void Main(string[] args)
         {
             using (var serviceProvider = CreateServices())
@@ -21,7 +20,7 @@ namespace GerenciamentodeClientes
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString(ConnectionString)
+                    .WithGlobalConnectionString(RepositorioClienteBancoDeDados.connectionString)
                     .ScanIn(typeof(AddClienteTable).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);

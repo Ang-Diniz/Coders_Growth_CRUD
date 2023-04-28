@@ -5,23 +5,26 @@
         public TelaInicial()
         {
             InitializeComponent();
+            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
         }
+
         DialogResult respostaEventosTelaInicial;
         RepositorioClienteLista repositorioClienteLista = new RepositorioClienteLista();
+        RepositorioClienteBancoDeDados repositorioClienteBancoDeDados = new RepositorioClienteBancoDeDados();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
             {
                 var cadastro = new TelaDeCadastro(null);
                 respostaEventosTelaInicial = cadastro.ShowDialog(null);
+                repositorioClienteBancoDeDados.Criar(cadastro.cliente);
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    repositorioClienteLista.Criar(cadastro.cliente);
-
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
+                    DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
                 }
+
             }
             catch (Exception ex)
             {

@@ -34,10 +34,10 @@ namespace GerenciamentodeClientes
             {
                 if (ValidacaoGeral())
                 {
-                    if (cliente.Id == Decimal.Zero)
-                    {
-                        cliente.Id = Pessoa.GerarID();
-                    }
+                    //if (cliente.Id == Decimal.Zero)
+                    //{
+                    //    cliente.Id = Pessoa.GerarID();
+                    //}
                     cliente.Nome = textNome.Text;
                     cliente.CPF = mskCPF.Text;
                     cliente.Email = textEmail.Text;

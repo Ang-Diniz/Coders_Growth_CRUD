@@ -15,10 +15,10 @@ namespace GerenciamentodeClientes
         public DateTime DataDeNascimento { get; set; }
         public string CPF { get; set; }
 
-        public static int referenciaId = valorInicialId;
-        public static int GerarID()
-        {
-            return Pessoa.referenciaId += incrementoId;
-        }
+        //public static int referenciaId = valorInicialId;
+        //public static int GerarID()
+        //{
+        //    return Pessoa.referenciaId += incrementoId;
+        //}
     }
 }

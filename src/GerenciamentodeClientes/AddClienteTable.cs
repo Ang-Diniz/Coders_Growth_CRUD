@@ -1,4 +1,5 @@
 ﻿using FluentMigrator;
+using FluentMigrator.SqlServer;
 
 namespace GerenciamentodeClientes
 {
@@ -7,8 +8,8 @@ namespace GerenciamentodeClientes
     {
         public override void Up()
         {
-            Create.Table("cliente")
-                .WithColumn("id").AsInt64().PrimaryKey().Identity()
+            Create.Table("clientes")
+                .WithColumn("id").AsInt32().PrimaryKey().Identity(1, 1)
                 .WithColumn("nome").AsString().NotNullable()
                 .WithColumn("cpf").AsString().NotNullable()
                 .WithColumn("email").AsString().NotNullable()
@@ -16,7 +17,7 @@ namespace GerenciamentodeClientes
         }
         public override void Down()
         {
-            Delete.Table("cliente");
+            Delete.Table("clientes");
         }
     }
 }
