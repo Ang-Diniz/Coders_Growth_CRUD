@@ -1,6 +1,4 @@
 ﻿using FluentMigrator;
-using System;
-using System.Collections.Generic;
 
 namespace GerenciamentodeClientes
 {
@@ -9,16 +7,16 @@ namespace GerenciamentodeClientes
     {
         public override void Up()
         {
-            Create.Table("Cliente")
-                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
-                .WithColumn("Nome").AsString().NotNullable()
-                .WithColumn("CPF").AsString().NotNullable()
-                .WithColumn("Email").AsString().NotNullable()
-                .WithColumn("DataDeNascimento").AsDateTime().NotNullable();
+            Create.Table("cliente")
+                .WithColumn("id").AsInt64().PrimaryKey().Identity()
+                .WithColumn("nome").AsString().NotNullable()
+                .WithColumn("cpf").AsString().NotNullable()
+                .WithColumn("email").AsString().NotNullable()
+                .WithColumn("data_de_nascimento").AsDateTime().NotNullable();
         }
         public override void Down()
         {
-            Delete.Table("Cliente");
+            Delete.Table("cliente");
         }
     }
 }
