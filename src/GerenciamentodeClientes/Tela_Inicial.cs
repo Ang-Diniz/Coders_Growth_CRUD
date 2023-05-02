@@ -64,7 +64,7 @@
             {
                 if (DataGridViewTelaInicial.SelectedRows.Count == Decimal.Zero)
                 {
-                    MessageBox.Show("Nenhum cliente foi selecionado", "ERRO", MessageBoxButtons.OK);
+                    MessageBox.Show("Nenhum cliente foi selecionado.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -72,7 +72,7 @@
 
                     if (index != null)
                     {
-                        int id = PegarId();
+                        var id = PegarId();
                         var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
                         respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 

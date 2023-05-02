@@ -19,7 +19,7 @@ namespace GerenciamentodeClientes
             {
                 ConexaoSQL.Open();
 
-                string sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) " +
+                var sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) " +
                              "VALUES (@nome, @cpf, @email, @data_de_nascimento)";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
@@ -48,7 +48,7 @@ namespace GerenciamentodeClientes
             {
                 ConexaoSQL.Open();
 
-                string sql = $"SELECT * FROM CLIENTES WHERE Id ={id}";
+                var sql = $"SELECT * FROM CLIENTES WHERE Id ={id}";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
 
@@ -75,7 +75,7 @@ namespace GerenciamentodeClientes
             }
             catch (Exception ex)
             {
-                throw new Exception("Falha ao obter o cliente.", ex);
+                throw new Exception("Erro ao obter o id do cliente.", ex);
             }
             finally
             {
@@ -92,7 +92,7 @@ namespace GerenciamentodeClientes
                 ConexaoSQL.Open();
 
                 List<Pessoa> clientes = new List<Pessoa>();
-                string sql = "SELECT * FROM clientes";
+                var sql = "SELECT * FROM clientes";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
 
@@ -133,7 +133,7 @@ namespace GerenciamentodeClientes
                 ConexaoSQL.Open();
 
                 var cliente = ObterPorId(id);
-                string sql = $"DELETE FROM clientes WHERE Id ={cliente.Id}";
+                var sql = $"DELETE FROM clientes WHERE Id ={cliente.Id}";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
 
