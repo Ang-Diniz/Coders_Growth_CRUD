@@ -17,6 +17,7 @@ namespace GerenciamentodeClientes
 
             try
             {
+                ConexaoSQL.Open();
 
                 string sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) VALUES (@nome, @cpf, @email, @data_de_nascimento)";
 
@@ -26,7 +27,7 @@ namespace GerenciamentodeClientes
                 cmd.Parameters.AddWithValue("@email", clienteNovo.Email);
                 cmd.Parameters.AddWithValue("@data_de_nascimento", clienteNovo.DataDeNascimento);
 
-                ConexaoSQL.Open();
+                
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -69,9 +70,7 @@ namespace GerenciamentodeClientes
                 }
                 else
                 {
-
                     return null;
-
                 }
             }
             catch (Exception ex)
@@ -134,7 +133,6 @@ namespace GerenciamentodeClientes
                 ConexaoSQL.Open();
 
                 var cliente = ObterPorId(id);
-
                 string sql = $"DELETE FROM clientes WHERE Id ={cliente.Id}";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);

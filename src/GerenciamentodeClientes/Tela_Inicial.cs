@@ -24,7 +24,6 @@
                     DataGridViewTelaInicial.DataSource = null;
                     DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
                 }
-
             }
             catch (Exception ex)
             {
@@ -63,15 +62,14 @@
         {
             try
             {
-
                 int linhaSelecionada = DataGridViewTelaInicial.SelectedRows.Count;
 
-                if (linhaSelecionada == Decimal.Zero)
+                if ( linhaSelecionada == Decimal.Zero )
                 {
-                    MessageBox.Show("Nenhum cliente para exlcuir.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Nenhum cliente foi selecionado","ERRO", MessageBoxButtons.OK);
                 }
 
-                var index = DataGridViewTelaInicial.CurrentRow.Index;
+                var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
                 int id = PegarId();
                 var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
                 respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -82,11 +80,6 @@
                     DataGridViewTelaInicial.DataSource = null;
                     DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
                 }
-
-                int PegarId()
-                {
-                    return int.Parse(DataGridViewTelaInicial.SelectedRows[0].Cells[0].Value.ToString());
-                }
             }
 
             catch (Exception ex)
@@ -94,8 +87,14 @@
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+        private int PegarId()
+        {
+            return int.Parse(DataGridViewTelaInicial.SelectedRows[0].Cells[0].Value.ToString());
+        }
+
     }
 }
+
 
 
 
