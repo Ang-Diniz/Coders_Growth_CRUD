@@ -63,25 +63,32 @@
         {
             try
             {
-                if (ClienteListSingleton.Instancia.ClienteList.Count == Decimal.Zero)
+
+                int linhaSelecionada = DataGridViewTelaInicial.SelectedRows.Count;
+
+                if (linhaSelecionada == Decimal.Zero)
                 {
                     MessageBox.Show("Nenhum cliente para exlcuir.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else
+
+                var index = DataGridViewTelaInicial.CurrentRow.Index;
+                int id = PegarId();
+                var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
+                respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (respostaEventosTelaInicial == DialogResult.Yes)
                 {
-                    var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
-                    respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    repositorioClienteBancoDeDados.Remover(clienteSelecionado.Id);
+                    DataGridViewTelaInicial.DataSource = null;
+                    DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                }
 
-                    if (respostaEventosTelaInicial == DialogResult.Yes)
-                    {
-                        repositorioClienteLista.Remover(clienteSelecionado.Id);
-
-                        DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
-                    }
+                int PegarId()
+                {
+                    return int.Parse(DataGridViewTelaInicial.SelectedRows[0].Cells[0].Value.ToString());
                 }
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);

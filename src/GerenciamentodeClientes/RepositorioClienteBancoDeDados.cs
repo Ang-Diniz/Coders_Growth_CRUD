@@ -6,7 +6,6 @@ namespace GerenciamentodeClientes
     public class RepositorioClienteBancoDeDados : ICliente
     {
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
-        SqlConnection ConexaoSQL = new SqlConnection(connectionString);
         public void Atualizar(Pessoa pessoaAtualizada)
         {
             throw new NotImplementedException();
@@ -14,58 +13,146 @@ namespace GerenciamentodeClientes
 
         public void Criar(Pessoa clienteNovo)
         {
-            string inserirNovoCliente = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) VALUES (@nome, @cpf, @email, @data_de_nascimento)";
+            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
 
-            SqlCommand cmd = new SqlCommand(inserirNovoCliente, ConexaoSQL);
-            cmd.Parameters.AddWithValue("@nome", clienteNovo.Nome);
-            cmd.Parameters.AddWithValue("@cpf", clienteNovo.CPF);
-            cmd.Parameters.AddWithValue("@email", clienteNovo.Email);
-            cmd.Parameters.AddWithValue("@data_de_nascimento", clienteNovo.DataDeNascimento);
+            try
+            {
 
-            ConexaoSQL.Open();
-            cmd.ExecuteNonQuery();
-            ConexaoSQL.Close();
+                string sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) VALUES (@nome, @cpf, @email, @data_de_nascimento)";
+
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                cmd.Parameters.AddWithValue("@nome", clienteNovo.Nome);
+                cmd.Parameters.AddWithValue("@cpf", clienteNovo.CPF);
+                cmd.Parameters.AddWithValue("@email", clienteNovo.Email);
+                cmd.Parameters.AddWithValue("@data_de_nascimento", clienteNovo.DataDeNascimento);
+
+                ConexaoSQL.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao cadastrar o cliente.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
         }
 
         public Pessoa ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+
+            try
+            {
+                ConexaoSQL.Open();
+
+                string sql = $"SELECT * FROM CLIENTES WHERE Id ={id}";
+
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Pessoa cliente = new()
+                    {
+                        Id = (int)reader.GetInt32(0),
+                        Nome = reader.GetString(1),
+                        CPF = reader.GetString(2),
+                        Email = reader.GetString(3),
+                        DataDeNascimento = reader.GetDateTime(4)
+
+                    };
+                    return cliente;
+                }
+                else
+                {
+
+                    return null;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao obter o cliente.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
         }
 
         public List<Pessoa> ObterTodos()
         {
-            ConexaoSQL.Open();
+            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
 
-            List<Pessoa> clientes = new List<Pessoa>();
-
-            string sql = "SELECT * FROM clientes";
-            SqlCommand cmd = new(sql, ConexaoSQL);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                Pessoa cliente = new()
+                ConexaoSQL.Open();
+
+                List<Pessoa> clientes = new List<Pessoa>();
+                string sql = "SELECT * FROM clientes";
+
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    Id = (int)reader.GetInt32(0),
-                    Nome = reader.GetString(1),
-                    CPF = reader.GetString(2),
-                    Email = reader.GetString(3),
-                    DataDeNascimento = reader.GetDateTime(4)
+                    Pessoa cliente = new()
+                    {
+                        Id = (int)reader.GetInt32(0),
+                        Nome = reader.GetString(1),
+                        CPF = reader.GetString(2),
+                        Email = reader.GetString(3),
+                        DataDeNascimento = reader.GetDateTime(4)
 
-                };
+                    };
 
-                clientes.Add(cliente);
+                    clientes.Add(cliente);
+                }
+                return clientes.ToList();
             }
-
-            ConexaoSQL.Close();
-            return clientes.ToList();
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possivel obter todos os clientes.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
         }
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+
+            try
+            {
+                ConexaoSQL.Open();
+
+                var cliente = ObterPorId(id);
+
+                string sql = $"DELETE FROM clientes WHERE Id ={cliente.Id}";
+
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao remover o cliente.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
         }
     }
 }
+
+
 

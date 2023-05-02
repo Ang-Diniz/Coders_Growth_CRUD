@@ -91,9 +91,8 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Image = Properties.Resources.pagina_inicial;
-            label1.ImageAlign = ContentAlignment.MiddleRight;
-            label1.Location = new Point(439, 9);
+            label1.ImageAlign = ContentAlignment.MiddleLeft;
+            label1.Location = new Point(442, 10);
             label1.Name = "label1";
             label1.Size = new Size(145, 31);
             label1.TabIndex = 4;
