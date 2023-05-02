@@ -19,16 +19,16 @@ namespace GerenciamentodeClientes
             {
                 ConexaoSQL.Open();
 
-                string sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) VALUES (@nome, @cpf, @email, @data_de_nascimento)";
+                string sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) " +
+                             "VALUES (@nome, @cpf, @email, @data_de_nascimento)";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
                 cmd.Parameters.AddWithValue("@nome", clienteNovo.Nome);
                 cmd.Parameters.AddWithValue("@cpf", clienteNovo.CPF);
                 cmd.Parameters.AddWithValue("@email", clienteNovo.Email);
                 cmd.Parameters.AddWithValue("@data_de_nascimento", clienteNovo.DataDeNascimento);
-
-                
                 cmd.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {

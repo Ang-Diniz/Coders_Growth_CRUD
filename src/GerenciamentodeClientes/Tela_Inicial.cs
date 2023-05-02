@@ -62,26 +62,29 @@
         {
             try
             {
-                int linhaSelecionada = DataGridViewTelaInicial.SelectedRows.Count;
-
-                if ( linhaSelecionada == Decimal.Zero )
+                if (DataGridViewTelaInicial.SelectedRows.Count == Decimal.Zero)
                 {
-                    MessageBox.Show("Nenhum cliente foi selecionado","ERRO", MessageBoxButtons.OK);
+                    MessageBox.Show("Nenhum cliente foi selecionado", "ERRO", MessageBoxButtons.OK);
                 }
-
-                var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                int id = PegarId();
-                var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
-                respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (respostaEventosTelaInicial == DialogResult.Yes)
+                else
                 {
-                    repositorioClienteBancoDeDados.Remover(clienteSelecionado.Id);
-                    DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                    var index = DataGridViewTelaInicial.CurrentRow.Index;
+
+                    if (index != null)
+                    {
+                        int id = PegarId();
+                        var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
+                        respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        if (respostaEventosTelaInicial == DialogResult.Yes)
+                        {
+                            repositorioClienteBancoDeDados.Remover(clienteSelecionado.Id);
+                            DataGridViewTelaInicial.DataSource = null;
+                            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                        }
+                    }
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
