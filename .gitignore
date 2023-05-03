@@ -1,5 +1,8 @@
 # Visual Studio temporary files
 .vs/
+src/GerenciamentodeClientes/.vs/
+src/GerenciamentodeClientes/bin/
+src/GerenciamentodeClientes/obj/
 bin/
 obj/
 *.user
