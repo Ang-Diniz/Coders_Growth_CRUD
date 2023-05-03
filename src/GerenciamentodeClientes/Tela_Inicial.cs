@@ -2,15 +2,18 @@
 {
     public partial class TelaInicial : Form
     {
-        public TelaInicial()
+        private readonly ICliente _repositorio;
+        public TelaInicial(ICliente repositorio )
         {
             InitializeComponent();
+            _repositorio = repositorio;
             DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
         }
 
         DialogResult respostaEventosTelaInicial;
 
         RepositorioClienteBancoDeDados repositorioClienteBancoDeDados = new RepositorioClienteBancoDeDados();
+
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -20,9 +23,9 @@
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    repositorioClienteBancoDeDados.Criar(cadastro.cliente);
+                    _repositorio.Criar(cadastro.cliente);
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                    DataGridViewTelaInicial.DataSource = _repositorio.ObterTodos();
                 }
             }
             catch (Exception ex)
@@ -30,6 +33,7 @@
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         private void AoClicarEmEditar(object sender, EventArgs e)
         {
             try
@@ -53,9 +57,9 @@
 
                         if (respostaEventosTelaInicial == DialogResult.OK)
                         {
-                            repositorioClienteBancoDeDados.Atualizar(clienteSelecionado);
+                            _repositorio.Atualizar(clienteSelecionado);
                             DataGridViewTelaInicial.DataSource = null;
-                            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                            DataGridViewTelaInicial.DataSource = _repositorio.ObterTodos();
                         }
                     }
                 }
@@ -65,6 +69,7 @@
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         private void AoClicarEmExcluir(object sender, EventArgs e)
         {
             try
@@ -85,9 +90,9 @@
 
                         if (respostaEventosTelaInicial == DialogResult.Yes)
                         {
-                            repositorioClienteBancoDeDados.Remover(clienteSelecionado.Id);
+                            _repositorio.Remover(clienteSelecionado.Id);
                             DataGridViewTelaInicial.DataSource = null;
-                            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                            DataGridViewTelaInicial.DataSource = _repositorio.ObterTodos();
                         }
                     }
                 }
@@ -97,6 +102,7 @@
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         private int PegarId()
         {
             return int.Parse(DataGridViewTelaInicial.SelectedRows[0].Cells[0].Value.ToString());

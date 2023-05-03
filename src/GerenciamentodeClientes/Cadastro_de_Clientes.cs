@@ -4,6 +4,7 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
+        private readonly ICliente _repositorio;
         public Pessoa cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
         public TelaDeCadastro(Pessoa ClienteSelecionada)
@@ -29,6 +30,7 @@ namespace GerenciamentodeClientes
 
             DialogResult = DialogResult.OK;
         }
+
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
@@ -52,6 +54,7 @@ namespace GerenciamentodeClientes
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         public bool ValidacaoGeral()
         {
             var erros = new List<string>();
@@ -87,6 +90,7 @@ namespace GerenciamentodeClientes
             }
             return true;
         }
+
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
