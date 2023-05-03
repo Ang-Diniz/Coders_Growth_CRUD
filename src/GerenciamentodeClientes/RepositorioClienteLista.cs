@@ -22,14 +22,14 @@
             var clienteARemover = ObterPorId(id);
             ClienteListSingleton.Instancia.ClienteList.Remove(clienteARemover);
         }
-        public void Atualizar(Pessoa clienteAtualizada)
+        public void Atualizar(Pessoa clienteAtualizado)
         {
-            var clienteParaAtualizar = ObterPorId(clienteAtualizada.Id);
+            var clienteParaAtualizar = ObterPorId(clienteAtualizado.Id);
 
-            clienteParaAtualizar.Nome = clienteAtualizada.Nome;
-            clienteParaAtualizar.Email = clienteAtualizada.Email;
-            clienteParaAtualizar.CPF = clienteAtualizada.CPF;
-            clienteParaAtualizar.DataDeNascimento = clienteAtualizada.DataDeNascimento;
+            clienteParaAtualizar.Nome = clienteAtualizado.Nome;
+            clienteParaAtualizar.Email = clienteAtualizado.Email;
+            clienteParaAtualizar.CPF = clienteAtualizado.CPF;
+            clienteParaAtualizar.DataDeNascimento = clienteAtualizado.DataDeNascimento;
         }
     }
 }

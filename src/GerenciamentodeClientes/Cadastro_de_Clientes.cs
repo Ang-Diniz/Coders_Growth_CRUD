@@ -19,6 +19,7 @@ namespace GerenciamentodeClientes
                 PreencherInputDaTela();
             }
         }
+
         private void PreencherInputDaTela()
         {
             textNome.Text = cliente.Nome;
@@ -34,10 +35,6 @@ namespace GerenciamentodeClientes
             {
                 if (ValidacaoGeral())
                 {
-                    if (cliente.Id == Decimal.Zero)
-                    {
-                        cliente.Id = Pessoa.GerarID();
-                    }
                     cliente.Nome = textNome.Text;
                     cliente.CPF = mskCPF.Text;
                     cliente.Email = textEmail.Text;
@@ -98,7 +95,7 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosCadastroClientes == DialogResult.Yes)
                 {
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)

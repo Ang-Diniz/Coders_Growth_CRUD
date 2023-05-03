@@ -5,9 +5,12 @@
         public TelaInicial()
         {
             InitializeComponent();
+            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
         }
+
         DialogResult respostaEventosTelaInicial;
-        RepositorioClienteLista repositorioClienteLista = new RepositorioClienteLista();
+
+        RepositorioClienteBancoDeDados repositorioClienteBancoDeDados = new RepositorioClienteBancoDeDados();
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -17,10 +20,9 @@
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    repositorioClienteLista.Criar(cadastro.cliente);
-
+                    repositorioClienteBancoDeDados.Criar(cadastro.cliente);
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
+                    DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
                 }
             }
             catch (Exception ex)
@@ -32,22 +34,29 @@
         {
             try
             {
-                if (ClienteListSingleton.Instancia.ClienteList.Count == Decimal.Zero)
+                if (DataGridViewTelaInicial.SelectedRows.Count == Decimal.Zero)
                 {
-                    MessageBox.Show("Nenhum cliente para editar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Nenhum cliente foi selecionado.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
                 else
                 {
-                    var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
-                    var telaEdicao = new TelaDeCadastro(clienteSelecionado);
-                    repositorioClienteLista.Atualizar(clienteSelecionado);
-                    respostaEventosTelaInicial = telaEdicao.ShowDialog();
+                    var index = DataGridViewTelaInicial.CurrentRow.Index;
 
-                    if (respostaEventosTelaInicial == DialogResult.OK)
+                    if (index != null)
                     {
-                        DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
+                        var id = PegarId();
+                        var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
+                        var telaEdicao = new TelaDeCadastro(clienteSelecionado);
+                        respostaEventosTelaInicial = telaEdicao.ShowDialog();
+                       
+
+                        if (respostaEventosTelaInicial == DialogResult.OK)
+                        {
+                            repositorioClienteBancoDeDados.Atualizar(clienteSelecionado);
+                            DataGridViewTelaInicial.DataSource = null;
+                            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                        }
                     }
                 }
             }
@@ -60,22 +69,26 @@
         {
             try
             {
-                if (ClienteListSingleton.Instancia.ClienteList.Count == Decimal.Zero)
+                if (DataGridViewTelaInicial.SelectedRows.Count == Decimal.Zero)
                 {
-                    MessageBox.Show("Nenhum cliente para exlcuir.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Nenhum cliente foi selecionado.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var clienteSelecionado = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
-                    respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var index = DataGridViewTelaInicial.CurrentRow.Index;
 
-                    if (respostaEventosTelaInicial == DialogResult.Yes)
+                    if (index != null)
                     {
-                        repositorioClienteLista.Remover(clienteSelecionado.Id);
+                        var id = PegarId();
+                        var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
+                        respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                        DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = repositorioClienteLista.ObterTodos();
+                        if (respostaEventosTelaInicial == DialogResult.Yes)
+                        {
+                            repositorioClienteBancoDeDados.Remover(clienteSelecionado.Id);
+                            DataGridViewTelaInicial.DataSource = null;
+                            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+                        }
                     }
                 }
             }
@@ -84,8 +97,14 @@
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+        private int PegarId()
+        {
+            return int.Parse(DataGridViewTelaInicial.SelectedRows[0].Cells[0].Value.ToString());
+        }
+
     }
 }
+
 
 
 

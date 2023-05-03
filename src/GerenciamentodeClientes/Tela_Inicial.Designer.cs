@@ -39,6 +39,7 @@
             // DataGridViewTelaInicial
             // 
             DataGridViewTelaInicial.AllowUserToAddRows = false;
+            DataGridViewTelaInicial.AllowUserToOrderColumns = true;
             DataGridViewTelaInicial.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             DataGridViewTelaInicial.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DataGridViewTelaInicial.Location = new Point(12, 44);
@@ -76,6 +77,7 @@
             // 
             btnExcluir.BackColor = Color.FromArgb(192, 0, 0);
             btnExcluir.ForeColor = Color.White;
+            btnExcluir.ImageAlign = ContentAlignment.MiddleLeft;
             btnExcluir.Location = new Point(797, 434);
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Size = new Size(133, 60);
@@ -89,11 +91,12 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Light", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(427, 10);
+            label1.ImageAlign = ContentAlignment.MiddleLeft;
+            label1.Location = new Point(442, 10);
             label1.Name = "label1";
-            label1.Size = new Size(109, 31);
+            label1.Size = new Size(145, 31);
             label1.TabIndex = 4;
-            label1.Text = "Tela Inicial";
+            label1.Text = "Tela Inicial      ";
             // 
             // TelaInicial
             // 
