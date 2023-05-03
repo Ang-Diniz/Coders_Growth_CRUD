@@ -6,9 +6,46 @@ namespace GerenciamentodeClientes
     public class RepositorioClienteBancoDeDados : ICliente
     {
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
-        public void Atualizar(Pessoa pessoaAtualizada)
+
+        public List<Pessoa> ObterTodos()
         {
-            throw new NotImplementedException();
+            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+
+            try
+            {
+                ConexaoSQL.Open();
+
+                List<Pessoa> clientes = new List<Pessoa>();
+                var sql = "SELECT * FROM clientes";
+
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Pessoa cliente = new()
+                    {
+                        Id = (int)reader.GetInt32(0),
+                        Nome = reader.GetString(1),
+                        CPF = reader.GetString(2),
+                        Email = reader.GetString(3),
+                        DataDeNascimento = reader.GetDateTime(4)
+
+                    };
+
+                    clientes.Add(cliente);
+                }
+                return clientes.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao obter todos os clientes.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
         }
 
         public void Criar(Pessoa clienteNovo)
@@ -83,47 +120,6 @@ namespace GerenciamentodeClientes
             }
         }
 
-        public List<Pessoa> ObterTodos()
-        {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
-
-            try
-            {
-                ConexaoSQL.Open();
-
-                List<Pessoa> clientes = new List<Pessoa>();
-                var sql = "SELECT * FROM clientes";
-
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Pessoa cliente = new()
-                    {
-                        Id = (int)reader.GetInt32(0),
-                        Nome = reader.GetString(1),
-                        CPF = reader.GetString(2),
-                        Email = reader.GetString(3),
-                        DataDeNascimento = reader.GetDateTime(4)
-
-                    };
-
-                    clientes.Add(cliente);
-                }
-                return clientes.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possivel obter todos os clientes.", ex);
-            }
-            finally
-            {
-                ConexaoSQL.Close();
-            }
-        }
-
         public void Remover(int id)
         {
             SqlConnection ConexaoSQL = new SqlConnection(connectionString);
@@ -138,11 +134,39 @@ namespace GerenciamentodeClientes
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
 
                 SqlDataReader reader = cmd.ExecuteReader();
-
             }
             catch (Exception ex)
             {
                 throw new Exception("Erro ao remover o cliente.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
+        }
+
+        public void Atualizar(Pessoa clienteAtualizado)
+        {
+            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+
+            try
+            {
+                ConexaoSQL.Open();
+
+                var sql = $"UPDATE clientes SET nome=@nome, cpf=@cpf, email=@email, data_de_nascimento=@data_de_nascimento " +
+                       $"WHERE ID={clienteAtualizado.Id}";
+
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+
+                cmd.Parameters.AddWithValue("@nome", clienteAtualizado.Nome);
+                cmd.Parameters.AddWithValue("@cpf", clienteAtualizado.CPF);
+                cmd.Parameters.AddWithValue("@email", clienteAtualizado.Email);
+                cmd.Parameters.AddWithValue("@data_de_nascimento", clienteAtualizado.DataDeNascimento);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao editar o cliente.", ex);
             }
             finally
             {

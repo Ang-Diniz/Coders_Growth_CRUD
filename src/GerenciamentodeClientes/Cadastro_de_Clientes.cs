@@ -19,6 +19,7 @@ namespace GerenciamentodeClientes
                 PreencherInputDaTela();
             }
         }
+
         private void PreencherInputDaTela()
         {
             textNome.Text = cliente.Nome;
@@ -94,7 +95,7 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosCadastroClientes == DialogResult.Yes)
                 {
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)

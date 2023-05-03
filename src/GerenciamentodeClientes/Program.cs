@@ -1,4 +1,3 @@
-using System.Configuration;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 
