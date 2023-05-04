@@ -2,7 +2,7 @@
 {
     public partial class TelaInicial : Form
     {
-        private readonly ICliente _repositorioCliente;
+        ICliente _repositorioCliente;
         public TelaInicial(ICliente repositorioCliente )
         {
             InitializeComponent();

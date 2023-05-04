@@ -14,7 +14,6 @@ namespace GerenciamentodeClientes
             {
                 UpdateDatabase(scope.ServiceProvider);
             }
-
             var builder = CriarHostBuilder();
             var servicesProvider = builder.Build().Services;
             var repositorio = servicesProvider.GetService<ICliente>();
@@ -22,12 +21,14 @@ namespace GerenciamentodeClientes
             ApplicationConfiguration.Initialize();
             Application.Run(new TelaInicial(repositorio));
         }
+
         private static void UpdateDatabase(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             runner.MigrateUp();
         }
+
         private static ServiceProvider CreateServices()
         {
             return new ServiceCollection()
