@@ -2,10 +2,10 @@
 {
     public interface ICliente 
     {
-        public List<Pessoa> ObterTodos();
-        public void Criar(Pessoa clienteNovo);
-        public Pessoa ObterPorId(int id);
+        public List<Cliente> ObterTodos();
+        public void Criar(Cliente clienteNovo);
+        public Cliente ObterPorId(int id);
         public void Remover(int id);
-        public void Atualizar(Pessoa clienteAtualizado);
+        public void Atualizar(Cliente clienteAtualizado);
     }
 }

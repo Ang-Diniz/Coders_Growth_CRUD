@@ -1,12 +1,16 @@
-﻿namespace GerenciamentodeClientes
+﻿using FluentValidation;
+using Microsoft.Extensions.Options;
+
+namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
         ICliente _repositorioCliente;
-        public TelaInicial(ICliente repositorioCliente )
+        public TelaInicial( ICliente repositorioCliente)
         {
             InitializeComponent();
             _repositorioCliente = repositorioCliente;
+            
             DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
         }
 
@@ -16,7 +20,7 @@
         {
             try
             {
-                var cadastro = new TelaDeCadastro(null!);
+                var cadastro = new TelaDeCadastro(null);
                 respostaEventosTelaInicial = cadastro.ShowDialog(null);
 
                 if (respostaEventosTelaInicial == DialogResult.OK)

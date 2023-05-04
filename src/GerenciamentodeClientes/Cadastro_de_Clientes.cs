@@ -1,17 +1,19 @@
-﻿using System.Text.RegularExpressions;
+﻿using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
-        public Pessoa cliente { get; set; }
+        public Cliente cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public TelaDeCadastro(Pessoa ClienteSelecionada)
+
+        public TelaDeCadastro(Cliente ClienteSelecionada)
         {
             InitializeComponent();
             if (ClienteSelecionada == null)
             {
-                cliente = new Pessoa();
+                cliente = new Cliente();
             }
             else
             {
@@ -72,7 +74,7 @@ namespace GerenciamentodeClientes
                 erros.Add("CPF inválido. Por favor insira um CPF válido.\n");
             }
 
-            if (DateTime.Now.Year - dateTimeDataDeNascimento.Value.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - dateTimeDataDeNascimento.Value.Year < Cliente.valorMinimoIdade)
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }
@@ -105,11 +107,6 @@ namespace GerenciamentodeClientes
             {
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -53,7 +53,6 @@
             label5.Size = new Size(143, 20);
             label5.TabIndex = 10;
             label5.Text = "Cadastro de clientes";
-            label5.Click += label5_Click;
             // 
             // label1
             // 

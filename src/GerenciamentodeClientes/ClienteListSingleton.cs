@@ -3,10 +3,10 @@
     public class ClienteListSingleton
     {
         private static ClienteListSingleton instancia;
-        private List<Pessoa> clienteList;
+        private List<Cliente> clienteList;
         private ClienteListSingleton()
         {
-            clienteList = new List<Pessoa>();
+            clienteList = new List<Cliente>();
         }
         public static ClienteListSingleton Instancia
         {
@@ -19,7 +19,7 @@
                 return instancia;
             }
         }
-        public List<Pessoa> ClienteList 
+        public List<Cliente> ClienteList 
         { 
           get { return clienteList; } 
           set { clienteList = value; }

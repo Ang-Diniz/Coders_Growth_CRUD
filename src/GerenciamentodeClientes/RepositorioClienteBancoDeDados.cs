@@ -7,7 +7,7 @@ namespace GerenciamentodeClientes
     {
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
 
-        public List<Pessoa> ObterTodos()
+        public List<Cliente> ObterTodos()
         {
             SqlConnection ConexaoSQL = new SqlConnection(connectionString);
 
@@ -15,7 +15,7 @@ namespace GerenciamentodeClientes
             {
                 ConexaoSQL.Open();
 
-                List<Pessoa> clientes = new List<Pessoa>();
+                List<Cliente> clientes = new List<Cliente>();
                 var sql = "SELECT * FROM clientes";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
@@ -24,7 +24,7 @@ namespace GerenciamentodeClientes
 
                 while (reader.Read())
                 {
-                    Pessoa cliente = new()
+                    Cliente cliente = new()
                     {
                         Id = (int)reader.GetInt32(0),
                         Nome = reader.GetString(1),
@@ -48,7 +48,7 @@ namespace GerenciamentodeClientes
             }
         }
 
-        public void Criar(Pessoa clienteNovo)
+        public void Criar(Cliente clienteNovo)
         {
             SqlConnection ConexaoSQL = new SqlConnection(connectionString);
 
@@ -77,7 +77,7 @@ namespace GerenciamentodeClientes
             }
         }
 
-        public Pessoa ObterPorId(int id)
+        public Cliente ObterPorId(int id)
         {
             SqlConnection ConexaoSQL = new SqlConnection(connectionString);
 
@@ -94,7 +94,7 @@ namespace GerenciamentodeClientes
 
                 if (reader.Read())
                 {
-                    Pessoa cliente = new()
+                    Cliente cliente = new()
                     {
                         Id = (int)reader.GetInt32(0),
                         Nome = reader.GetString(1),
@@ -145,7 +145,7 @@ namespace GerenciamentodeClientes
             }
         }
 
-        public void Atualizar(Pessoa clienteAtualizado)
+        public void Atualizar(Cliente clienteAtualizado)
         {
             SqlConnection ConexaoSQL = new SqlConnection(connectionString);
 
@@ -153,7 +153,7 @@ namespace GerenciamentodeClientes
             {
                 ConexaoSQL.Open();
 
-                var sql = $"UPDATE clientes SET nome=@nome, cpf=@cpf, email=@email, data_de_nascimento=@data_de_nascimento " +
+                var sql = "UPDATE clientes SET nome=@nome, cpf=@cpf, email=@email, data_de_nascimento=@data_de_nascimento " +
                        $"WHERE ID={clienteAtualizado.Id}";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
