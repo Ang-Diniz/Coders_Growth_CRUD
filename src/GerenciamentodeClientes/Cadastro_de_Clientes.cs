@@ -106,5 +106,10 @@ namespace GerenciamentodeClientes
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
