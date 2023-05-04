@@ -4,6 +4,7 @@ namespace GerenciamentodeClientes
 {
     internal class PessoaValidacao : AbstractValidator<Cliente>
     {
+        //teste
         public PessoaValidacao()
         {
             RuleFor(c => c.Nome)
