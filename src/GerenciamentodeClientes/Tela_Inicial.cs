@@ -2,30 +2,28 @@
 {
     public partial class TelaInicial : Form
     {
-        private readonly ICliente _repositorio;
-        public TelaInicial(ICliente repositorio )
+        private readonly ICliente _repositorioCliente;
+        public TelaInicial(ICliente repositorioCliente )
         {
             InitializeComponent();
-            _repositorio = repositorio;
-            DataGridViewTelaInicial.DataSource = repositorioClienteBancoDeDados.ObterTodos();
+            _repositorioCliente = repositorioCliente;
+            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
         }
 
         DialogResult respostaEventosTelaInicial;
-
-        RepositorioClienteBancoDeDados repositorioClienteBancoDeDados = new RepositorioClienteBancoDeDados();
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
             {
-                var cadastro = new TelaDeCadastro(null);
+                var cadastro = new TelaDeCadastro(null!);
                 respostaEventosTelaInicial = cadastro.ShowDialog(null);
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    _repositorio.Criar(cadastro.cliente);
+                    _repositorioCliente.Criar(cadastro.cliente);
                     DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = _repositorio.ObterTodos();
+                    DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
                 }
             }
             catch (Exception ex)
@@ -50,16 +48,16 @@
                     if (index != null)
                     {
                         var id = PegarId();
-                        var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
+                        var clienteSelecionado = _repositorioCliente.ObterPorId(id);
                         var telaEdicao = new TelaDeCadastro(clienteSelecionado);
                         respostaEventosTelaInicial = telaEdicao.ShowDialog();
                        
 
                         if (respostaEventosTelaInicial == DialogResult.OK)
                         {
-                            _repositorio.Atualizar(clienteSelecionado);
+                            _repositorioCliente.Atualizar(clienteSelecionado);
                             DataGridViewTelaInicial.DataSource = null;
-                            DataGridViewTelaInicial.DataSource = _repositorio.ObterTodos();
+                            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
                         }
                     }
                 }
@@ -85,14 +83,14 @@
                     if (index != null)
                     {
                         var id = PegarId();
-                        var clienteSelecionado = repositorioClienteBancoDeDados.ObterPorId(id);
+                        var clienteSelecionado = _repositorioCliente.ObterPorId(id);
                         respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                         if (respostaEventosTelaInicial == DialogResult.Yes)
                         {
-                            _repositorio.Remover(clienteSelecionado.Id);
+                            _repositorioCliente.Remover(clienteSelecionado.Id);
                             DataGridViewTelaInicial.DataSource = null;
-                            DataGridViewTelaInicial.DataSource = _repositorio.ObterTodos();
+                            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
                         }
                     }
                 }

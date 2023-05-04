@@ -59,17 +59,19 @@ namespace GerenciamentodeClientes.Properties {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Add_User_80_icon_icons_com_57380 {
-            get {
+        internal static System.Drawing.Bitmap Add_User_80_icon_icons_com_57380
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("Add_User-80_icon-icons.com_57380", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>

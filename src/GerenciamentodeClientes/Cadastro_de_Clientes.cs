@@ -4,7 +4,6 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
-        private readonly ICliente _repositorio;
         public Pessoa cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
         public TelaDeCadastro(Pessoa ClienteSelecionada)

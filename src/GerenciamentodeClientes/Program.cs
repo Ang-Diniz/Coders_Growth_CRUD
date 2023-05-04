@@ -1,6 +1,6 @@
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting; 
 
 namespace GerenciamentodeClientes
 {
@@ -15,13 +15,11 @@ namespace GerenciamentodeClientes
                 UpdateDatabase(scope.ServiceProvider);
             }
 
-            ApplicationConfiguration.Initialize();
-
             var builder = CriarHostBuilder();
             var servicesProvider = builder.Build().Services;
             var repositorio = servicesProvider.GetService<ICliente>();
 
-            
+            ApplicationConfiguration.Initialize();
             Application.Run(new TelaInicial(repositorio));
         }
         private static void UpdateDatabase(IServiceProvider serviceProvider)
