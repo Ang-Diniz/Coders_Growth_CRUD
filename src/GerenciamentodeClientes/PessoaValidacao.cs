@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
@@ -9,12 +10,6 @@ namespace GerenciamentodeClientes
             RuleFor(c => c.Nome)
             .NotEmpty()
             .MaximumLength(100);
-
-            RuleFor(c => c.Email)
-            .NotEmpty()
-            .EmailAddress()
-            .WithMessage("E-mail inválido.")
-            .MaximumLength(40);
 
             RuleFor(c => c.CPF)
             .Must(validarCPF)
@@ -27,6 +22,21 @@ namespace GerenciamentodeClientes
             .NotEmpty()
             .LessThan(DateTime.Now.AddYears(-18))
             .WithMessage("Cliente menor de 18 anos.");
+
+            RuleFor(c => c.Email)
+            .NotEmpty()
+            .Must(validarEmail)
+            .WithMessage("E-mail inválido.")
+            .MaximumLength(40);
+        }
+
+        private bool validarEmail (string email)
+        {
+            if (!Regex.IsMatch(email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
+            {
+                return false;
+            }
+            return true;
         }
 
         private bool validarCPF(string cpf)

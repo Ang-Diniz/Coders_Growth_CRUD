@@ -37,7 +37,6 @@ namespace GerenciamentodeClientes
                     {
                         var erros = results.Errors.Select(erros => erros.ErrorMessage);
                         MessageBox.Show(string.Join("\n", erros), "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        InitializeComponent();
                     }
 
                 }

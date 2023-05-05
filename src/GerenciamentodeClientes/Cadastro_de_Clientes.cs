@@ -65,7 +65,7 @@ namespace GerenciamentodeClientes
             var campoCPF = mskCPF.Text.Trim();
             var campoEmail = textEmail.Text;
 
-            if (/*string.IsNullOrEmpty(campoNome) ||*/ !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
+            if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
                 erros.Add("Nome inválido. O campo nome deve conter apenas letras e espaços.\n");
             }
