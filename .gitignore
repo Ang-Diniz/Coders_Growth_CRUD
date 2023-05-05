@@ -31,10 +31,6 @@ build/
 # Resharper cache files
 */resharper*/**/cache/
 
-# Local configuration files
-*.config
-*.config.user
-
 # Other generated files
 [Tt]humbs.db
 *.bak
