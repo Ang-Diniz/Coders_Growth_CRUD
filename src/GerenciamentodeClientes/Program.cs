@@ -1,7 +1,7 @@
 using FluentMigrator.Runner;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting; 
+using Microsoft.Extensions.Hosting;
 
 namespace GerenciamentodeClientes
 {
@@ -15,12 +15,18 @@ namespace GerenciamentodeClientes
             {
                 UpdateDatabase(scope.ServiceProvider);
             }
+
+            var builder1 = CriarHostBuilder();
+            var servicesProvider1 = builder1.Build().Services;
+            var validacao = servicesProvider1.GetService<IValidator<Cliente>>();
+
             var builder = CriarHostBuilder();
             var servicesProvider = builder.Build().Services;
             var repositorio = servicesProvider.GetService<ICliente>();
 
+
             ApplicationConfiguration.Initialize();
-            Application.Run(new TelaInicial(repositorio));
+            Application.Run(new TelaInicial(repositorio, validacao));
         }
 
         private static void UpdateDatabase(IServiceProvider serviceProvider)
@@ -40,12 +46,19 @@ namespace GerenciamentodeClientes
                 .ScanIn(typeof(AddClienteTable).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
+           
+        }
+
+        public void configureService(IServiceCollection services)
+        {
+            services.AddValidatorsFromAssemblyContaining<Cliente>();
         }
 
         static IHostBuilder CriarHostBuilder()
         {
             return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) => {
+                services.AddScoped<IValidator<Cliente>, PessoaValidacao>();
                 services.AddScoped<ICliente , RepositorioClienteBancoDeDados>();
             });
         }

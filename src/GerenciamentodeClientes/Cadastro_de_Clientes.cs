@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
@@ -7,7 +6,6 @@ namespace GerenciamentodeClientes
     {
         public Cliente cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
-
         public TelaDeCadastro(Cliente ClienteSelecionada)
         {
             InitializeComponent();
@@ -45,15 +43,18 @@ namespace GerenciamentodeClientes
 
                     DialogResult = DialogResult.OK;
                 }
+
                 else
                 {
-                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Preencha corretamente todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
+
         }
 
         public bool ValidacaoGeral()
@@ -64,7 +65,7 @@ namespace GerenciamentodeClientes
             var campoCPF = mskCPF.Text.Trim();
             var campoEmail = textEmail.Text;
 
-            if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
+            if (/*string.IsNullOrEmpty(campoNome) ||*/ !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
             {
                 erros.Add("Nome inválido. O campo nome deve conter apenas letras e espaços.\n");
             }
@@ -110,3 +111,4 @@ namespace GerenciamentodeClientes
         }
     }
 }
+

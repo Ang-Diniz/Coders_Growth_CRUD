@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
-using Microsoft.Extensions.Options;
 
 namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
-        ICliente _repositorioCliente;
-        public TelaInicial( ICliente repositorioCliente)
+        private readonly ICliente _repositorioCliente;
+        private readonly IValidator<Cliente> _validator;
+        public TelaInicial(ICliente repositorioCliente, IValidator<Cliente> validator)
         {
             InitializeComponent();
             _repositorioCliente = repositorioCliente;
-            
+            _validator = validator;
             DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
         }
 
@@ -25,9 +25,21 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
-                    _repositorioCliente.Criar(cadastro.cliente);
-                    DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                    var results = _validator.Validate(cadastro.cliente);
+
+                    if (results.IsValid)
+                    {
+                        _repositorioCliente.Criar(cadastro.cliente);
+                        DataGridViewTelaInicial.DataSource = null;
+                        DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                    }
+                    else
+                    {
+                        var erros = results.Errors.Select(erros => erros.ErrorMessage);
+                        MessageBox.Show(string.Join("\n", erros), "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        InitializeComponent();
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -55,13 +67,24 @@ namespace GerenciamentodeClientes
                         var clienteSelecionado = _repositorioCliente.ObterPorId(id);
                         var telaEdicao = new TelaDeCadastro(clienteSelecionado);
                         respostaEventosTelaInicial = telaEdicao.ShowDialog();
-                       
+
 
                         if (respostaEventosTelaInicial == DialogResult.OK)
                         {
-                            _repositorioCliente.Atualizar(clienteSelecionado);
-                            DataGridViewTelaInicial.DataSource = null;
-                            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                            var results = _validator.Validate(clienteSelecionado);
+
+                            if (results.IsValid)
+                            {
+                                _repositorioCliente.Atualizar(clienteSelecionado);
+                                DataGridViewTelaInicial.DataSource = null;
+                                DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                            }
+                            else
+                            {
+                                var erros = results.Errors.Select(erros => erros.ErrorMessage);
+                                MessageBox.Show(string.Join("\n", erros), "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
                         }
                     }
                 }
