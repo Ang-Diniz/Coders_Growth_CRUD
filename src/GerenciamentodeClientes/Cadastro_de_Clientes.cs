@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Microsoft.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
@@ -28,6 +29,8 @@ namespace GerenciamentodeClientes
             dateTimeDataDeNascimento.Value = cliente.DataDeNascimento;
 
             DialogResult = DialogResult.OK;
+
+            mskCPF.Enabled = false;
         }
 
         private void AoClicarEmSalvar(object sender, EventArgs e)
@@ -43,18 +46,15 @@ namespace GerenciamentodeClientes
 
                     DialogResult = DialogResult.OK;
                 }
-
                 else
                 {
                     MessageBox.Show("Preencha corretamente todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
-
         }
 
         public bool ValidacaoGeral()

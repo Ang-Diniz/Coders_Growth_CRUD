@@ -58,7 +58,7 @@ namespace GerenciamentodeClientes
         {
             return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) => {
-                services.AddScoped<IValidator<Cliente>, PessoaValidacao>();
+                services.AddScoped<IValidator<Cliente>, ClienteFluentValidation>();
                 services.AddScoped<ICliente , RepositorioClienteBancoDeDados>();
             });
         }

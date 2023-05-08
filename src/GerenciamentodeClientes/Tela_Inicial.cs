@@ -38,7 +38,6 @@ namespace GerenciamentodeClientes
                         var erros = results.Errors.Select(erros => erros.ErrorMessage);
                         MessageBox.Show(string.Join("\n", erros), "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
             }
             catch (Exception ex)
@@ -66,15 +65,14 @@ namespace GerenciamentodeClientes
                         var clienteSelecionado = _repositorioCliente.ObterPorId(id);
                         var telaEdicao = new TelaDeCadastro(clienteSelecionado);
                         respostaEventosTelaInicial = telaEdicao.ShowDialog();
-
-
+                        
                         if (respostaEventosTelaInicial == DialogResult.OK)
                         {
                             var results = _validator.Validate(clienteSelecionado);
 
                             if (results.IsValid)
-                            {
-                                _repositorioCliente.Atualizar(clienteSelecionado);
+                            {   
+                                _repositorioCliente.Atualizar(clienteSelecionado);                          
                                 DataGridViewTelaInicial.DataSource = null;
                                 DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
                             }

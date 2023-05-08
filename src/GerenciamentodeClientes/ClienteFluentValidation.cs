@@ -1,11 +1,12 @@
 ﻿using FluentValidation;
+using Microsoft.Data.SqlClient;
 using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
-    public class PessoaValidacao : AbstractValidator<Cliente>
+    public class ClienteFluentValidation : AbstractValidator<Cliente>
     {
-        public PessoaValidacao()
+        public ClienteFluentValidation()
         {
             RuleFor(c => c.Nome)
             .NotEmpty()
@@ -14,9 +15,15 @@ namespace GerenciamentodeClientes
             RuleFor(c => c.CPF)
             .Must(validarCPF)
             .WithMessage("CPF inválido. Por favor insira um CPF válido.")
-            .MinimumLength(11)
-            .MaximumLength(11)
-            .WithMessage("  ");
+            .Must((cpf) =>
+            {
+                if (verificarCpfExiste(cpf) == false)
+                {
+                    return true;
+                }
+                return false;
+            })
+            .WithMessage("CPF já cadastrado na base da dados.");
 
             RuleFor(c => c.DataDeNascimento)
             .NotEmpty()
@@ -30,13 +37,43 @@ namespace GerenciamentodeClientes
             .MaximumLength(40);
         }
 
-        private bool validarEmail (string email)
+        private bool validarEmail(string email)
         {
             if (!Regex.IsMatch(email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
             {
                 return false;
             }
             return true;
+        }
+
+        public bool verificarCpfExiste(string cpf)
+        {
+            SqlConnection ConexaoSQL = new SqlConnection(RepositorioClienteBancoDeDados.connectionString);
+
+            try
+            {
+                ConexaoSQL.Open();
+
+                string sql = "SELECT COUNT(1) FROM clientes WHERE cpf=@CPF";
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+
+                cmd.Parameters.AddWithValue("@CPF", cpf);
+                var resultado = cmd.ExecuteScalar();
+
+                if (resultado != null)
+                {
+                    return (int)resultado > 0;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
         }
 
         private bool validarCPF(string cpf)
