@@ -15,14 +15,15 @@ namespace GerenciamentodeClientes
             RuleFor(c => c.CPF)
             .Must(validarCPF)
             .WithMessage("CPF inválido. Por favor insira um CPF válido.")
-            .Must((cpf) =>
-            {
-                if (verificarCpfExiste(cpf) == false)
-                {
-                    return true;
-                }
-                return false;
-            })
+            .Must(verificarCpfExiste)
+            //.Must((cpf) =>
+            //{
+            //    if (verificarCpfExiste(cpf) == false)
+            //    {
+            //        return true;
+            //    }
+            //    return false;
+            //})
             .WithMessage("CPF já cadastrado na base da dados.");
 
             RuleFor(c => c.DataDeNascimento)
