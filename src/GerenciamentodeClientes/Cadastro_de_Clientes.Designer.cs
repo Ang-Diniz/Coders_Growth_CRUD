@@ -47,6 +47,7 @@
             // 
             label5.AutoSize = true;
             label5.ForeColor = SystemColors.ControlDarkDark;
+            label5.ImageAlign = ContentAlignment.MiddleLeft;
             label5.Location = new Point(119, 9);
             label5.Name = "label5";
             label5.Size = new Size(143, 20);
@@ -66,18 +67,18 @@
             label2.AutoSize = true;
             label2.Location = new Point(12, 138);
             label2.Name = "label2";
-            label2.Size = new Size(36, 20);
+            label2.Size = new Size(42, 20);
             label2.TabIndex = 1;
-            label2.Text = "CPF:";
+            label2.Text = "CPF*:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(12, 269);
             label3.Name = "label3";
-            label3.Size = new Size(55, 20);
+            label3.Size = new Size(61, 20);
             label3.TabIndex = 2;
-            label3.Text = "E-mail:";
+            label3.Text = "E-mail*:";
             // 
             // label4
             // 
@@ -148,18 +149,18 @@
             label6.AutoSize = true;
             label6.Location = new Point(12, 74);
             label6.Name = "label6";
-            label6.Size = new Size(53, 20);
+            label6.Size = new Size(59, 20);
             label6.TabIndex = 11;
-            label6.Text = "Nome:";
+            label6.Text = "Nome*:";
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Location = new Point(11, 203);
             label7.Name = "label7";
-            label7.Size = new Size(148, 20);
+            label7.Size = new Size(154, 20);
             label7.TabIndex = 14;
-            label7.Text = "Data de Nascimento:";
+            label7.Text = "Data de Nascimento*:";
             // 
             // TelaDeCadastro
             // 

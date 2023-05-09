@@ -1,54 +1,51 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
-        public Pessoa pessoa { get; set; }
+        public Cliente cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public TelaDeCadastro(Pessoa PessoaSelecionada)
+        public TelaDeCadastro(Cliente ClienteSelecionada)
         {
             InitializeComponent();
-            if (PessoaSelecionada == null)
+            if (ClienteSelecionada == null)
             {
-                pessoa = new Pessoa();
+                cliente = new Cliente();
             }
             else
             {
-                pessoa = PessoaSelecionada;
-                PreencherInputDaTela(PessoaSelecionada);
+                cliente = ClienteSelecionada;
+                PreencherInputDaTela();
             }
         }
-        private void PreencherInputDaTela(Pessoa PessoaSelecionada)
+
+        private void PreencherInputDaTela()
         {
-            textNome.Text = pessoa.Nome;
-            mskCPF.Text = pessoa.CPF;
-            textEmail.Text = pessoa.Email;
-            dateTimeDataDeNascimento.Value = pessoa.DataDeNascimento;
+            textNome.Text = cliente.Nome;
+            mskCPF.Text = cliente.CPF;
+            textEmail.Text = cliente.Email;
+            dateTimeDataDeNascimento.Value = cliente.DataDeNascimento;
 
             DialogResult = DialogResult.OK;
         }
+
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
             {
                 if (ValidacaoGeral())
                 {
-                    if (pessoa.Id == Decimal.Zero)
-                    {
-                        pessoa.Id = Pessoa.GerarID();
-                    }
-                    pessoa.Nome = textNome.Text;
-                    pessoa.CPF = mskCPF.Text;
-                    pessoa.Email = textEmail.Text;
-                    pessoa.DataDeNascimento = dateTimeDataDeNascimento.Value;
+                    cliente.Nome = textNome.Text;
+                    cliente.CPF = mskCPF.Text;
+                    cliente.Email = textEmail.Text;
+                    cliente.DataDeNascimento = dateTimeDataDeNascimento.Value;
 
                     DialogResult = DialogResult.OK;
                 }
                 else
                 {
-                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Preencha corretamente todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -56,13 +53,13 @@ namespace GerenciamentodeClientes
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         public bool ValidacaoGeral()
         {
             var erros = new List<string>();
 
             var campoNome = textNome.Text.Trim();
             var campoCPF = mskCPF.Text.Trim();
-            var campoDataSelecionada = new DateTime();
             var campoEmail = textEmail.Text;
 
             if (string.IsNullOrEmpty(campoNome) || !Regex.IsMatch(campoNome, @"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$"))
@@ -75,12 +72,7 @@ namespace GerenciamentodeClientes
                 erros.Add("CPF inválido. Por favor insira um CPF válido.\n");
             }
 
-            if (!DateTime.TryParse(dateTimeDataDeNascimento.Text, out campoDataSelecionada))
-            {
-                return false;
-            }
-
-            if (DateTime.Now.Year - campoDataSelecionada.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - dateTimeDataDeNascimento.Value.Year < Cliente.valorMinimoIdade)
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }
@@ -97,15 +89,16 @@ namespace GerenciamentodeClientes
             }
             return true;
         }
+
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
             {
-                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                respostaEventosCadastroClientes = MessageBox.Show("Deseja mesmo cancelar ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (respostaEventosCadastroClientes == DialogResult.Yes)
                 {
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)
@@ -115,3 +108,4 @@ namespace GerenciamentodeClientes
         }
     }
 }
+

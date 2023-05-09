@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using FluentValidation;
 
 namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
-        public TelaInicial()
+        public static ICliente _repositorioCliente;
+        private readonly IValidator<Cliente> _validator;
+        public TelaInicial(ICliente repositorioCliente, IValidator<Cliente> validator)
         {
             InitializeComponent();
+            _repositorioCliente = repositorioCliente;
+            _validator = validator;
+            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
         }
+
         DialogResult respostaEventosTelaInicial;
-        RepositorioPessoaLista repositorioPessoaLista = new RepositorioPessoaLista();
+
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
@@ -29,12 +25,19 @@ namespace GerenciamentodeClientes
 
                 if (respostaEventosTelaInicial == DialogResult.OK)
                 {
+                    var results = _validator.Validate(cadastro.cliente);
 
-                    repositorioPessoaLista.Criar(cadastro.pessoa);
-
-                    DataGridViewTelaInicial.DataSource = null;
-                    DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
-
+                    if (results.IsValid)
+                    {
+                        _repositorioCliente.Criar(cadastro.cliente);
+                        DataGridViewTelaInicial.DataSource = null;
+                        DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                    }
+                    else
+                    {
+                        var erros = results.Errors.Select(erros => erros.ErrorMessage);
+                        MessageBox.Show(string.Join("\n", erros), "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)
@@ -42,27 +45,44 @@ namespace GerenciamentodeClientes
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         private void AoClicarEmEditar(object sender, EventArgs e)
         {
             try
             {
-                if (PessoaListSingleton.Instancia.PessoaList.Count == Decimal.Zero)
+                if (DataGridViewTelaInicial.SelectedRows.Count == Decimal.Zero)
                 {
-                    MessageBox.Show("Nenhum cliente para editar.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Nenhum cliente foi selecionado.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
                 else
                 {
-                    var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
-                    var telaEdicao = new TelaDeCadastro(pessoaSelecionada);
-                    repositorioPessoaLista.Atualizar(pessoaSelecionada);
-                    respostaEventosTelaInicial = telaEdicao.ShowDialog();
+                    var index = DataGridViewTelaInicial.CurrentRow.Index;
 
-                    if (respostaEventosTelaInicial == DialogResult.OK)
+                    if (index != null)
                     {
-                        DataGridViewTelaInicial.DataSource = null;
+                        var id = PegarId();
+                        var clienteSelecionado = _repositorioCliente.ObterPorId(id);
+                        var telaEdicao = new TelaDeCadastro(clienteSelecionado);
+                        respostaEventosTelaInicial = telaEdicao.ShowDialog();
+                        
+                        if (respostaEventosTelaInicial == DialogResult.OK)
+                        {
+                            var results = _validator.Validate(clienteSelecionado);
 
-                        DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
+                            if (results.IsValid)
+                            {   
+                                _repositorioCliente.Atualizar(clienteSelecionado);                            
+                                DataGridViewTelaInicial.DataSource = null;
+                                DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                            }
+                            else
+                            {
+                                var erros = results.Errors.Select(erros => erros.ErrorMessage);
+                                MessageBox.Show(string.Join("\n", erros), "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                        }
                     }
                 }
             }
@@ -71,28 +91,31 @@ namespace GerenciamentodeClientes
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         private void AoClicarEmExcluir(object sender, EventArgs e)
         {
             try
             {
-                if (PessoaListSingleton.Instancia.PessoaList.Count == Decimal.Zero)
+                if (DataGridViewTelaInicial.SelectedRows.Count == Decimal.Zero)
                 {
-                    MessageBox.Show("Nenhum cliente para exlcuir.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Nenhum cliente foi selecionado.", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    var index = DataGridViewTelaInicial.CurrentCell.RowIndex;
-                    var pessoaSelecionada = DataGridViewTelaInicial.Rows[index].DataBoundItem as Pessoa;
-                    respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    var index = DataGridViewTelaInicial.CurrentRow.Index;
 
-                    if (respostaEventosTelaInicial == DialogResult.Yes)
+                    if (index != null)
                     {
+                        var id = PegarId();
+                        var clienteSelecionado = _repositorioCliente.ObterPorId(id);
+                        respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-                        repositorioPessoaLista.Remover(pessoaSelecionada.Id);
-
-                        DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = repositorioPessoaLista.ObterTodos();
-
+                        if (respostaEventosTelaInicial == DialogResult.Yes)
+                        {
+                            _repositorioCliente.Remover(clienteSelecionado.Id);
+                            DataGridViewTelaInicial.DataSource = null;
+                            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                        }
                     }
                 }
             }
@@ -101,8 +124,15 @@ namespace GerenciamentodeClientes
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
+        private int PegarId()
+        {
+            return int.Parse(DataGridViewTelaInicial.SelectedRows[0].Cells[0].Value.ToString());
+        }
+
     }
 }
+
 
 
 
