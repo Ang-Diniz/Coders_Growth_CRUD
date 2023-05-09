@@ -26,15 +26,17 @@ namespace GerenciamentodeClientes
                 {
                     Cliente cliente = new()
                     {
-                        Id = (int)reader.GetInt32(0),
+                        Id = reader.GetInt32(0),
                         Nome = reader.GetString(1),
                         CPF = reader.GetString(2),
                         Email = reader.GetString(3),
                         DataDeNascimento = reader.GetDateTime(4)
 
                     };
+
                     clientes.Add(cliente);
                 }
+
                 return clientes.ToList();
             }
             catch (Exception ex)
@@ -59,6 +61,7 @@ namespace GerenciamentodeClientes
                              "VALUES (@nome, @cpf, @email, @data_de_nascimento)";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+
                 cmd.Parameters.AddWithValue("@nome", clienteNovo.Nome);
                 cmd.Parameters.AddWithValue("@cpf", clienteNovo.CPF);
                 cmd.Parameters.AddWithValue("@email", clienteNovo.Email);
@@ -94,13 +97,14 @@ namespace GerenciamentodeClientes
                 {
                     Cliente cliente = new()
                     {
-                        Id = (int)reader.GetInt32(0),
+                        Id = reader.GetInt32(0),
                         Nome = reader.GetString(1),
                         CPF = reader.GetString(2),
                         Email = reader.GetString(3),
                         DataDeNascimento = reader.GetDateTime(4)
 
                     };
+
                     return cliente;
                 }
                 else

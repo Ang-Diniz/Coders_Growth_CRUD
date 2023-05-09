@@ -36,6 +36,7 @@ namespace GerenciamentodeClientes
             {
                 return false;
             }
+
             return true;
         }
 
@@ -62,6 +63,7 @@ namespace GerenciamentodeClientes
                     return !cpfExistente;
                 }
             }
+
             return false;
         }
 
