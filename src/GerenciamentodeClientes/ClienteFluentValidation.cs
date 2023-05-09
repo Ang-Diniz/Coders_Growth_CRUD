@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Microsoft.Data.SqlClient;
 using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
@@ -10,35 +9,28 @@ namespace GerenciamentodeClientes
         {
             RuleFor(c => c.Nome)
             .NotEmpty()
-            .MaximumLength(100);
+            .MaximumLength(100)
+            .MinimumLength(4);
 
             RuleFor(c => c.CPF)
             .Must(validarCPF)
-            .WithMessage("CPF inválido. Por favor insira um CPF válido.")
-            .Must(verificarCpfExiste)
-            //.Must((cpf) =>
-            //{
-            //    if (verificarCpfExiste(cpf) == false)
-            //    {
-            //        return true;
-            //    }
-            //    return false;
-            //})
-            .WithMessage("CPF já cadastrado na base da dados.");
+            .WithMessage("\nCPF inválido. Por favor insira um CPF válido.\n")
+            .Must((cliente, CPF) => VerificarCpfExiste(cliente, CPF))
+            .WithMessage("\nCPF já cadastrado na base da dados.\n");
 
             RuleFor(c => c.DataDeNascimento)
             .NotEmpty()
             .LessThan(DateTime.Now.AddYears(-18))
-            .WithMessage("Cliente menor de 18 anos.");
+            .WithMessage("\nCliente menor de 18 anos.\n");
 
             RuleFor(c => c.Email)
             .NotEmpty()
-            .Must(validarEmail)
-            .WithMessage("E-mail inválido.")
+            .Must(ValidarEmail)
+            .WithMessage("\nE-mail inválido.\n")
             .MaximumLength(40);
         }
 
-        private bool validarEmail(string email)
+        private bool ValidarEmail(string email)
         {
             if (!Regex.IsMatch(email, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
             {
@@ -47,34 +39,30 @@ namespace GerenciamentodeClientes
             return true;
         }
 
-        public bool verificarCpfExiste(string cpf)
+        public bool VerificarCpfExiste(Cliente cliente, string cpf)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(RepositorioClienteBancoDeDados.connectionString);
+            var obtendoClientePorId = TelaInicial._repositorioCliente.ObterPorId(cliente.Id);
+            var cpfExistente = RepositorioClienteBancoDeDados.VerificarCpfNoBancoDeDados(cpf);
 
-            try
+            if (obtendoClientePorId != null)
             {
-                ConexaoSQL.Open();
-
-                string sql = "SELECT COUNT(1) FROM clientes WHERE cpf=@CPF";
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
-
-                cmd.Parameters.AddWithValue("@CPF", cpf);
-                var resultado = cmd.ExecuteScalar();
-
-                if (resultado != null)
+                if (obtendoClientePorId.CPF == cpf)
                 {
-                    return (int)resultado > 0;
+                    return true;
                 }
-                return false;
+                if (cpfExistente != null)
+                {
+                    return !cpfExistente;
+                }
             }
-            catch (Exception ex)
+            if (obtendoClientePorId == null)
             {
-                throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
+                if (cpfExistente != null)
+                {
+                    return !cpfExistente;
+                }
             }
-            finally
-            {
-                ConexaoSQL.Close();
-            }
+            return false;
         }
 
         private bool validarCPF(string cpf)

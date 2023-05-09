@@ -33,7 +33,6 @@ namespace GerenciamentodeClientes
                         DataDeNascimento = reader.GetDateTime(4)
 
                     };
-
                     clientes.Add(cliente);
                 }
                 return clientes.ToList();
@@ -65,7 +64,6 @@ namespace GerenciamentodeClientes
                 cmd.Parameters.AddWithValue("@email", clienteNovo.Email);
                 cmd.Parameters.AddWithValue("@data_de_nascimento", clienteNovo.DataDeNascimento);
                 cmd.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -85,7 +83,7 @@ namespace GerenciamentodeClientes
             {
                 ConexaoSQL.Open();
 
-                var sql = $"SELECT * FROM CLIENTES WHERE Id ={id}";
+                var sql = $"SELECT * FROM clientes WHERE Id ={id}";
 
                 SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
 
@@ -173,6 +171,36 @@ namespace GerenciamentodeClientes
                 ConexaoSQL.Close();
             }
         }
+
+        public static bool VerificarCpfNoBancoDeDados(string cpf)
+        {
+            var cpfExisteNoBancoDeDados = false;
+
+            SqlConnection ConexaoSQL = new SqlConnection(RepositorioClienteBancoDeDados.connectionString);
+
+            try
+            {
+                string sql = "SELECT COUNT(cpf) FROM clientes WHERE cpf=@CPF";
+                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                cmd.Parameters.AddWithValue("@CPF", cpf);
+
+                ConexaoSQL.Open();
+
+                int contadorCpf = (int)cmd.ExecuteScalar();
+
+                cpfExisteNoBancoDeDados = contadorCpf > Decimal.Zero;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
+            return cpfExisteNoBancoDeDados;
+        }
+
     }
 }
 

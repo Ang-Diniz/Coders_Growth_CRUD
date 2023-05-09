@@ -4,7 +4,7 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
-        private readonly ICliente _repositorioCliente;
+        public static ICliente _repositorioCliente;
         private readonly IValidator<Cliente> _validator;
         public TelaInicial(ICliente repositorioCliente, IValidator<Cliente> validator)
         {
@@ -72,7 +72,7 @@ namespace GerenciamentodeClientes
 
                             if (results.IsValid)
                             {   
-                                _repositorioCliente.Atualizar(clienteSelecionado);                          
+                                _repositorioCliente.Atualizar(clienteSelecionado);                            
                                 DataGridViewTelaInicial.DataSource = null;
                                 DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
                             }

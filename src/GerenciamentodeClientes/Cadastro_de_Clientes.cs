@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
@@ -29,8 +28,6 @@ namespace GerenciamentodeClientes
             dateTimeDataDeNascimento.Value = cliente.DataDeNascimento;
 
             DialogResult = DialogResult.OK;
-
-            mskCPF.Enabled = false;
         }
 
         private void AoClicarEmSalvar(object sender, EventArgs e)
