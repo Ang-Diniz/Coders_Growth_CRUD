@@ -9,16 +9,16 @@ namespace GerenciamentodeClientes
 
         public List<Cliente> ObterTodos()
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
                 ConexaoSQL.Open();
 
-                List<Cliente> clientes = new List<Cliente>();
+                List<Cliente> clientes = new();
                 var sql = "SELECT * FROM clientes";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -51,7 +51,7 @@ namespace GerenciamentodeClientes
 
         public void Criar(Cliente clienteNovo)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -60,7 +60,7 @@ namespace GerenciamentodeClientes
                 var sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) " +
                              "VALUES (@nome, @cpf, @email, @data_de_nascimento)";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
                 cmd.Parameters.AddWithValue("@nome", clienteNovo.Nome);
                 cmd.Parameters.AddWithValue("@cpf", clienteNovo.CPF);
@@ -80,7 +80,7 @@ namespace GerenciamentodeClientes
 
         public Cliente ObterPorId(int id)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -88,7 +88,7 @@ namespace GerenciamentodeClientes
 
                 var sql = $"SELECT * FROM clientes WHERE Id ={id}";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -124,7 +124,7 @@ namespace GerenciamentodeClientes
 
         public void Remover(int id)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -133,7 +133,7 @@ namespace GerenciamentodeClientes
                 var cliente = ObterPorId(id);
                 var sql = $"DELETE FROM clientes WHERE Id ={cliente.Id}";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
                 SqlDataReader reader = cmd.ExecuteReader();
             }
@@ -149,7 +149,7 @@ namespace GerenciamentodeClientes
 
         public void Atualizar(Cliente clienteAtualizado)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -158,7 +158,7 @@ namespace GerenciamentodeClientes
                 var sql = "UPDATE clientes SET nome=@nome, cpf=@cpf, email=@email, data_de_nascimento=@data_de_nascimento " +
                        $"WHERE ID={clienteAtualizado.Id}";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
                 cmd.Parameters.AddWithValue("@nome", clienteAtualizado.Nome);
                 cmd.Parameters.AddWithValue("@cpf", clienteAtualizado.CPF);
@@ -180,12 +180,12 @@ namespace GerenciamentodeClientes
         {
             var cpfExisteNoBancoDeDados = false;
 
-            SqlConnection ConexaoSQL = new SqlConnection(RepositorioClienteBancoDeDados.connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
                 string sql = "SELECT COUNT(cpf) FROM clientes WHERE cpf=@CPF";
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
                 cmd.Parameters.AddWithValue("@CPF", cpf);
 
                 ConexaoSQL.Open();
