@@ -59,55 +59,5 @@ namespace GerenciamentodeClientes.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Add_User_80_icon_icons_com_57380 {
-            get {
-                object obj = ResourceManager.GetObject("Add_User-80_icon-icons.com_57380", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cesto_de_lixo__1_ {
-            get {
-                object obj = ResourceManager.GetObject("cesto-de-lixo (1)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Custom_Icon_Design_Flatastic_4_Male_user_add_48 {
-            get {
-                object obj = ResourceManager.GetObject("Custom-Icon-Design-Flatastic-4-Male-user-add.48", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon {
-            get {
-                object obj = ResourceManager.GetObject("icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap pagina_inicial {
-            get {
-                object obj = ResourceManager.GetObject("pagina-inicial", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

@@ -4,14 +4,14 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaDeCadastro : Form
     {
-        public Pessoa cliente { get; set; }
+        public Cliente cliente { get; set; }
         DialogResult respostaEventosCadastroClientes;
-        public TelaDeCadastro(Pessoa ClienteSelecionada)
+        public TelaDeCadastro(Cliente ClienteSelecionada)
         {
             InitializeComponent();
             if (ClienteSelecionada == null)
             {
-                cliente = new Pessoa();
+                cliente = new Cliente();
             }
             else
             {
@@ -29,6 +29,7 @@ namespace GerenciamentodeClientes
 
             DialogResult = DialogResult.OK;
         }
+
         private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
@@ -44,7 +45,7 @@ namespace GerenciamentodeClientes
                 }
                 else
                 {
-                    MessageBox.Show("Preencha corretamento todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Preencha corretamente todos os campos antes de salvar.", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -52,6 +53,7 @@ namespace GerenciamentodeClientes
                 MessageBox.Show("Erro inesperado. Contate o administrador do sistema.", ex.Message);
             }
         }
+
         public bool ValidacaoGeral()
         {
             var erros = new List<string>();
@@ -70,7 +72,7 @@ namespace GerenciamentodeClientes
                 erros.Add("CPF inválido. Por favor insira um CPF válido.\n");
             }
 
-            if (DateTime.Now.Year - dateTimeDataDeNascimento.Value.Year < Pessoa.valorMinimoIdade)
+            if (DateTime.Now.Year - dateTimeDataDeNascimento.Value.Year < Cliente.valorMinimoIdade)
             {
                 erros.Add("Data Inválida. \nVocê precisa ter mais de 18 anos para se cadastrar.\n");
             }
@@ -87,6 +89,7 @@ namespace GerenciamentodeClientes
             }
             return true;
         }
+
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
@@ -105,3 +108,4 @@ namespace GerenciamentodeClientes
         }
     }
 }
+

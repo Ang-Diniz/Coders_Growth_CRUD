@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaDeCadastro));
             label5 = new Label();
             label1 = new Label();
             label2 = new Label();
@@ -48,13 +47,12 @@
             // 
             label5.AutoSize = true;
             label5.ForeColor = SystemColors.ControlDarkDark;
-            label5.Image = (Image)resources.GetObject("label5.Image");
             label5.ImageAlign = ContentAlignment.MiddleLeft;
-            label5.Location = new Point(102, 9);
+            label5.Location = new Point(119, 9);
             label5.Name = "label5";
-            label5.Size = new Size(167, 20);
+            label5.Size = new Size(143, 20);
             label5.TabIndex = 10;
-            label5.Text = "      Cadastro de clientes";
+            label5.Text = "Cadastro de clientes";
             // 
             // label1
             // 
