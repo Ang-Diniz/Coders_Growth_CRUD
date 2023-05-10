@@ -205,6 +205,35 @@ namespace GerenciamentodeClientes
             return cpfExisteNoBancoDeDados;
         }
 
+        public static bool VerificarEmailNoBancoDeDados(string email)
+        {
+            var emailExisteNoBancoDeDados = false;
+
+            SqlConnection ConexaoSQL = new(connectionString);
+
+            try
+            {
+                string sql = "SELECT COUNT(email) FROM clientes WHERE email=@EMAIL";
+                SqlCommand cmd = new(sql, ConexaoSQL);
+                cmd.Parameters.AddWithValue("@EMAIL", email);
+
+                ConexaoSQL.Open();
+
+                int contadorEmail = (int)cmd.ExecuteScalar();
+
+                emailExisteNoBancoDeDados = contadorEmail > Decimal.Zero;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
+            return emailExisteNoBancoDeDados;
+        }
+
     }
 }
 

@@ -27,6 +27,8 @@ namespace GerenciamentodeClientes
             .NotEmpty()
             .Must(ValidarEmail)
             .WithMessage("\nE-mail inválido.\n")
+            .Must((cliente, EMAIL) => VerificarEmailExiste(cliente, EMAIL))
+            .WithMessage("\nE-mail já cadastrado na base da dados.\n")
             .MaximumLength(40);
         }
 
@@ -61,6 +63,33 @@ namespace GerenciamentodeClientes
                 if (cpfExistente != null)
                 {
                     return !cpfExistente;
+                }
+            }
+
+            return false;
+        }
+
+        public bool VerificarEmailExiste(Cliente cliente, string email)
+        {
+            var obtendoClientePorId = TelaInicial._repositorioCliente.ObterPorId(cliente.Id);
+            var emailExistente = RepositorioClienteBancoDeDados.VerificarEmailNoBancoDeDados(email);
+
+            if (obtendoClientePorId != null)
+            {
+                if (obtendoClientePorId.Email == email)
+                {
+                    return true;
+                }
+                if (emailExistente != null)
+                {
+                    return !emailExistente;
+                }
+            }
+            if (obtendoClientePorId == null)
+            {
+                if (emailExistente != null)
+                {
+                    return !emailExistente;
                 }
             }
 
