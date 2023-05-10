@@ -1,5 +1,7 @@
+using Dominio;
 using FluentMigrator.Runner;
 using FluentValidation;
+using Infraestrutura;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

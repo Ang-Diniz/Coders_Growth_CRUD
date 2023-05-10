@@ -1,10 +1,12 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Dominio;
 using System.Configuration;
+using System.Data.SqlClient;
 
-namespace GerenciamentodeClientes
+namespace Infraestrutura
 {
     public class RepositorioClienteBancoDeDados : ICliente
     {
+        public static ICliente _repositorioCliente;
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
 
         public List<Cliente> ObterTodos()
@@ -176,7 +178,7 @@ namespace GerenciamentodeClientes
             }
         }
 
-        public static bool VerificarCpfNoBancoDeDados(string cpf)
+        public bool VerificarCpfNoBancoDeDados(string cpf)
         {
             var cpfExisteNoBancoDeDados = false;
 
@@ -205,7 +207,7 @@ namespace GerenciamentodeClientes
             return cpfExisteNoBancoDeDados;
         }
 
-        public static bool VerificarEmailNoBancoDeDados(string email)
+        public bool VerificarEmailNoBancoDeDados(string email)
         {
             var emailExisteNoBancoDeDados = false;
 

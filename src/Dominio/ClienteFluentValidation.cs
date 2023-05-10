@@ -1,12 +1,16 @@
 ﻿using FluentValidation;
 using System.Text.RegularExpressions;
 
-namespace GerenciamentodeClientes
+namespace Dominio
 {
-    public class ClienteFluentValidation : AbstractValidator<Cliente>
+    public class ClienteFluentValidation : AbstractValidator<Cliente> 
     {
-        public ClienteFluentValidation()
+        public static ICliente _repositorioCliente;
+        const int valorMinimoIdade = 18;
+        public ClienteFluentValidation(ICliente repositorioCliente)
         {
+            _repositorioCliente = repositorioCliente;
+
             RuleFor(c => c.Nome)
             .NotEmpty()
             .MaximumLength(100)
@@ -20,7 +24,7 @@ namespace GerenciamentodeClientes
 
             RuleFor(c => c.DataDeNascimento)
             .NotEmpty()
-            .LessThan(DateTime.Now.AddYears(-18))
+            .LessThan(DateTime.Now.AddYears(-valorMinimoIdade))
             .WithMessage("\nCliente menor de 18 anos.\n");
 
             RuleFor(c => c.Email)
@@ -44,8 +48,8 @@ namespace GerenciamentodeClientes
 
         public bool VerificarCpfExiste(Cliente cliente, string cpf)
         {
-            var obtendoClientePorId = TelaInicial._repositorioCliente.ObterPorId(cliente.Id);
-            var cpfExistente = RepositorioClienteBancoDeDados.VerificarCpfNoBancoDeDados(cpf);
+            var obtendoClientePorId = _repositorioCliente.ObterPorId(cliente.Id);
+            var cpfExistente = _repositorioCliente.VerificarCpfNoBancoDeDados(cpf);
 
             if (obtendoClientePorId != null)
             {
@@ -71,8 +75,8 @@ namespace GerenciamentodeClientes
 
         public bool VerificarEmailExiste(Cliente cliente, string email)
         {
-            var obtendoClientePorId = TelaInicial._repositorioCliente.ObterPorId(cliente.Id);
-            var emailExistente = RepositorioClienteBancoDeDados.VerificarEmailNoBancoDeDados(email);
+            var obtendoClientePorId = _repositorioCliente.ObterPorId(cliente.Id);
+            var emailExistente = _repositorioCliente.VerificarEmailNoBancoDeDados(email);
 
             if (obtendoClientePorId != null)
             {

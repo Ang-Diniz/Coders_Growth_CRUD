@@ -1,4 +1,6 @@
-﻿namespace GerenciamentodeClientes
+﻿using Dominio;
+
+namespace Infraestrutura
 {
     public class ClienteListSingleton
     {

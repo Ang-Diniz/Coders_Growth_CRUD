@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Dominio;
+using System.Text.RegularExpressions;
 
 namespace GerenciamentodeClientes
 {
