@@ -1,4 +1,6 @@
-﻿namespace GerenciamentodeClientes
+﻿using Dominio;
+
+namespace Infraestrutura
 {
     public class RepositorioClienteLista : ICliente
     {
@@ -30,6 +32,16 @@
             clienteParaAtualizar.Email = clienteAtualizado.Email;
             clienteParaAtualizar.CPF = clienteAtualizado.CPF;
             clienteParaAtualizar.DataDeNascimento = clienteAtualizado.DataDeNascimento;
+        }
+
+        public bool VerificarCpfNoBancoDeDados(string cpf)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool VerificarEmailNoBancoDeDados(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }

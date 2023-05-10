@@ -1,4 +1,4 @@
-﻿namespace GerenciamentodeClientes
+﻿namespace Dominio
 {
     public interface ICliente 
     {
@@ -7,5 +7,7 @@
         public Cliente ObterPorId(int id);
         public void Remover(int id);
         public void Atualizar(Cliente clienteAtualizado);
+        public bool VerificarCpfNoBancoDeDados(string cpf);
+        public bool VerificarEmailNoBancoDeDados(string email);
     }
 }

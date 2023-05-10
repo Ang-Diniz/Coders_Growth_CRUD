@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Dominio;
+using FluentValidation;
 
 namespace GerenciamentodeClientes
 {
@@ -6,6 +7,7 @@ namespace GerenciamentodeClientes
     {
         public static ICliente _repositorioCliente;
         private readonly IValidator<Cliente> _validator;
+        DialogResult respostaEventosTelaInicial;
         public TelaInicial(ICliente repositorioCliente, IValidator<Cliente> validator)
         {
             InitializeComponent();
@@ -13,8 +15,6 @@ namespace GerenciamentodeClientes
             _validator = validator;
             DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
         }
-
-        DialogResult respostaEventosTelaInicial;
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {

@@ -1,24 +1,26 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Dominio;
 using System.Configuration;
+using System.Data.SqlClient;
 
-namespace GerenciamentodeClientes
+namespace Infraestrutura
 {
     public class RepositorioClienteBancoDeDados : ICliente
     {
+        public static ICliente _repositorioCliente;
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
 
         public List<Cliente> ObterTodos()
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
                 ConexaoSQL.Open();
 
-                List<Cliente> clientes = new List<Cliente>();
+                List<Cliente> clientes = new();
                 var sql = "SELECT * FROM clientes";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -26,15 +28,17 @@ namespace GerenciamentodeClientes
                 {
                     Cliente cliente = new()
                     {
-                        Id = (int)reader.GetInt32(0),
+                        Id = reader.GetInt32(0),
                         Nome = reader.GetString(1),
                         CPF = reader.GetString(2),
                         Email = reader.GetString(3),
                         DataDeNascimento = reader.GetDateTime(4)
 
                     };
+
                     clientes.Add(cliente);
                 }
+
                 return clientes.ToList();
             }
             catch (Exception ex)
@@ -49,7 +53,7 @@ namespace GerenciamentodeClientes
 
         public void Criar(Cliente clienteNovo)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -58,7 +62,8 @@ namespace GerenciamentodeClientes
                 var sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) " +
                              "VALUES (@nome, @cpf, @email, @data_de_nascimento)";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
+
                 cmd.Parameters.AddWithValue("@nome", clienteNovo.Nome);
                 cmd.Parameters.AddWithValue("@cpf", clienteNovo.CPF);
                 cmd.Parameters.AddWithValue("@email", clienteNovo.Email);
@@ -77,7 +82,7 @@ namespace GerenciamentodeClientes
 
         public Cliente ObterPorId(int id)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -85,7 +90,7 @@ namespace GerenciamentodeClientes
 
                 var sql = $"SELECT * FROM clientes WHERE Id ={id}";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -94,13 +99,14 @@ namespace GerenciamentodeClientes
                 {
                     Cliente cliente = new()
                     {
-                        Id = (int)reader.GetInt32(0),
+                        Id = reader.GetInt32(0),
                         Nome = reader.GetString(1),
                         CPF = reader.GetString(2),
                         Email = reader.GetString(3),
                         DataDeNascimento = reader.GetDateTime(4)
 
                     };
+
                     return cliente;
                 }
                 else
@@ -120,7 +126,7 @@ namespace GerenciamentodeClientes
 
         public void Remover(int id)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -129,7 +135,7 @@ namespace GerenciamentodeClientes
                 var cliente = ObterPorId(id);
                 var sql = $"DELETE FROM clientes WHERE Id ={cliente.Id}";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
                 SqlDataReader reader = cmd.ExecuteReader();
             }
@@ -145,7 +151,7 @@ namespace GerenciamentodeClientes
 
         public void Atualizar(Cliente clienteAtualizado)
         {
-            SqlConnection ConexaoSQL = new SqlConnection(connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
@@ -154,7 +160,7 @@ namespace GerenciamentodeClientes
                 var sql = "UPDATE clientes SET nome=@nome, cpf=@cpf, email=@email, data_de_nascimento=@data_de_nascimento " +
                        $"WHERE ID={clienteAtualizado.Id}";
 
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
 
                 cmd.Parameters.AddWithValue("@nome", clienteAtualizado.Nome);
                 cmd.Parameters.AddWithValue("@cpf", clienteAtualizado.CPF);
@@ -172,16 +178,16 @@ namespace GerenciamentodeClientes
             }
         }
 
-        public static bool VerificarCpfNoBancoDeDados(string cpf)
+        public bool VerificarCpfNoBancoDeDados(string cpf)
         {
             var cpfExisteNoBancoDeDados = false;
 
-            SqlConnection ConexaoSQL = new SqlConnection(RepositorioClienteBancoDeDados.connectionString);
+            SqlConnection ConexaoSQL = new(connectionString);
 
             try
             {
                 string sql = "SELECT COUNT(cpf) FROM clientes WHERE cpf=@CPF";
-                SqlCommand cmd = new SqlCommand(sql, ConexaoSQL);
+                SqlCommand cmd = new(sql, ConexaoSQL);
                 cmd.Parameters.AddWithValue("@CPF", cpf);
 
                 ConexaoSQL.Open();
@@ -199,6 +205,35 @@ namespace GerenciamentodeClientes
                 ConexaoSQL.Close();
             }
             return cpfExisteNoBancoDeDados;
+        }
+
+        public bool VerificarEmailNoBancoDeDados(string email)
+        {
+            var emailExisteNoBancoDeDados = false;
+
+            SqlConnection ConexaoSQL = new(connectionString);
+
+            try
+            {
+                string sql = "SELECT COUNT(email) FROM clientes WHERE email=@EMAIL";
+                SqlCommand cmd = new(sql, ConexaoSQL);
+                cmd.Parameters.AddWithValue("@EMAIL", email);
+
+                ConexaoSQL.Open();
+
+                int contadorEmail = (int)cmd.ExecuteScalar();
+
+                emailExisteNoBancoDeDados = contadorEmail > Decimal.Zero;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
+            }
+            finally
+            {
+                ConexaoSQL.Close();
+            }
+            return emailExisteNoBancoDeDados;
         }
 
     }

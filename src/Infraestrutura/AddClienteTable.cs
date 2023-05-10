@@ -1,7 +1,7 @@
 ﻿using FluentMigrator;
 using FluentMigrator.SqlServer;
 
-namespace GerenciamentodeClientes
+namespace Infraestrutura
 {
     [Migration(20230427101000)]
     public class AddClienteTable : Migration

@@ -3,6 +3,7 @@
 src/GerenciamentodeClientes/.vs/
 src/GerenciamentodeClientes/bin/
 src/GerenciamentodeClientes/obj/
+src/GerenciamentodeClientes/Properties/Resources.Designer.cs
 bin/
 obj/
 *.user

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamentodeClientes", "GerenciamentodeClientes.csproj", "{38476438-8702-4861-96AB-29B23B8745E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciamentodeClientes", "GerenciamentodeClientes.csproj", "{38476438-8702-4861-96AB-29B23B8745E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "..\Dominio\Dominio.csproj", "{ADDE5526-6738-4223-8166-0730169C2316}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infraestrutura", "..\Infraestrutura\Infraestrutura.csproj", "{0392594E-36E1-4946-999B-688319865E29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{38476438-8702-4861-96AB-29B23B8745E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38476438-8702-4861-96AB-29B23B8745E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38476438-8702-4861-96AB-29B23B8745E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDE5526-6738-4223-8166-0730169C2316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDE5526-6738-4223-8166-0730169C2316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDE5526-6738-4223-8166-0730169C2316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDE5526-6738-4223-8166-0730169C2316}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0392594E-36E1-4946-999B-688319865E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0392594E-36E1-4946-999B-688319865E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0392594E-36E1-4946-999B-688319865E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0392594E-36E1-4946-999B-688319865E29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

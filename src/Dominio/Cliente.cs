@@ -1,4 +1,4 @@
-﻿namespace GerenciamentodeClientes
+﻿namespace Dominio
 {
     public class Cliente
     {
