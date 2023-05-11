@@ -52,7 +52,6 @@ namespace Infraestrutura
                 FirstOrDefault(c => c.Id == id);
 
                 return cliente;
-
             }
             catch (Exception ex)
             {
@@ -62,7 +61,6 @@ namespace Infraestrutura
 
         public List<Cliente> ObterTodos()
         {
-
             using var conexaoLinq2Db = CriarConexao();
 
             try

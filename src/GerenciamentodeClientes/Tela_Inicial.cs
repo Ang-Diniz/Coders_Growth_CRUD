@@ -7,14 +7,14 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
-        private static ICliente _repositorioClienteBD;
         private static ICliente _repositorioClienteLinq2Db;
+
         private readonly IValidator<Cliente> _validator;
+
         DialogResult respostaEventosTelaInicial;
-        public TelaInicial(ICliente repositorioCliente, IValidator<Cliente> validator, ICliente repositorioClienteLinq2Db)
+        public TelaInicial(IValidator<Cliente> validator, ICliente repositorioClienteLinq2Db)
         {
             InitializeComponent();
-            _repositorioClienteBD = repositorioCliente;
             _validator = validator;
             _repositorioClienteLinq2Db = repositorioClienteLinq2Db;
             DataGridViewTelaInicial.DataSource = _repositorioClienteLinq2Db.ObterTodos();
@@ -69,14 +69,14 @@ namespace GerenciamentodeClientes
                         var clienteSelecionado = _repositorioClienteLinq2Db.ObterPorId(id);
                         var telaEdicao = new TelaDeCadastro(clienteSelecionado);
                         respostaEventosTelaInicial = telaEdicao.ShowDialog();
-                        
+
                         if (respostaEventosTelaInicial == DialogResult.OK)
                         {
                             var results = _validator.Validate(clienteSelecionado);
 
                             if (results.IsValid)
                             {
-                                _repositorioClienteLinq2Db.Atualizar(clienteSelecionado);                            
+                                _repositorioClienteLinq2Db.Atualizar(clienteSelecionado);
                                 DataGridViewTelaInicial.DataSource = null;
                                 DataGridViewTelaInicial.DataSource = _repositorioClienteLinq2Db.ObterTodos();
                             }

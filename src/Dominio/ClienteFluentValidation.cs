@@ -5,12 +5,11 @@ namespace Dominio
 {
     public class ClienteFluentValidation : AbstractValidator<Cliente>
     {
-        private static ICliente _repositorioClienteDB;
         private static ICliente _repositorioClienteLinq2Db;
+
         const int valorMinimoIdade = 18;
-        public ClienteFluentValidation(ICliente repositorioClienteDB, ICliente repositorioClienteLinq2Db)
+        public ClienteFluentValidation(ICliente repositorioClienteLinq2Db)
         {
-            _repositorioClienteDB = repositorioClienteDB;
             _repositorioClienteLinq2Db = repositorioClienteLinq2Db;
 
             RuleFor(c => c.Nome)
