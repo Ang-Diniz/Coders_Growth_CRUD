@@ -26,7 +26,6 @@ namespace GerenciamentodeClientes
 
             var repositorioLinq2Db = servicesProvider.GetService<ICliente>();
 
-
             ApplicationConfiguration.Initialize();
             Application.Run(new TelaInicial(validacao, repositorioLinq2Db));
         }

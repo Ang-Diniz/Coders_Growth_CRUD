@@ -3,7 +3,6 @@ using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
 using LinqToDB.DataProvider.SqlServer;
-using System.Data.SqlClient;
 
 namespace Infraestrutura
 {
@@ -104,14 +103,12 @@ namespace Infraestrutura
             {
                 var contadorCpf = conexaoLinq2Db.GetTable<Cliente>().Count(c => c.CPF == cpf);
 
-                cpfExisteNoBancoDeDados = contadorCpf > Decimal.Zero;
+                return cpfExisteNoBancoDeDados = contadorCpf > Decimal.Zero;
             }
             catch (Exception ex)
             {
                 throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
             }
-
-            return cpfExisteNoBancoDeDados;
         }
 
         public bool VerificarEmailNoBancoDeDados(string email)
@@ -124,14 +121,12 @@ namespace Infraestrutura
             {
                 var contadorEmail = conexaoLinq2Db.GetTable<Cliente>().Count(c => c.Email == email);
 
-                emailExisteNoBancoDeDados = contadorEmail > Decimal.Zero;
+                return emailExisteNoBancoDeDados = contadorEmail > Decimal.Zero;
             }
             catch (Exception ex)
             {
                 throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
             }
-            
-            return emailExisteNoBancoDeDados;
         }
     }
 }
