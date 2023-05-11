@@ -3,29 +3,31 @@ using System.Text.RegularExpressions;
 
 namespace Dominio
 {
-    public class ClienteFluentValidation : AbstractValidator<Cliente> 
+    public class ClienteFluentValidation : AbstractValidator<Cliente>
     {
-        public static ICliente _repositorioCliente;
+        private static ICliente _repositorioClienteDB;
+        private static ICliente _repositorioClienteLinq2Db;
         const int valorMinimoIdade = 18;
-        public ClienteFluentValidation(ICliente repositorioCliente)
+        public ClienteFluentValidation(ICliente repositorioClienteDB, ICliente repositorioClienteLinq2Db)
         {
-            _repositorioCliente = repositorioCliente;
+            _repositorioClienteDB = repositorioClienteDB;
+            _repositorioClienteLinq2Db = repositorioClienteLinq2Db;
 
             RuleFor(c => c.Nome)
             .NotEmpty()
             .MaximumLength(100)
             .MinimumLength(4);
 
+            RuleFor(c => c.DataDeNascimento)
+            .NotEmpty()
+            .LessThan(DateTime.Now.AddYears(-valorMinimoIdade))
+            .WithMessage("\nCliente menor de 18 anos.\n");
+
             RuleFor(c => c.CPF)
             .Must(validarCPF)
             .WithMessage("\nCPF inválido. Por favor insira um CPF válido.\n")
             .Must((cliente, CPF) => VerificarCpfExiste(cliente, CPF))
             .WithMessage("\nCPF já cadastrado na base da dados.\n");
-
-            RuleFor(c => c.DataDeNascimento)
-            .NotEmpty()
-            .LessThan(DateTime.Now.AddYears(-valorMinimoIdade))
-            .WithMessage("\nCliente menor de 18 anos.\n");
 
             RuleFor(c => c.Email)
             .NotEmpty()
@@ -48,8 +50,8 @@ namespace Dominio
 
         public bool VerificarCpfExiste(Cliente cliente, string cpf)
         {
-            var obtendoClientePorId = _repositorioCliente.ObterPorId(cliente.Id);
-            var cpfExistente = _repositorioCliente.VerificarCpfNoBancoDeDados(cpf);
+            var obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+            var cpfExistente = _repositorioClienteLinq2Db.VerificarCpfNoBancoDeDados(cpf);
 
             if (obtendoClientePorId != null)
             {
@@ -75,8 +77,8 @@ namespace Dominio
 
         public bool VerificarEmailExiste(Cliente cliente, string email)
         {
-            var obtendoClientePorId = _repositorioCliente.ObterPorId(cliente.Id);
-            var emailExistente = _repositorioCliente.VerificarEmailNoBancoDeDados(email);
+            var obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+            var emailExistente = _repositorioClienteLinq2Db.VerificarEmailNoBancoDeDados(email);
 
             if (obtendoClientePorId != null)
             {

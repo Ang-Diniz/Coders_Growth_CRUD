@@ -2,6 +2,7 @@ using Dominio;
 using FluentMigrator.Runner;
 using FluentValidation;
 using Infraestrutura;
+using LinqToDB;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -18,17 +19,21 @@ namespace GerenciamentodeClientes
                 UpdateDatabase(scope.ServiceProvider);
             }
 
-            var builder1 = CriarHostBuilder();
-            var servicesProvider1 = builder1.Build().Services;
-            var validacao = servicesProvider1.GetService<IValidator<Cliente>>();
-
             var builder = CriarHostBuilder();
             var servicesProvider = builder.Build().Services;
-            var repositorio = servicesProvider.GetService<ICliente>();
+            var validacao = servicesProvider.GetService<IValidator<Cliente>>();
+
+            var builder1 = CriarHostBuilder();
+            var servicesProvider1 = builder1.Build().Services;
+            var repositorio = servicesProvider1.GetService<ICliente>();
+
+            var builder2 = CriarHostBuilder();
+            var servicesProvider2 = builder2.Build().Services;
+            var repositorioLinq2Db = servicesProvider2.GetService<ICliente>();
 
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new TelaInicial(repositorio, validacao));
+            Application.Run(new TelaInicial(repositorio, validacao, repositorioLinq2Db));
         }
 
         private static void UpdateDatabase(IServiceProvider serviceProvider)
@@ -48,7 +53,6 @@ namespace GerenciamentodeClientes
                 .ScanIn(typeof(AddClienteTable).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
-           
         }
 
         public void configureService(IServiceCollection services)
@@ -61,7 +65,8 @@ namespace GerenciamentodeClientes
             return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) => {
                 services.AddScoped<IValidator<Cliente>, ClienteFluentValidation>();
-                services.AddScoped<ICliente , RepositorioClienteBancoDeDados>();
+                services.AddScoped<ICliente, RepositorioClienteBancoDeDados>();
+                services.AddScoped<ICliente, RepositorioClienteLinq2DB>();
             });
         }
     }

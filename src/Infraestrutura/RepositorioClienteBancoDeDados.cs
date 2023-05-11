@@ -6,7 +6,7 @@ namespace Infraestrutura
 {
     public class RepositorioClienteBancoDeDados : ICliente
     {
-        public static ICliente _repositorioCliente;
+        public static ICliente _repositorioClienteBD;
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
 
         public List<Cliente> ObterTodos()
@@ -59,7 +59,7 @@ namespace Infraestrutura
             {
                 ConexaoSQL.Open();
 
-                var sql = "INSERT INTO clientes (nome, cpf, email, data_de_nascimento) " +
+                var sql = "INSERT INTO Cliente (Nome, CPF, Email, DataDeNascimento) " +
                              "VALUES (@nome, @cpf, @email, @data_de_nascimento)";
 
                 SqlCommand cmd = new(sql, ConexaoSQL);
@@ -88,7 +88,7 @@ namespace Infraestrutura
             {
                 ConexaoSQL.Open();
 
-                var sql = $"SELECT * FROM clientes WHERE Id ={id}";
+                var sql = $"SELECT * FROM Cliente WHERE Id ={id}";
 
                 SqlCommand cmd = new(sql, ConexaoSQL);
 
@@ -133,7 +133,7 @@ namespace Infraestrutura
                 ConexaoSQL.Open();
 
                 var cliente = ObterPorId(id);
-                var sql = $"DELETE FROM clientes WHERE Id ={cliente.Id}";
+                var sql = $"DELETE FROM Cliente WHERE Id ={cliente.Id}";
 
                 SqlCommand cmd = new(sql, ConexaoSQL);
 
@@ -157,7 +157,7 @@ namespace Infraestrutura
             {
                 ConexaoSQL.Open();
 
-                var sql = "UPDATE clientes SET nome=@nome, cpf=@cpf, email=@email, data_de_nascimento=@data_de_nascimento " +
+                var sql = "UPDATE Cliente SET Nome=@nome, CPF=@cpf, Email=@email, DataDeNascimento=@data_de_nascimento " +
                        $"WHERE ID={clienteAtualizado.Id}";
 
                 SqlCommand cmd = new(sql, ConexaoSQL);
@@ -186,7 +186,7 @@ namespace Infraestrutura
 
             try
             {
-                string sql = "SELECT COUNT(cpf) FROM clientes WHERE cpf=@CPF";
+                string sql = "SELECT COUNT(CPF) FROM clientes WHERE CPF=@CPF";
                 SqlCommand cmd = new(sql, ConexaoSQL);
                 cmd.Parameters.AddWithValue("@CPF", cpf);
 
@@ -215,7 +215,7 @@ namespace Infraestrutura
 
             try
             {
-                string sql = "SELECT COUNT(email) FROM clientes WHERE email=@EMAIL";
+                string sql = "SELECT COUNT(Email) FROM clientes WHERE Email=@EMAIL";
                 SqlCommand cmd = new(sql, ConexaoSQL);
                 cmd.Parameters.AddWithValue("@EMAIL", email);
 
