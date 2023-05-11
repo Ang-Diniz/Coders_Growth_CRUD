@@ -19,13 +19,12 @@ namespace GerenciamentodeClientes
                 UpdateDatabase(scope.ServiceProvider);
             }
 
-            var builderValidator = CriarHostBuilder();
-            var servicesProviderValidator = builderValidator.Build().Services;
-            var validacao = servicesProviderValidator.GetService<IValidator<Cliente>>();
+            var builder = CriarHostBuilder();
+            var servicesProvider = builder.Build().Services;
 
-            var builderRepositorio = CriarHostBuilder();
-            var servicesProviderRepositorio = builderRepositorio.Build().Services;
-            var repositorioLinq2Db = servicesProviderRepositorio.GetService<ICliente>();
+            var validacao = servicesProvider.GetService<IValidator<Cliente>>();
+
+            var repositorioLinq2Db = servicesProvider.GetService<ICliente>();
 
 
             ApplicationConfiguration.Initialize();
