@@ -1,19 +1,23 @@
 ﻿using Dominio;
 using FluentValidation;
+using Infraestrutura;
+using LinqToDB;
 
 namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
-        public static ICliente _repositorioCliente;
+        private static ICliente _repositorioClienteLinq2Db;
+
         private readonly IValidator<Cliente> _validator;
+
         DialogResult respostaEventosTelaInicial;
-        public TelaInicial(ICliente repositorioCliente, IValidator<Cliente> validator)
+        public TelaInicial(IValidator<Cliente> validator, ICliente repositorioClienteLinq2Db)
         {
             InitializeComponent();
-            _repositorioCliente = repositorioCliente;
             _validator = validator;
-            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+            _repositorioClienteLinq2Db = repositorioClienteLinq2Db;
+            DataGridViewTelaInicial.DataSource = _repositorioClienteLinq2Db.ObterTodos();
         }
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
@@ -29,9 +33,9 @@ namespace GerenciamentodeClientes
 
                     if (results.IsValid)
                     {
-                        _repositorioCliente.Criar(cadastro.cliente);
+                        _repositorioClienteLinq2Db.Criar(cadastro.cliente);
                         DataGridViewTelaInicial.DataSource = null;
-                        DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                        DataGridViewTelaInicial.DataSource = _repositorioClienteLinq2Db.ObterTodos();
                     }
                     else
                     {
@@ -62,19 +66,19 @@ namespace GerenciamentodeClientes
                     if (index != null)
                     {
                         var id = PegarId();
-                        var clienteSelecionado = _repositorioCliente.ObterPorId(id);
+                        var clienteSelecionado = _repositorioClienteLinq2Db.ObterPorId(id);
                         var telaEdicao = new TelaDeCadastro(clienteSelecionado);
                         respostaEventosTelaInicial = telaEdicao.ShowDialog();
-                        
+
                         if (respostaEventosTelaInicial == DialogResult.OK)
                         {
                             var results = _validator.Validate(clienteSelecionado);
 
                             if (results.IsValid)
-                            {   
-                                _repositorioCliente.Atualizar(clienteSelecionado);                            
+                            {
+                                _repositorioClienteLinq2Db.Atualizar(clienteSelecionado);
                                 DataGridViewTelaInicial.DataSource = null;
-                                DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                                DataGridViewTelaInicial.DataSource = _repositorioClienteLinq2Db.ObterTodos();
                             }
                             else
                             {
@@ -107,14 +111,14 @@ namespace GerenciamentodeClientes
                     if (index != null)
                     {
                         var id = PegarId();
-                        var clienteSelecionado = _repositorioCliente.ObterPorId(id);
+                        var clienteSelecionado = _repositorioClienteLinq2Db.ObterPorId(id);
                         respostaEventosTelaInicial = MessageBox.Show("Tem certeza que deseja excluir esse cliente ?", "AVISO", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                         if (respostaEventosTelaInicial == DialogResult.Yes)
                         {
-                            _repositorioCliente.Remover(clienteSelecionado.Id);
+                            _repositorioClienteLinq2Db.Remover(clienteSelecionado.Id);
                             DataGridViewTelaInicial.DataSource = null;
-                            DataGridViewTelaInicial.DataSource = _repositorioCliente.ObterTodos();
+                            DataGridViewTelaInicial.DataSource = _repositorioClienteLinq2Db.ObterTodos();
                         }
                     }
                 }

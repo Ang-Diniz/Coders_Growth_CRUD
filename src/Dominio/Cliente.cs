@@ -1,10 +1,15 @@
-﻿namespace Dominio
+﻿using LinqToDB.Mapping;
+
+namespace Dominio
 {
     public class Cliente
     {
+
         public const int valorInicialId = 0;
         public const int incrementoId = 1;
         public const int valorMinimoIdade = 18;
+
+        [PrimaryKey, Identity]
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
