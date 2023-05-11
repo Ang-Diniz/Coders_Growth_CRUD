@@ -80,7 +80,7 @@ namespace GerenciamentodeClientes
 
             if (string.IsNullOrEmpty(campoEmail) || !Regex.IsMatch(campoEmail, @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"))
             {
-                erros.Add("Email Inválido. Por favor insira um endereço de e-mail válido. \nExemplo: seunome@gmail.com\n");
+                erros.Add("E-mail Inválido. Por favor insira um endereço de e-mail válido. \nExemplo: seunome@gmail.com\n");
             }
 
             if (erros.Any())
