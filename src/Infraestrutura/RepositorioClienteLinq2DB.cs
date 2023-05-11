@@ -14,6 +14,12 @@ namespace Infraestrutura
 
         string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
 
+        private DataConnection CriarConexao()
+        {
+            conexao = SqlServerTools.CreateDataConnection(connectionString);
+            return conexao;
+        }
+
         public void Atualizar(Cliente clienteAtualizado)
         {
             using var conexaoLinq2Db = CriarConexao();
@@ -92,27 +98,17 @@ namespace Infraestrutura
         {
             var cpfExisteNoBancoDeDados = false;
 
-            SqlConnection ConexaoSQL = new(connectionString);
+            using var conexaoLinq2Db = CriarConexao();
 
             try
             {
-                string sql = "SELECT COUNT(CPF) FROM Cliente WHERE CPF=@CPF";
-                SqlCommand cmd = new(sql, ConexaoSQL);
-                cmd.Parameters.AddWithValue("@CPF", cpf);
-
-                ConexaoSQL.Open();
-
-                int contadorCpf = (int)cmd.ExecuteScalar();
+                var contadorCpf = conexaoLinq2Db.GetTable<Cliente>().Count(c => c.CPF == cpf);
 
                 cpfExisteNoBancoDeDados = contadorCpf > Decimal.Zero;
             }
             catch (Exception ex)
             {
                 throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
-            }
-            finally
-            {
-                ConexaoSQL.Close();
             }
 
             return cpfExisteNoBancoDeDados;
@@ -122,17 +118,11 @@ namespace Infraestrutura
         {
             var emailExisteNoBancoDeDados = false;
 
-            SqlConnection ConexaoSQL = new(connectionString);
+            using var conexaoLinq2Db = CriarConexao();
 
             try
             {
-                string sql = "SELECT COUNT(Email) FROM Cliente WHERE Email=@EMAIL";
-                SqlCommand cmd = new(sql, ConexaoSQL);
-                cmd.Parameters.AddWithValue("@EMAIL", email);
-
-                ConexaoSQL.Open();
-
-                int contadorEmail = (int)cmd.ExecuteScalar();
+                var contadorEmail = conexaoLinq2Db.GetTable<Cliente>().Count(c => c.Email == email);
 
                 emailExisteNoBancoDeDados = contadorEmail > Decimal.Zero;
             }
@@ -140,18 +130,8 @@ namespace Infraestrutura
             {
                 throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
             }
-            finally
-            {
-                ConexaoSQL.Close();
-            }
-
+            
             return emailExisteNoBancoDeDados;
-        }
-
-        private DataConnection CriarConexao()
-        {
-            conexao = SqlServerTools.CreateDataConnection(connectionString);
-            return conexao;
         }
     }
 }
