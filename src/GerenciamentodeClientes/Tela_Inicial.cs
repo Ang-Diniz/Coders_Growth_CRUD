@@ -5,7 +5,7 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
-        public static ICliente _repositorioCliente;
+        private static ICliente _repositorioCliente;
         private readonly IValidator<Cliente> _validator;
         DialogResult respostaEventosTelaInicial;
         public TelaInicial(ICliente repositorioCliente, IValidator<Cliente> validator)
