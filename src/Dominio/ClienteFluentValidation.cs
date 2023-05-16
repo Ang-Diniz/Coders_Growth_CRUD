@@ -7,7 +7,6 @@ namespace Dominio
     {
         private static ICliente _repositorioClienteLinq2Db;
 
-        const int valorMinimoIdade = 18;
         public ClienteFluentValidation(ICliente repositorioClienteLinq2Db)
         {
             _repositorioClienteLinq2Db = repositorioClienteLinq2Db;
@@ -19,7 +18,7 @@ namespace Dominio
 
             RuleFor(c => c.DataDeNascimento)
             .NotEmpty()
-            .LessThan(DateTime.Now.AddYears(-valorMinimoIdade))
+            .LessThan(DateTime.Now.AddYears(-Cliente.valorMinimoIdade))
             .WithMessage("\nCliente menor de 18 anos.\n");
 
             RuleFor(c => c.CPF)
