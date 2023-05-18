@@ -18,7 +18,7 @@ namespace Dominio
 
             RuleFor(c => c.DataDeNascimento)
             .NotEmpty()
-            .LessThan(DateTime.Now.AddYears(-Cliente.valorMinimoIdade))
+            .LessThan(DateTime.Now.AddYears( - Cliente.valorMinimoIdade))
             .WithMessage("\nCliente menor de 18 anos.\n");
 
             RuleFor(c => c.CPF)

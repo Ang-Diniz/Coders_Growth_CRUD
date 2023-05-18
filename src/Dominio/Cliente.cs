@@ -4,7 +4,6 @@ namespace Dominio
 {
     public class Cliente
     {
-
         public const int valorInicialId = 0;
         public const int incrementoId = 1;
         public const int valorMinimoIdade = 18;
