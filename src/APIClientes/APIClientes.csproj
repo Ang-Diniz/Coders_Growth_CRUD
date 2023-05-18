@@ -11,4 +11,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\i18n\" />
+    <Folder Include="wwwroot\Controller\" />
+    <Folder Include="wwwroot\View\" />
+  </ItemGroup>
+
 </Project>
