@@ -1,4 +1,4 @@
-namespace AplicacaoWebClientes
+namespace APIClientes
 {
     public class WeatherForecast
     {
