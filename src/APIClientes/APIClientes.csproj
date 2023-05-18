@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\i18n\" />
     <Folder Include="wwwroot\Controller\" />
     <Folder Include="wwwroot\View\" />
   </ItemGroup>
