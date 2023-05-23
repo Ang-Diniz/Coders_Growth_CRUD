@@ -19,13 +19,14 @@ namespace Infraestrutura
             return conexao;
         }
 
-        public void Atualizar(Cliente clienteAtualizado)
+        public int Atualizar(Cliente clienteAtualizado)
         {
             using var conexaoLinq2Db = CriarConexao();
 
             try
             {
                 conexaoLinq2Db.Update(clienteAtualizado);
+                return clienteAtualizado.Id;
             }
             catch (Exception ex)
             {
@@ -33,13 +34,14 @@ namespace Infraestrutura
             }
         }
 
-        public void Criar(Cliente clienteNovo)
+        public int Criar(Cliente clienteNovo)
         {
             using var conexaoLinq2Db = CriarConexao();
 
             try
             {
                 conexaoLinq2Db.Insert(clienteNovo);
+                return clienteNovo.Id;
             }
             catch (Exception ex)
             {
@@ -128,5 +130,6 @@ namespace Infraestrutura
                 throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
             }
         }
+
     }
 }

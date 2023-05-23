@@ -8,9 +8,10 @@ namespace Infraestrutura
         {
             return ClienteListSingleton.Instancia.ClienteList;
         }
-        public void Criar(Cliente clienteNovo)
+        public int Criar(Cliente clienteNovo)
         {
             ClienteListSingleton.Instancia.ClienteList.Add(clienteNovo);
+            return clienteNovo.Id;
         }
         public Cliente ObterPorId(int id)
         {
@@ -24,7 +25,7 @@ namespace Infraestrutura
             var clienteARemover = ObterPorId(id);
             ClienteListSingleton.Instancia.ClienteList.Remove(clienteARemover);
         }
-        public void Atualizar(Cliente clienteAtualizado)
+        public int Atualizar(Cliente clienteAtualizado)
         {
             var clienteParaAtualizar = ObterPorId(clienteAtualizado.Id);
 
@@ -32,6 +33,8 @@ namespace Infraestrutura
             clienteParaAtualizar.Email = clienteAtualizado.Email;
             clienteParaAtualizar.CPF = clienteAtualizado.CPF;
             clienteParaAtualizar.DataDeNascimento = clienteAtualizado.DataDeNascimento;
+
+            return clienteAtualizado.Id;
         }
 
         public bool VerificarCpfNoBancoDeDados(string cpf)

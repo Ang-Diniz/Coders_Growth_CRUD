@@ -1,15 +1,20 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿﻿<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Inicial</title>
+    <meta charset="utf-8">
+    <title>Gerenciamento de Clientes</title>
+    <script id="sap-ui-bootstrap" src="https://sdk.openui5.org/resources/sap-ui-core.js"
+        data-sap-ui-theme="sap_bluecrystal" data-sap-ui-compatVersion="edge" data-sap-ui-async="true"
+        data-sap-ui-onInit="module:sap/ui/core/ComponentSupport" data-sap-ui-resourceroots='{
+			"sap.ui.clientes": "./"
+		}'>
+        </script>
 </head>
 
-<body>
-
+<body class="sapUiBody" id="content">
+    <div data-sap-ui-component data-name="sap.ui.clientes" data-id="container" data-settings='{"id" : "clientes"}'>
+    </div>
 </body>
 
 </html>

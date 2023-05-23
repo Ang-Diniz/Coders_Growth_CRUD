@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "..\Dominio\Domin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infraestrutura", "..\Infraestrutura\Infraestrutura.csproj", "{0392594E-36E1-4946-999B-688319865E29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIClientes", "..\APIClientes\APIClientes.csproj", "{1E16D94C-A2C4-4DE6-ABF1-E19FAE4F7F56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIClientes", "..\APIClientes\APIClientes.csproj", "{1E16D94C-A2C4-4DE6-ABF1-E19FAE4F7F56}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0392594E-36E1-4946-999B-688319865E29} = {0392594E-36E1-4946-999B-688319865E29}
+		{ADDE5526-6738-4223-8166-0730169C2316} = {ADDE5526-6738-4223-8166-0730169C2316}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
