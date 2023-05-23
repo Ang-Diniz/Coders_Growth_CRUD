@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\**" />
     <Compile Remove="NovaPasta\**" />
-    <Content Remove="Controllers\**" />
     <Content Remove="NovaPasta\**" />
-    <EmbeddedResource Remove="Controllers\**" />
     <EmbeddedResource Remove="NovaPasta\**" />
-    <None Remove="Controllers\**" />
     <None Remove="NovaPasta\**" />
   </ItemGroup>
 
