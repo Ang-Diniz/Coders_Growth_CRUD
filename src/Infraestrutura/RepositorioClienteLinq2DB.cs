@@ -40,8 +40,8 @@ namespace Infraestrutura
 
             try
             {
-                conexaoLinq2Db.Insert(clienteNovo);
-                return clienteNovo.Id;
+                var novoId = conexaoLinq2Db.InsertWithInt32Identity(clienteNovo);
+                return novoId;
             }
             catch (Exception ex)
             {

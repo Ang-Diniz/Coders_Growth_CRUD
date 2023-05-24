@@ -22,65 +22,82 @@ namespace ClientesAPI.Controllers
         {
             List<Cliente> listaClientes;
 
-            listaClientes = _cliente.ObterTodos();
-
+            try
+            {
+                listaClientes = _cliente.ObterTodos();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return Ok(listaClientes);
         }
 
         [HttpPost]
         public IActionResult Criar([FromBody] Cliente clienteNovo)
         {
-            var resultado = _validator.Validate(clienteNovo);
+            int id;
 
-            if (!resultado.IsValid)
+            try
             {
-                return BadRequest();
-            }
+                _validator.ValidateAndThrow(clienteNovo);
 
-            if (clienteNovo == null)
+                 id = _cliente.Criar(clienteNovo);
+
+                clienteNovo.Id = id;
+            }
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
-
-            var id = _cliente.Criar(clienteNovo);
-
-            clienteNovo.Id = id;
-
             return Created($"api/cliente/{id}", clienteNovo);
         }
 
         [HttpGet("{id}")]
         public IActionResult ObterPorId(int id)
         {
-            var cliente = _cliente.ObterPorId(id);
+            Cliente cliente;
 
-            if (cliente == null) { return NotFound(); }
-
+            try
+            {
+                cliente = _cliente.ObterPorId(id);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
             return Ok(cliente);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Remover(int id)
         {
-            _cliente.Remover(id);
-
+            try
+            {
+                _cliente.Remover(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return Ok();
         }
 
         [HttpPut]
         public IActionResult Atualizar([FromBody] Cliente clienteAtualizado)
         {
-            var resultado = _validator.Validate(clienteAtualizado);
-
-            if (!resultado.IsValid)
+            try
             {
-                return BadRequest();
+                _validator.ValidateAndThrow(clienteAtualizado);
+
+                var id = _cliente.Atualizar(clienteAtualizado);
+
+                clienteAtualizado.Id = id;
             }
-
-            var id = _cliente.Atualizar(clienteAtualizado);
-
-            clienteAtualizado.Id = id;
-
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
             return Ok();
         }
     }
