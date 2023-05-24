@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.IIS.Core;
 
 namespace ClientesAPI.Controllers
 {
@@ -25,12 +26,12 @@ namespace ClientesAPI.Controllers
             try
             {
                 listaClientes = _cliente.ObterTodos();
+                return Ok(listaClientes);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok(listaClientes);
         }
 
         [HttpPost]
@@ -42,7 +43,7 @@ namespace ClientesAPI.Controllers
             {
                 _validator.ValidateAndThrow(clienteNovo);
 
-                 id = _cliente.Criar(clienteNovo);
+                id = _cliente.Criar(clienteNovo);
 
                 clienteNovo.Id = id;
             }
@@ -61,12 +62,12 @@ namespace ClientesAPI.Controllers
             try
             {
                 cliente = _cliente.ObterPorId(id);
+                return Ok(cliente);
             }
             catch (Exception ex)
             {
-                return NotFound(ex.Message);
+                return NotFound(ex.Message + ", " + ex.InnerException);
             }
-            return Ok(cliente);
         }
 
         [HttpDelete("{id}")]
@@ -75,12 +76,12 @@ namespace ClientesAPI.Controllers
             try
             {
                 _cliente.Remover(id);
+                return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok();
         }
 
         [HttpPut]

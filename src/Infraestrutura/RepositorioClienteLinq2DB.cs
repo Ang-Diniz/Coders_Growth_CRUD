@@ -56,7 +56,8 @@ namespace Infraestrutura
             try
             {
                 var cliente = conexaoLinq2Db.GetTable<Cliente>().
-                FirstOrDefault(c => c.Id == id);
+                FirstOrDefault(c => c.Id == id)
+                ?? throw new Exception($"O ID: {id} NÃO EXISTE!");
 
                 return cliente;
             }
@@ -76,7 +77,7 @@ namespace Infraestrutura
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO OBTER TODOS OS CLIENTE", ex);
+                throw new Exception("ERRO AO OBTER TODOS OS CLIENTE", ex.InnerException);
             }
         }
 
