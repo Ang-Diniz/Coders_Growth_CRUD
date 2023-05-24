@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "..\Dominio\Domin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infraestrutura", "..\Infraestrutura\Infraestrutura.csproj", "{0392594E-36E1-4946-999B-688319865E29}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIClientes", "..\APIClientes\APIClientes.csproj", "{1E16D94C-A2C4-4DE6-ABF1-E19FAE4F7F56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientesAPI", "..\ClientesAPI\ClientesAPI.csproj", "{EF2352F7-8303-402A-9F25-34921B00340A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0392594E-36E1-4946-999B-688319865E29} = {0392594E-36E1-4946-999B-688319865E29}
 		{ADDE5526-6738-4223-8166-0730169C2316} = {ADDE5526-6738-4223-8166-0730169C2316}
@@ -33,10 +33,10 @@ Global
 		{0392594E-36E1-4946-999B-688319865E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0392594E-36E1-4946-999B-688319865E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0392594E-36E1-4946-999B-688319865E29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E16D94C-A2C4-4DE6-ABF1-E19FAE4F7F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E16D94C-A2C4-4DE6-ABF1-E19FAE4F7F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E16D94C-A2C4-4DE6-ABF1-E19FAE4F7F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E16D94C-A2C4-4DE6-ABF1-E19FAE4F7F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2352F7-8303-402A-9F25-34921B00340A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2352F7-8303-402A-9F25-34921B00340A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2352F7-8303-402A-9F25-34921B00340A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2352F7-8303-402A-9F25-34921B00340A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

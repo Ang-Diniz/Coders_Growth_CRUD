@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:45651",
-      "sslPort": 44345
+      "applicationUrl": "http://localhost:17562",
+      "sslPort": 44348
     }
   },
   "profiles": {
@@ -14,7 +14,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5114",
+      "applicationUrl": "http://localhost:5098",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -24,7 +24,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7187;http://localhost:5114",
+      "applicationUrl": "https://localhost:7147;http://localhost:5098",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -44,7 +44,7 @@
     "sku=\".NETFramework,Version=v4.8\"/>": "</startup>",
     "<connectionStrings>": "<add",
     "name=\"Cliente\"": "connectionString=\"Data Source=INVENT089;Initial Catalog=GerenciamentoDeClientes;Persist Security Info=True;User ID=sa;Password=sap@123\"",
-    "providerName=\"System.Data.Client\"/>" : "</connectionStrings>",
+    "providerName=\"System.Data.Client\"/>": "</connectionStrings>",
     "</configuration>"
   }
 }

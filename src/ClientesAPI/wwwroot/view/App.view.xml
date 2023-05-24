@@ -1,0 +1,6 @@
+﻿namespace ClientesAPI.wwwroot.view
+{
+    public class App
+    {
+    }
+}
