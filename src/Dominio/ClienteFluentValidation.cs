@@ -20,7 +20,7 @@ namespace Dominio
 
             RuleFor(c => c.DataDeNascimento)
             .NotEmpty()
-            .LessThan(DateTime.Now.AddYears( - Cliente.valorMinimoIdade))
+            .LessThan(DateTime.Now.AddYears(-Cliente.valorMinimoIdade))
             .WithMessage("\nCliente menor de 18 anos.\n");
 
             RuleFor(c => c.CPF)
@@ -51,22 +51,27 @@ namespace Dominio
 
         public bool VerificarCpfExiste(Cliente cliente, string cpf)
         {
-            var obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+            var obtendoClientePorId = cliente;
+
+            if (cliente.Id != Decimal.Zero)
+            {
+                obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+            }
             var cpfExistente = _repositorioClienteLinq2Db.VerificarCpfNoBancoDeDados(cpf);
 
-            if (obtendoClientePorId != null)
+            if (obtendoClientePorId.Id == Decimal.Zero)
             {
-                if (obtendoClientePorId.CPF == cpf)
-                {
-                    return true;
-                }
                 if (cpfExistente != null)
                 {
                     return !cpfExistente;
                 }
             }
-            if (obtendoClientePorId == null)
+            if (obtendoClientePorId.Id != null)
             {
+                if (obtendoClientePorId.CPF == cpf)
+                {
+                    return true;
+                }
                 if (cpfExistente != null)
                 {
                     return !cpfExistente;
@@ -78,22 +83,27 @@ namespace Dominio
 
         public bool VerificarEmailExiste(Cliente cliente, string email)
         {
-            var obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+            var obtendoClientePorId = cliente;
+
+            if (cliente.Id != Decimal.Zero)
+            {
+                obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+            }
             var emailExistente = _repositorioClienteLinq2Db.VerificarEmailNoBancoDeDados(email);
 
-            if (obtendoClientePorId != null)
+            if (obtendoClientePorId.Id == Decimal.Zero)
             {
-                if (obtendoClientePorId.Email == email)
-                {
-                    return true;
-                }
                 if (emailExistente != null)
                 {
                     return !emailExistente;
                 }
             }
-            if (obtendoClientePorId == null)
+            if (obtendoClientePorId.Id != null)
             {
+                if (obtendoClientePorId.Email == email)
+                {
+                    return true;
+                }
                 if (emailExistente != null)
                 {
                     return !emailExistente;

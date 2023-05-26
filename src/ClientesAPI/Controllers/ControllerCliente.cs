@@ -1,7 +1,7 @@
 ﻿using Dominio;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.IIS.Core;
+using System.Collections.Generic;
 
 namespace ClientesAPI.Controllers
 {
@@ -21,12 +21,11 @@ namespace ClientesAPI.Controllers
         [HttpGet]
         public IActionResult ObterTodos()
         {
-            List<Cliente> listaClientes;
-
             try
             {
-                listaClientes = _cliente.ObterTodos();
-                return Ok(listaClientes);
+                List<Cliente> cliente = _cliente.ObterTodos();
+
+                return Ok(cliente);
             }
             catch (Exception ex)
             {
@@ -37,45 +36,12 @@ namespace ClientesAPI.Controllers
         [HttpPost]
         public IActionResult Criar([FromBody] Cliente clienteNovo)
         {
-            int id;
-
             try
             {
                 _validator.ValidateAndThrow(clienteNovo);
 
-                id = _cliente.Criar(clienteNovo);
+                _cliente.Criar(clienteNovo);
 
-                clienteNovo.Id = id;
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            return Created($"api/cliente/{id}", clienteNovo);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult ObterPorId(int id)
-        {
-            Cliente cliente;
-
-            try
-            {
-                cliente = _cliente.ObterPorId(id);
-                return Ok(cliente);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message + ", " + ex.InnerException);
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Remover(int id)
-        {
-            try
-            {
-                _cliente.Remover(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -84,22 +50,53 @@ namespace ClientesAPI.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult Atualizar([FromBody] Cliente clienteAtualizado)
+        [HttpGet("{id}")]
+        public IActionResult ObterPorId([FromRoute] int id)
+        {
+            try
+            {
+                Cliente cliente = _cliente.ObterPorId(id);
+
+                return Ok(cliente);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message + ", \n" + ex.InnerException);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remover([FromRoute] int id)
+        {
+            try
+            {
+                var cliente = _cliente.ObterPorId(id);
+
+                _cliente.Remover(cliente.Id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message + ", \n" + ex.InnerException);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Atualizar([FromRoute] int id, [FromBody] Cliente clienteAtualizado)
         {
             try
             {
                 _validator.ValidateAndThrow(clienteAtualizado);
 
-                var id = _cliente.Atualizar(clienteAtualizado);
+                _cliente.Atualizar(clienteAtualizado);
 
-                clienteAtualizado.Id = id;
+                return Ok(clienteAtualizado.Id);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            return Ok();
         }
     }
 }

@@ -19,33 +19,31 @@ namespace Infraestrutura
             return conexao;
         }
 
-        public int Atualizar(Cliente clienteAtualizado)
+        public void Atualizar(Cliente clienteAtualizado)
         {
             using var conexaoLinq2Db = CriarConexao();
 
             try
             {
                 conexaoLinq2Db.Update(clienteAtualizado);
-                return clienteAtualizado.Id;
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO ALTERAR DADOS DO CLIENTE", ex);
+                throw new Exception("Erro ao atualizar o cliente.", ex);
             }
         }
 
-        public int Criar(Cliente clienteNovo)
+        public void Criar(Cliente clienteNovo)
         {
             using var conexaoLinq2Db = CriarConexao();
 
             try
             {
                 var novoId = conexaoLinq2Db.InsertWithInt32Identity(clienteNovo);
-                return novoId;
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO INSERIR CLIENTE", ex);
+                throw new Exception("Erro ao criar o cliente.", ex);
             }
         }
 
@@ -57,13 +55,13 @@ namespace Infraestrutura
             {
                 var cliente = conexaoLinq2Db.GetTable<Cliente>().
                 FirstOrDefault(c => c.Id == id)
-                ?? throw new Exception($"O ID: {id} NÃO EXISTE!");
+                ?? throw new Exception($"O ID: [ {id} ] não existe.");
 
                 return cliente;
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO OBTER ID DO CLIENTE", ex);
+                throw new Exception("Erro ao obter o ID do cliente.", ex);
             }
         }
 
@@ -77,7 +75,7 @@ namespace Infraestrutura
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO OBTER TODOS OS CLIENTE", ex.InnerException);
+                throw new Exception("Erro ao obter todos os clientes.", ex);
             }
         }
 
@@ -92,7 +90,7 @@ namespace Infraestrutura
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO DELETAR CLIENTE", ex);
+                throw new Exception("Erro ao deletar o cliente.", ex);
             }
         }
 

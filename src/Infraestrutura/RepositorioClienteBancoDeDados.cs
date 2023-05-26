@@ -51,7 +51,7 @@ namespace Infraestrutura
             }
         }
 
-        public int Criar(Cliente clienteNovo)
+        public void Criar(Cliente clienteNovo)
         {
             SqlConnection ConexaoSQL = new(connectionString);
 
@@ -78,7 +78,6 @@ namespace Infraestrutura
             {
                 ConexaoSQL.Close();
             }
-            return clienteNovo.Id;
         }
 
         public Cliente ObterPorId(int id)
@@ -150,7 +149,7 @@ namespace Infraestrutura
             }
         }
 
-        public int Atualizar(Cliente clienteAtualizado)
+        public void Atualizar(Cliente clienteAtualizado)
         {
             SqlConnection ConexaoSQL = new(connectionString);
 
@@ -177,7 +176,6 @@ namespace Infraestrutura
             {
                 ConexaoSQL.Close();
             }
-            return clienteAtualizado.Id;
         }
 
         public bool VerificarCpfNoBancoDeDados(string cpf)
