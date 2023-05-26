@@ -29,7 +29,7 @@ namespace Infraestrutura
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO ALTERAR DADOS DO CLIENTE", ex);
+                throw new Exception("Erro ao atualizar o cliente.", ex);
             }
         }
 
@@ -39,11 +39,11 @@ namespace Infraestrutura
 
             try
             {
-                conexaoLinq2Db.Insert(clienteNovo);
+                var novoId = conexaoLinq2Db.Insert(clienteNovo);
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO INSERIR CLIENTE", ex);
+                throw new Exception("Erro ao criar o cliente.", ex);
             }
         }
 
@@ -54,13 +54,14 @@ namespace Infraestrutura
             try
             {
                 var cliente = conexaoLinq2Db.GetTable<Cliente>().
-                FirstOrDefault(c => c.Id == id);
+                FirstOrDefault(c => c.Id == id)
+                ?? throw new Exception($"O ID: [ {id} ] não existe.");
 
                 return cliente;
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO OBTER ID DO CLIENTE", ex);
+                throw new Exception("Erro ao obter o ID do cliente.", ex);
             }
         }
 
@@ -74,7 +75,7 @@ namespace Infraestrutura
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO OBTER TODOS OS CLIENTE", ex);
+                throw new Exception("Erro ao obter todos os clientes.", ex);
             }
         }
 
@@ -89,7 +90,7 @@ namespace Infraestrutura
             }
             catch (Exception ex)
             {
-                throw new Exception("ERRO AO DELETAR CLIENTE", ex);
+                throw new Exception("Erro ao deletar o cliente.", ex);
             }
         }
 
@@ -128,5 +129,6 @@ namespace Infraestrutura
                 throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
             }
         }
+
     }
 }

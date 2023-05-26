@@ -9,5 +9,6 @@
         public void Atualizar(Cliente clienteAtualizado);
         public bool VerificarCpfNoBancoDeDados(string cpf);
         public bool VerificarEmailNoBancoDeDados(string email);
+     
     }
 }

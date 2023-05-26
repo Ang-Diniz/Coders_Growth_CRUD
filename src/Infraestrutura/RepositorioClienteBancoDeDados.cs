@@ -235,7 +235,6 @@ namespace Infraestrutura
             }
             return emailExisteNoBancoDeDados;
         }
-
     }
 }
 
