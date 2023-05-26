@@ -39,7 +39,7 @@ namespace Infraestrutura
 
             try
             {
-                var novoId = conexaoLinq2Db.InsertWithInt32Identity(clienteNovo);
+                var novoId = conexaoLinq2Db.Insert(clienteNovo);
             }
             catch (Exception ex)
             {

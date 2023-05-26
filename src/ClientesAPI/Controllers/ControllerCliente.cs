@@ -34,8 +34,12 @@ namespace ClientesAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar([FromBody] Cliente clienteNovo)
+        public IActionResult Criar( Cliente clienteNovo)
         {
+            if (clienteNovo == null)
+            {
+                return BadRequest("teste");
+            }
             try
             {
                 _validator.ValidateAndThrow(clienteNovo);
