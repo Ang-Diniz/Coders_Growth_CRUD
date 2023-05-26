@@ -51,24 +51,24 @@ namespace Dominio
 
         public bool VerificarCpfExiste(Cliente cliente, string cpf)
         {
-            var obtendoClientePorId = cliente;
+            var verificarCliente = cliente;
 
             if (cliente.Id != Decimal.Zero)
             {
-                obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+                verificarCliente = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
             }
             var cpfExistente = _repositorioClienteLinq2Db.VerificarCpfNoBancoDeDados(cpf);
 
-            if (obtendoClientePorId.Id == Decimal.Zero)
+            if (verificarCliente.Id == Decimal.Zero)
             {
                 if (cpfExistente != null)
                 {
                     return !cpfExistente;
                 }
             }
-            if (obtendoClientePorId.Id != null)
+            if (verificarCliente.Id != null)
             {
-                if (obtendoClientePorId.CPF == cpf)
+                if (verificarCliente.CPF == cpf)
                 {
                     return true;
                 }
@@ -83,24 +83,24 @@ namespace Dominio
 
         public bool VerificarEmailExiste(Cliente cliente, string email)
         {
-            var obtendoClientePorId = cliente;
+            var verificarCliente = cliente;
 
             if (cliente.Id != Decimal.Zero)
             {
-                obtendoClientePorId = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
+                verificarCliente = _repositorioClienteLinq2Db.ObterPorId(cliente.Id);
             }
             var emailExistente = _repositorioClienteLinq2Db.VerificarEmailNoBancoDeDados(email);
 
-            if (obtendoClientePorId.Id == Decimal.Zero)
+            if (verificarCliente.Id == Decimal.Zero)
             {
                 if (emailExistente != null)
                 {
                     return !emailExistente;
                 }
             }
-            if (obtendoClientePorId.Id != null)
+            if (verificarCliente.Id != null)
             {
-                if (obtendoClientePorId.Email == email)
+                if (verificarCliente.Email == email)
                 {
                     return true;
                 }
