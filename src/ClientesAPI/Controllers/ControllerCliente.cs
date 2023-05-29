@@ -34,7 +34,7 @@ namespace ClientesAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar( Cliente clienteNovo)
+        public IActionResult Criar(Cliente clienteNovo)
         {
             try
             {

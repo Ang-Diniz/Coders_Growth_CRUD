@@ -33,7 +33,7 @@ namespace Dominio
             RuleFor(c => c.Email)
             .NotEmpty()
             .Must(ValidarEmail)
-            .WithMessage("\nE-mail inválido.\n")
+            .WithMessage("\nE-mail inválido. Por favor insira um E-mail válido.\n")
             .Must((cliente, EMAIL) => VerificarEmailExiste(cliente, EMAIL))
             .WithMessage("\nE-mail já cadastrado na base da dados.\n")
             .MaximumLength(40);

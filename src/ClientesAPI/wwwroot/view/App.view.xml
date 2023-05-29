@@ -6,16 +6,16 @@
   <Shell>
    <App>
       <pages>
-         <Page title="{i18n>homePageTitle}">
+         <Page title="{i18n>TituloPagina}">
             <content>
                <Panel
-                  headerText="{i18n>helloPanelTitle}"
+                  headerText="{i18n>TituloPainel}"
                   class="sapUiResponsiveMargin"
 						width="auto">
                   <content>
                      <Button
-                        text="{i18n>showHelloButtonText}"
-                        press=".onShowHello"
+                        text="{i18n>BotaoCadastrar}"
+                        icon="sap-icon://add"
                         class="sapUiSmallMarginEnd"/>
                   </content>
                </Panel>
