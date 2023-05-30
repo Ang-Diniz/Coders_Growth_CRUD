@@ -17,6 +17,40 @@
                         text="{i18n>BotaoCadastrar}"
                         icon="sap-icon://add"
                         class="sapUiSmallMarginEnd"/>
+                        <Table id = "Tabela">
+                        <columns> 
+                        <Column
+                        width="4em">
+                        <Text text = "Id"/>
+                        </Column>
+                        </columns>
+                        <columns> 
+                        <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                        width="12em">
+                        <Text text = "Nome"/>
+                        </Column>
+                        </columns> 
+                        <columns> 
+                        <Column
+                        width="12em">
+                        <Text text = "E-mail"/>
+                        </Column>
+                        </columns>
+                        <columns> 
+                        <Column
+                        width="12em">
+                        <Text text = "CPF"/>
+                        </Column>
+                        </columns>
+                        <columns> 
+                        <Column
+                        width="12em">
+                        <Text text = "Data de Nascimento"/>
+                        </Column>
+                        </columns>
+                        </Table>
                   </content>
                </Panel>
             </content>
