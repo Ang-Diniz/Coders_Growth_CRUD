@@ -1,9 +1,9 @@
-﻿<mvc:View xmlns:core="sap.ui.core"
+﻿<mvc:View 
    controllerName="sap.ui.cliente.controller.App"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
-  displayBlock="true">
-  <Shell>
+   xmlns:core="sap.ui.core">
+<Shell>
    <App>
       <pages>
          <Page title="{i18n>TituloPagina}">
@@ -17,45 +17,42 @@
                         text="{i18n>BotaoCadastrar}"
                         icon="sap-icon://add"
                         class="sapUiSmallMarginEnd"/>
-                        <Table id = "Tabela">
+                     <Table id = "Tabelaclientes" items="{/cliente}">
                         <columns> 
-                        <Column
-                        width="4em">
-                        <Text text = "Id"/>
-                        </Column>
+                           <Column
+                              width="6em">
+                              <Text text = "{i18n>colunaId}"/>
+                           </Column>
+                           <Column>
+                              <Text text = "{i18n>colunaNome}"/>
+                           </Column>
+                           <Column>
+                              <Text text = "{i18n>colunaEmail}"/>
+                           </Column>
+                           <Column>
+                              <Text text = "{i18n>colunaCPF}"/>
+                           </Column>
+                           <Column>
+                              <Text text = "{i18n>colunaDataDeNascimento}"/>
+                           </Column>
                         </columns>
-                        <columns> 
-                        <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true"
-                        width="12em">
-                        <Text text = "Nome"/>
-                        </Column>
-                        </columns> 
-                        <columns> 
-                        <Column
-                        width="12em">
-                        <Text text = "E-mail"/>
-                        </Column>
-                        </columns>
-                        <columns> 
-                        <Column
-                        width="12em">
-                        <Text text = "CPF"/>
-                        </Column>
-                        </columns>
-                        <columns> 
-                        <Column
-                        width="12em">
-                        <Text text = "Data de Nascimento"/>
-                        </Column>
-                        </columns>
-                        </Table>
+                        <items>
+                           <ColumnListItem>
+                              <cells>
+                                 <Text text = "{id}"/>
+                                 <Text text = "{nome}"/>
+                                 <Text text = "{email}"/>
+                                 <Text text = "{cpf}"/>
+                                 <Text text = "{dataDeNascimento}"/>
+                              </cells>
+                           </ColumnListItem>
+                        </items>
+                     </Table>
                   </content>
                </Panel>
             </content>
          </Page>
       </pages>
    </App>
-   </Shell>
+</Shell>
 </mvc:View>

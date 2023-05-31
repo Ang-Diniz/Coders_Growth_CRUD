@@ -1,7 +1,6 @@
 ﻿using Dominio;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace ClientesAPI.Controllers
 {

@@ -3,6 +3,16 @@ using FluentValidation;
 using Infraestrutura;
 
 var builder = WebApplication.CreateBuilder(args);
+var AllowSpecificOrigins = "_allowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowSpecificOrigins,
+                      policy =>
+                      {
+                      policy.AllowAnyOrigin();
+                      });
+});
 
 // Add services to the container.
 
@@ -14,6 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseCors(AllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

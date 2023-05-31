@@ -1,19 +1,23 @@
 ﻿sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], function (Controller) {
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel"
+], function (Controller, JSONModel) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.App", {
         onInit: function () {
 
-            const Tabela = 'https://localhost:7147/api/cliente';
+            this.obterClientes();
+        },
 
-            fetch(Tabela).then(res => res.json()).then(res => {
-                const dataModel = new JSONModel();
-                dataModel.setData({
-                    items: res
-                });
-                this.getView().setModel(dataModel, "cliente")
-            })
+        obterClientes: function () {
+
+            var jsonCliente = new JSONModel();
+
+            fetch("https://localhost:7147/api/cliente/")
+                .then(res => res.json())
+                .then(res => jsonCliente.setData({ cliente:res }))
+
+            this.getView().setModel(jsonCliente);
         }
     });
 });
