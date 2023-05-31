@@ -2,7 +2,8 @@
    controllerName="sap.ui.cliente.controller.App"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
-   xmlns:core="sap.ui.core">
+   xmlns:core="sap.ui.core"
+   displayBlock="true">
 <Shell>
    <App>
       <pages>
@@ -15,39 +16,9 @@
                   <content>
                      <Button
                         text="{i18n>BotaoCadastrar}"
-                        icon="sap-icon://add"
+                        icon="sap-icon://add-employee"
                         class="sapUiSmallMarginEnd"/>
-                     <Table id = "Tabelaclientes" items="{/cliente}">
-                        <columns> 
-                           <Column
-                              width="6em">
-                              <Text text = "{i18n>colunaId}"/>
-                           </Column>
-                           <Column>
-                              <Text text = "{i18n>colunaNome}"/>
-                           </Column>
-                           <Column>
-                              <Text text = "{i18n>colunaEmail}"/>
-                           </Column>
-                           <Column>
-                              <Text text = "{i18n>colunaCPF}"/>
-                           </Column>
-                           <Column>
-                              <Text text = "{i18n>colunaDataDeNascimento}"/>
-                           </Column>
-                        </columns>
-                        <items>
-                           <ColumnListItem>
-                              <cells>
-                                 <Text text = "{id}"/>
-                                 <Text text = "{nome}"/>
-                                 <Text text = "{email}"/>
-                                 <Text text = "{cpf}"/>
-                                 <Text text = "{dataDeNascimento}"/>
-                              </cells>
-                           </ColumnListItem>
-                        </items>
-                     </Table>
+                        <mvc:XMLView viewName="sap.ui.cliente.view.ListaClientes"/>
                   </content>
                </Panel>
             </content>

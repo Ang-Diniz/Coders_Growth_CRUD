@@ -1,8 +1,11 @@
 using Dominio;
 using FluentValidation;
 using Infraestrutura;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var AllowSpecificOrigins = "_allowSpecificOrigins";
 
 builder.Services.AddCors(options =>
@@ -10,7 +13,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowSpecificOrigins,
                       policy =>
                       {
-                      policy.AllowAnyOrigin();
+
+                        policy.AllowAnyOrigin();
+
                       });
 });
 
@@ -32,6 +37,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseFileServer();
+
+app.UseDefaultFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")
+                ),
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings = { [".properties"] = "application/x-msdownload" }
+    }
+});
 
 app.UseHttpsRedirection();
 

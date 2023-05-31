@@ -8,7 +8,7 @@
       metadata: {
          "interfaces": ["sap.ui.core.IAsyncContentCreation"],
          "rootView": {
-            "viewName": "sap.ui.cliente.view.App",
+            "viewName": "sap.ui.cliente.view.Tabela",
             "type": "XML",
             "async": true,
             "id": "app"
