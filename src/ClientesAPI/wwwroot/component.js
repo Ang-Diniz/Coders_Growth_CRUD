@@ -21,6 +21,7 @@
                name: " "
             }
          };
+
          var oModel = new JSONModel(oData);
          this.setModel(oModel);
 

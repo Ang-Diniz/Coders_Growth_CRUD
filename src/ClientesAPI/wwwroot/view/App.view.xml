@@ -14,10 +14,6 @@
                   class="sapUiResponsiveMargin"
 						width="auto">
                   <content>
-                     <Button
-                        text="{i18n>BotaoCadastrar}"
-                        icon="sap-icon://add-employee"
-                        class="sapUiSmallMarginEnd"/>
                         <mvc:XMLView viewName="sap.ui.cliente.view.ListaClientes"/>
                   </content>
                </Panel>
