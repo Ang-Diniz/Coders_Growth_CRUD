@@ -17,16 +17,16 @@
 
       init: function () {
          UIComponent.prototype.init.apply(this, arguments);
-         var oData = {
+         let oData = {
             recipient: {
                name: " "
             }
          };
 
-         var oModel = new JSONModel(oData);
+         let oModel = new JSONModel(oData);
          this.setModel(oModel);
 
-         var i18nModel = new ResourceModel({
+         let i18nModel = new ResourceModel({
             bundleName: "sap.ui.cliente.i18n.i18n"
          });
 
