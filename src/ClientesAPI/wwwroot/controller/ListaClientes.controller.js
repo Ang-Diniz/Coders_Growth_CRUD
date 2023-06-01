@@ -6,7 +6,9 @@
 ], function (Controller, JSONModel, Filter, FilterOperator) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.ListaClientes", {
+
         onInit: function () {
+
             this.obterClientes();
         },
 

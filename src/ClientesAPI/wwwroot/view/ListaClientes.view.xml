@@ -6,7 +6,7 @@
                   <Table id = "Tabelaclientes" items="{/cliente}">
                      <headerToolbar>
                         <Toolbar>
-                           <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee" class="sapUiSmallMarginEnd"/>
+                           <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee" class="sapUiSmallMarginEnd" type="Emphasized"/>
                            <ToolbarSpacer/>
                            <SearchField width="55%" search="buscarClientes"/>
                         </Toolbar>
@@ -30,14 +30,13 @@
                            </Column>
                         </columns>
                         <items>
-                           <ColumnListItem type="Navigation"
-					               press="aoClicarNaLinha">
+                           <ColumnListItem type="Navigation" press="aoClicarNaLinha">
                               <cells>
                                  <Text text = "{id}"/>
                                  <Text text = "{nome}"/>
                                  <Text text = "{email}"/>
                                  <Text text = "{cpf}"/>
-                                 <Text text = "{path : 'dataDeNascimento', type : 'sap.ui.model.type.Date', formatOptions: {style : 'long', source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/>
+                                 <Text text = "{path : 'dataDeNascimento', type : 'sap.ui.model.type.Date', formatOptions: {style : 'medium', source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/>
                               </cells>
                            </ColumnListItem>
                         </items>
