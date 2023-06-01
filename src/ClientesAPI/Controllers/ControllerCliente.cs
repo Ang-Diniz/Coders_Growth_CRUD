@@ -1,7 +1,6 @@
 ﻿using Dominio;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace ClientesAPI.Controllers
 {
@@ -34,12 +33,8 @@ namespace ClientesAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar( Cliente clienteNovo)
+        public IActionResult Criar(Cliente clienteNovo)
         {
-            if (clienteNovo == null)
-            {
-                return BadRequest("teste");
-            }
             try
             {
                 _validator.ValidateAndThrow(clienteNovo);
