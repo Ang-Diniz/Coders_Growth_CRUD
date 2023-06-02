@@ -6,13 +6,8 @@ sap.ui.define([
 
         onInit: function () {
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
+            oRouter.getRoute("detail").attachPatternMatched(this, this);
         },
-        _onObjectMatched: function (oEvent) {
-            this.getView().bindElement({
-                path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").invoicePath),
-                model: "invoice"
-            });
-        }
+
     })
 });

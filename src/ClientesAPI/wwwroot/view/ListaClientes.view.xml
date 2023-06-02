@@ -4,12 +4,11 @@
    xmlns:mvc="sap.ui.core.mvc"
    xmlns:core="sap.ui.core">
    <App>
-         <pages>
                <Page title="{i18n>TituloPagina}">
                   <Table id = "ListaClientes" items="{/cliente}">
                      <headerToolbar>
-                        <Toolbar class="sapUiTinyMarginTop sapUiTinyMarginBottom">
-                           <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee" class="sapUiSmallMarginEnd" type="Unstyled"/>
+                        <Toolbar class="sapUiTinyMarginTop">
+                           <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee"  class="sapUiSmallMarginEnd" type="Emphasized"/>
                            <ToolbarSpacer/>
                            <SearchField width="50%"  placeholder="Buscar" search="buscarClientes"/>
                         </Toolbar>
@@ -45,6 +44,5 @@
                         </items>
                   </Table>
                </Page>
-         </pages>
    </App>
 </mvc:View>
