@@ -31,7 +31,7 @@
                 filtro.push(new Filter("nome", FilterOperator.Contains, buscar));
             }
 
-            let tabela = this.byId("Tabelaclientes")
+            let tabela = this.byId("ListaClientes")
             let items = tabela.getBinding("items");
             items.filter(filtro);
         },
@@ -39,7 +39,7 @@
         aoClicarNaLinha: function (oEvent) {
 
             let rota = this.getOwnerComponent().getRouter();
-            let idDaLinhaSelecionada = EventoDeClique.getSource().getBindingContext().getProperty("id")
+            let idDaLinhaSelecionada = oEvent.getSource().getBindingContext().getProperty("id")
             rota.navTo("detail", { id: idDaLinhaSelecionada });
         }
     });

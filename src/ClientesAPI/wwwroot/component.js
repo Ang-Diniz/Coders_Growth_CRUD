@@ -17,20 +17,9 @@
 
       init: function () {
          UIComponent.prototype.init.apply(this, arguments);
-         let oData = {
-            recipient: {
-               name: " "
-            }
-         };
 
-         let oModel = new JSONModel(oData);
-         this.setModel(oModel);
+         this.getRouter().initialize();
 
-         let i18nModel = new ResourceModel({
-            bundleName: "sap.ui.cliente.i18n.i18n"
-         });
-
-         this.setModel(i18nModel, "i18n");
       }
    });
 });
