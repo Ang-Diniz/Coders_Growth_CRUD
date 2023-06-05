@@ -3,14 +3,17 @@
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
    xmlns:core="sap.ui.core">
-   <App>
-               <Page title="{i18n>TituloPagina}">
-                  <Table id = "ListaClientes" items="{/cliente}">
+          <App>
+               <Page title="{i18n>TituloPagina}" >
+                  <Panel
+                     class="sapUiResponsiveMargin"
+							width="auto"/>
+                  <Table id = "ListaClientes" width="auto" class="sapUiSmallMargin" items="{/cliente}">
                      <headerToolbar>
                         <Toolbar class="sapUiTinyMarginTop">
                            <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee"  class="sapUiSmallMarginEnd" type="Emphasized"/>
                            <ToolbarSpacer/>
-                           <SearchField width="50%"  placeholder="Buscar" search="buscarClientes"/>
+                           <SearchField width="40%" class="sapUiSmallMargin" placeholder="Buscar" search="buscarClientes"/>
                         </Toolbar>
                      </headerToolbar>
                         <columns> 
@@ -44,5 +47,5 @@
                         </items>
                   </Table>
                </Page>
-   </App>
+          </App>
 </mvc:View>
