@@ -1,9 +1,9 @@
 <mvc:view 
-	controllerName="sap.ui.cliente.controller.Detail"
+	controllerName="sap.ui.cliente.controller.Detalhes"
   	xmlns="sap.m"
   	xmlns:mvc="sap.ui.core.mvc"
 >  
-	<Page title="{i18n>TituloPaginaDeDetalhes}" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar" design="Bold">
+	<Page title="{i18n>TituloPaginaDeDetalhes}" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 		<ToolbarSpacer/>
 			<content>
 				<Toolbar class="sapUiSmallMargin">

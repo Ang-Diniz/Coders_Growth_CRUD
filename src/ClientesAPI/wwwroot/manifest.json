@@ -59,9 +59,9 @@
                     "target": "ListaClientes"
                 },
                 {
-                    "pattern": "detail/{id}",
-                    "name": "detail",
-                    "target": "detail"
+                    "pattern": "detalhes/{id}",
+                    "name": "detalhes",
+                    "target": "detalhes"
                 }
             ],
             "targets": {
@@ -69,9 +69,9 @@
                     "id": "ListaClientes",
                     "name": "ListaClientes"
                 },
-                "detail": {
-                    "id": "detail",
-                    "name": "Detail"
+                "detalhes": {
+                    "id": "detalhes",
+                    "name": "Detalhes"
                 }
             }
         }

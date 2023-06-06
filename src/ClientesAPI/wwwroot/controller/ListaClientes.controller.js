@@ -40,7 +40,7 @@
             var oItem = oEvent.getSource();
             let rota = this.getOwnerComponent().getRouter();
             let idDaLinhaSelecionada = oEvent.getSource().getBindingContext().getProperty("id")
-            rota.navTo("detail", { id: idDaLinhaSelecionada })
+            rota.navTo("detalhes", { id: idDaLinhaSelecionada })
         }
     });
 });

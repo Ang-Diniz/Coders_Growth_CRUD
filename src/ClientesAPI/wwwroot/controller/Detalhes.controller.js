@@ -4,11 +4,11 @@ sap.ui.define([
     "sap/ui/core/routing/History"
 ], function (Controller, JSONModel, History) {
     "use strict";
-    return Controller.extend("sap.ui.cliente.controller.Detail", {
+    return Controller.extend("sap.ui.cliente.controller.Detalhes", {
 
         onInit: function () {
             let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.getRoute("detail").attachPatternMatched(this.aoCoincidirRota, this);
+            oRouter.getRoute("detalhes").attachPatternMatched(this.aoCoincidirRota, this);
         },
 
         aoCoincidirRota: function (oEvento) {
