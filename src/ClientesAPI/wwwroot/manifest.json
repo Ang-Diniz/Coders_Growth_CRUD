@@ -62,6 +62,11 @@
                     "pattern": "detalhes/{id}",
                     "name": "detalhes",
                     "target": "detalhes"
+                },
+                {
+                    "pattern": "cadastro",
+                    "name": "cadastro",
+                    "target": "cadastro"
                 }
             ],
             "targets": {
@@ -72,6 +77,10 @@
                 "detalhes": {
                     "id": "detalhes",
                     "name": "Detalhes"
+                },
+                "cadastro": {
+                    "id": "cadastro",
+                    "name": "Cadastro"
                 }
             }
         }

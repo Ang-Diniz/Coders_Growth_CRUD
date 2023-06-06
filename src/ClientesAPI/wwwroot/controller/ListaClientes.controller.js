@@ -2,8 +2,9 @@
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (Controller, JSONModel, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    "sap/ui/core/routing/History"
+], function (Controller, JSONModel, Filter, FilterOperator, History) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.ListaClientes", {
 
@@ -36,8 +37,22 @@
             items.filter(filtro);
         },
 
+        aoClicarEmCadastrar: function () {
+
+            let historico = History.getInstance();
+            let paginaAnterior = historico.getPreviousHash();
+
+            if (paginaAnterior !== undefined) {
+                window.history.go(+1);
+            }
+            else {
+                let rota = this.getOwnerComponent().getRouter();
+                rota.navTo("cadastro", {}, true);
+            }
+        },
+
         aoClicarNaLinha: function (oEvent) {
-            var oItem = oEvent.getSource();
+            let Item = oEvent.getSource();
             let rota = this.getOwnerComponent().getRouter();
             let idDaLinhaSelecionada = oEvent.getSource().getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })

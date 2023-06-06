@@ -11,7 +11,7 @@
                   <Table id = "ListaClientes" width="auto" class="sapUiSmallMargin" items="{/cliente}">
                      <headerToolbar>
                         <Toolbar class="sapUiTinyMarginTop">
-                           <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee"  class="sapUiSmallMarginEnd" type="Emphasized"/>
+                           <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee"  class="sapUiSmallMarginEnd" type="Emphasized" press="aoClicarEmCadastrar"/>
                            <ToolbarSpacer/>
                            <SearchField width="40%" class="sapUiSmallMargin" placeholder="Buscar" search="buscarClientes"/>
                         </Toolbar>
