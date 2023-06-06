@@ -42,6 +42,38 @@
                     "fallbackLocale": ""
                 }
             }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "type": "View",
+                "viewType": "XML",
+                "path": "sap.ui.cliente.view",
+                "controlId": "app",
+                "controlAggregation": "pages"
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "ListaClientes",
+                    "target": "ListaClientes"
+                },
+                {
+                    "pattern": "detalhes/{id}",
+                    "name": "detalhes",
+                    "target": "detalhes"
+                }
+            ],
+            "targets": {
+                "ListaClientes": {
+                    "id": "ListaClientes",
+                    "name": "ListaClientes"
+                },
+                "detalhes": {
+                    "id": "detalhes",
+                    "name": "Detalhes"
+                }
+            }
         }
     }
 }
