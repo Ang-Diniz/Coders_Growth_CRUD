@@ -11,6 +11,7 @@
 							width="auto">
                      <Toolbar class="sapUiTinyMarginBottom">
 						      <Title text="{i18n>TituloPainel}"/>
+                     <core:Icon src="sap-icon://person-placeholder"></core:Icon>
                      </Toolbar>
 		            </Panel>
                   <Table id = "ListaClientes" width="auto" items="{/cliente}">

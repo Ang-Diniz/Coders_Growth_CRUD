@@ -3,6 +3,7 @@
   	xmlns="sap.m"
   	xmlns:mvc="sap.ui.core.mvc"
     xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
 >  
 	<Page title="{i18n>TituloPaginaDeCadastro}"  titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 		<Panel 
@@ -10,6 +11,7 @@
 			width="auto">
 				<Toolbar class="sapUiTinyMarginBottom">
 						<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
+						<core:Icon src="sap-icon://add-activity"></core:Icon>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://save" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized"/>
 						<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
