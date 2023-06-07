@@ -34,12 +34,10 @@ sap.ui.define([
             let historico = History.getInstance();
             let paginaAnterior = historico.getPreviousHash();
 
-            if (paginaAnterior !== undefined) 
-            {
+            if (paginaAnterior !== undefined) {
                 window.history.go(-1);
             }
-            else 
-            {
+            else {
                 let rota = this.getOwnerComponent().getRouter();
                 rota.navTo("ListaClientes", {}, true);
             }

@@ -17,7 +17,7 @@
 
             let jsonCliente = new JSONModel();
 
-            fetch("https://localhost:7147/api/cliente/")
+            fetch("https://localhost:7147/api/cliente")
                 .then(res => res.json())
                 .then(res => jsonCliente.setData({ cliente: res }))
 

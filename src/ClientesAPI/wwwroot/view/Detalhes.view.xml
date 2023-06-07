@@ -3,19 +3,17 @@
   	xmlns="sap.m"
   	xmlns:mvc="sap.ui.core.mvc"
 >  
-	<Page title="{i18n>TituloPaginaDeDetalhes}" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
-		<ToolbarSpacer/>
-			<content>
-				<Toolbar class="sapUiSmallMargin">
-					<content>
-					<ToolbarSpacer/>
-
-						<Button icon="sap-icon://user-edit" width="12%" text="{i18n>BotaoEditar}" type="Emphasized"/>
+	<Page title="{i18n>TituloPaginaDeDetalhes}"  titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+			<Panel 
+            class="sapUiResponsiveMargin"
+			width="auto">
+				<Toolbar class="sapUiTinyMarginBottom">
+						<Title text="{i18n>TituloPainelTelaDeDetalhes}"/>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://user-edit" width="10%" text="{i18n>BotaoEditar}" type="Emphasized"/>
 						<Button icon="sap-icon://delete" class="sapUiSmallMarginEnd" text="{i18n>BotaoRemover}" type="Negative"/>
-
-					</content>
 				</Toolbar>
-			</content>
+		</Panel>
 		<ObjectHeader
 			title="{nome}">
 			<ObjectAttribute text="E-mail :  {email}"/>

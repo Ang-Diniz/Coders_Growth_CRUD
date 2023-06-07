@@ -1,24 +1,22 @@
 <mvc:view 
-controllerName="sap.ui.cliente.controller.Cadastro"
+	controllerName="sap.ui.cliente.controller.Cadastro"
   	xmlns="sap.m"
   	xmlns:mvc="sap.ui.core.mvc"
     xmlns:l="sap.ui.layout"
 >  
-	<Page title="{i18n>TituloPaginaDeCadastro}" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
-        <ToolbarSpacer/>
-			<content>
-				<Toolbar class="sapUiSmallMargin">
-					<content>
-					<ToolbarSpacer/>
-
-						<Button icon="sap-icon://save" width="9%" text="{i18n>BotaoSalvar}" type="Emphasized"/>
+	<Page title="{i18n>TituloPaginaDeCadastro}"  titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+		<Panel 
+            class="sapUiResponsiveMargin"
+			width="auto">
+				<Toolbar class="sapUiTinyMarginBottom">
+						<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://save" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized"/>
 						<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
-
-					</content>
 				</Toolbar>
-			</content>
-
-	<l:VerticalLayout class="sapUiContentPadding" width="40%">
+		</Panel>
+		
+	<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="40%">
 
 		<Label text="{i18n>LabelNome}" labelFor="inputNome"/>
 		<Input id="inputNome" required="true" placeholder="{i18n>InputNome}"/>
@@ -31,6 +29,8 @@ controllerName="sap.ui.cliente.controller.Cadastro"
 
         <Label text="{i18n>LabelDataDeNascimento}" labelFor="inputDataDeNascimento" />
 		<DatePicker id="inputDataDeNascimento" required="true" placeholder="{i18n>InputDataDeNascimento}"/>
+
+		<Text  text="{i18n>CampoObrigatorio}"/>
 
     </l:VerticalLayout>
 
