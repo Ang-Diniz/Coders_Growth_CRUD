@@ -3,6 +3,8 @@
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
    xmlns:core="sap.ui.core"
-   displayBlock="true">
-	<App class="myAppDemoWT" id="app"/>
+   displayBlock="true"
+>
+	   <App class="myAppDemoWT" id="app"/>
+
 </mvc:View>

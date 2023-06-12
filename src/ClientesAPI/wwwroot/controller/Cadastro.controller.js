@@ -45,17 +45,32 @@ sap.ui.define([
                             actions: [MessageBox.Action.OK], onClose: (acao) => {
                                 if (acao == MessageBox.Action.OK) {
                                     this.limparTelaDeCadastro();
-                                    this.aoClicarEmVoltar();
+                                    this.voltarParaPaginaDeDetalhes();
                                 }
                             }
                         })
                     }
-
-                    else {
-
+                    else 
+                    {
                         MessageBox.error("Falha ao cadastrar cliente");
                     }
                 })
+        },
+
+        voltarParaPaginaDeDetalhes: function (oEvent) {
+
+            let historico = History.getInstance();
+            let paginaAnterior = historico.getPreviousHash();
+
+            if (paginaAnterior !== undefined) {
+                window.history.go(-1);
+            }
+            else {
+                let Item = oEvent.getSource();
+                let rota = this.getOwnerComponent().getRouter();
+                let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id");
+                rota.navTo("detalhes", { id: idDaLinhaSelecionada }, true);
+            }
         },
 
         aoClicarEmVoltar: function () {
