@@ -54,7 +54,7 @@
         aoClicarNaLinha: function (oEvent) {
             let Item = oEvent.getSource();
             let rota = this.getOwnerComponent().getRouter();
-            let idDaLinhaSelecionada = oEvent.getSource().getBindingContext().getProperty("id")
+            let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })
         }
     });

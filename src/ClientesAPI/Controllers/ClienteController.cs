@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClientesAPI.Controllers
 {
-    [Route("api/cliente")]
+    [Route("api/[controller]")]
     [ApiController]
 
-    public class ControllerCliente : ControllerBase
+    public class ClienteController
+        : ControllerBase
     {
         private ICliente _cliente;
         private IValidator<Cliente> _validator;
-        public ControllerCliente(ICliente cliente, IValidator<Cliente> validator)
+        public ClienteController(ICliente cliente, IValidator<Cliente> validator)
         {
             _cliente = cliente;
             _validator = validator;
@@ -33,7 +34,7 @@ namespace ClientesAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(Cliente clienteNovo)
+        public IActionResult Criar([FromBody] Cliente clienteNovo)
         {
             try
             {
