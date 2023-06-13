@@ -7,14 +7,13 @@ namespace ClientesAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class ClienteController
-        : ControllerBase
+    public class ClienteController : ControllerBase
     {
-        private ICliente _cliente;
+        private IRepositorioCliente _clienteRepositorio;
         private IValidator<Cliente> _validator;
-        public ClienteController(ICliente cliente, IValidator<Cliente> validator)
+        public ClienteController(IRepositorioCliente repositorio, IValidator<Cliente> validator)
         {
-            _cliente = cliente;
+            _clienteRepositorio = repositorio;
             _validator = validator;
         }
 
@@ -23,7 +22,7 @@ namespace ClientesAPI.Controllers
         {
             try
             {
-                List<Cliente> cliente = _cliente.ObterTodos();
+                List<Cliente> cliente = _clienteRepositorio.ObterTodos();
 
                 return Ok(cliente);
             }
@@ -40,9 +39,10 @@ namespace ClientesAPI.Controllers
             {
                 _validator.ValidateAndThrow(clienteNovo);
 
-                _cliente.Criar(clienteNovo);
+                _clienteRepositorio.Criar(clienteNovo);
+                var cliente = _clienteRepositorio.ObterPorCpf(clienteNovo.CPF);
 
-                return Ok();
+                return Ok(cliente.Id);
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace ClientesAPI.Controllers
         {
             try
             {
-                Cliente cliente = _cliente.ObterPorId(id);
+                Cliente cliente = _clienteRepositorio.ObterPorId(id);
 
                 return Ok(cliente);
             }
@@ -70,9 +70,9 @@ namespace ClientesAPI.Controllers
         {
             try
             {
-                var cliente = _cliente.ObterPorId(id);
+                var cliente = _clienteRepositorio.ObterPorId(id);
 
-                _cliente.Remover(cliente.Id);
+                _clienteRepositorio.Remover(cliente.Id);
 
                 return Ok();
             }
@@ -89,7 +89,7 @@ namespace ClientesAPI.Controllers
             {
                 _validator.ValidateAndThrow(clienteAtualizado);
 
-                _cliente.Atualizar(clienteAtualizado);
+                _clienteRepositorio.Atualizar(clienteAtualizado);
 
                 return Ok(clienteAtualizado.Id);
             }

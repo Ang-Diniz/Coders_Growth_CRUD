@@ -8,13 +8,15 @@ sap.ui.define([
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
 
         onInit: function () {
+
             let rota = this.getOwnerComponent().getRouter();
             rota.getRoute("cadastro").attachPatternMatched(this.aoCoincidirRota, this);
         },
 
         aoCoincidirRota: function () {
 
-            let dadosCliente = {
+            let dadosCliente =
+            {
                 "nome": "",
                 "dataDeNascimento": "",
                 "cpf": "",
@@ -39,38 +41,30 @@ sap.ui.define([
 
                 body: JSON.stringify(cliente)
             })
+                .then(res => res.json())
                 .then(res => {
-                    if (res.status == 200) {
+                    if (res.status == 400) 
+                    {
+                        MessageBox.error("Erro ao cadastrar cliente");
+                    }
+                    else {
                         MessageBox.success("Cliente cadastrado com sucesso !", {
+                            title: "Sucesso",
                             actions: [MessageBox.Action.OK], onClose: (acao) => {
                                 if (acao == MessageBox.Action.OK) {
                                     this.limparTelaDeCadastro();
-                                    this.voltarParaPaginaDeDetalhes();
+                                    this.navegarTelaDetalhes(res);
                                 }
                             }
                         })
                     }
-                    else 
-                    {
-                        MessageBox.error("Falha ao cadastrar cliente");
-                    }
-                })
+                });
         },
 
-        voltarParaPaginaDeDetalhes: function (oEvent) {
+        navegarTelaDetalhes: function (id) {
 
-            let historico = History.getInstance();
-            let paginaAnterior = historico.getPreviousHash();
-
-            if (paginaAnterior !== undefined) {
-                window.history.go(-1);
-            }
-            else {
-                let Item = oEvent.getSource();
-                let rota = this.getOwnerComponent().getRouter();
-                let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id");
-                rota.navTo("detalhes", { id: idDaLinhaSelecionada }, true);
-            }
+            let rota = this.getOwnerComponent().getRouter();
+            rota.navTo("detalhes", { id: id });
         },
 
         aoClicarEmVoltar: function () {
@@ -90,9 +84,9 @@ sap.ui.define([
         aoClicarEmCancelar: function () {
 
             MessageBox.alert("Deseja mesmo cancelar ?", {
+                icon: MessageBox.Icon.WARNING,
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO], onClose: (acao) => {
                     if (acao == MessageBox.Action.YES) {
-
                         this.aoClicarEmVoltar();
                         this.limparTelaDeCadastro();
                     }

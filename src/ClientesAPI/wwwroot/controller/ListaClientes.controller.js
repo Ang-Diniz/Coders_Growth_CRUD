@@ -17,17 +17,18 @@
 
             let jsonCliente = new JSONModel();
 
-            fetch("https://localhost:7147/api/cliente")
+            fetch("https://localhost:7147/api/cliente/")
                 .then(res => res.json())
                 .then(res => jsonCliente.setData({ cliente: res }))
 
             this.getView().setModel(jsonCliente);
         },
 
-        buscarClientes: function (oEvent) {
+        buscarClientes: function (Evento) {
 
+            let buscar = Evento.getParameter("query");
             let filtro = [];
-            let buscar = oEvent.getParameter("query");
+
             if (buscar) {
                 filtro.push(new Filter("nome", FilterOperator.Contains, buscar));
             }
@@ -51,8 +52,9 @@
             }
         },
 
-        aoClicarNaLinha: function (oEvent) {
-            let Item = oEvent.getSource();
+        aoClicarNaLinha: function (Evento) {
+
+            let Item = Evento.getSource();
             let rota = this.getOwnerComponent().getRouter();
             let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })

@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 
 namespace Infraestrutura
 {
-    public class RepositorioClienteBancoDeDados : ICliente
+    public class RepositorioClienteBancoDeDados : IRepositorioCliente
     {
-        public static ICliente _repositorioClienteBD;
+        public static IRepositorioCliente _repositorioClienteBD;
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
 
         public List<Cliente> ObterTodos()
@@ -234,6 +234,11 @@ namespace Infraestrutura
                 ConexaoSQL.Close();
             }
             return emailExisteNoBancoDeDados;
+        }
+
+        public Cliente ObterPorCpf(string cpf)
+        {
+            throw new NotImplementedException();
         }
     }
 }

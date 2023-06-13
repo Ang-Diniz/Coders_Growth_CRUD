@@ -2,7 +2,7 @@
 
 namespace Infraestrutura
 {
-    public class RepositorioClienteLista : ICliente
+    public class RepositorioClienteLista : IRepositorioCliente
     {
         public List<Cliente> ObterTodos()
         {
@@ -40,6 +40,11 @@ namespace Infraestrutura
         }
 
         public bool VerificarEmailNoBancoDeDados(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Cliente ObterPorCpf(string cpf)
         {
             throw new NotImplementedException();
         }

@@ -2,8 +2,8 @@
    controllerName="sap.ui.cliente.controller.ListaClientes"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
-   xmlns:core="sap.ui.core"
->
+   xmlns:core="sap.ui.core">
+   
           <App>
                <Page title="{i18n>TituloPagina}" titleAlignment="Center">
                   <Panel
