@@ -15,8 +15,8 @@ sap.ui.define([
 
         aoCoincidirRota: function () {
 
-            let dadosCliente =
-            {
+            let dadosCliente = {
+                
                 "nome": "",
                 "dataDeNascimento": "",
                 "cpf": "",
@@ -41,24 +41,29 @@ sap.ui.define([
 
                 body: JSON.stringify(cliente)
             })
-                .then(res => res.json())
-                .then(res => {
-                    if (res.status == 400) 
-                    {
-                        MessageBox.error("Erro ao cadastrar cliente");
-                    }
-                    else {
-                        MessageBox.success("Cliente cadastrado com sucesso !", {
-                            title: "Sucesso",
-                            actions: [MessageBox.Action.OK], onClose: (acao) => {
-                                if (acao == MessageBox.Action.OK) {
-                                    this.limparTelaDeCadastro();
-                                    this.navegarTelaDetalhes(res);
-                                }
+            .then(res => res.json())
+            .then(res => {
+                if (res.status == 400) 
+                {
+                    MessageBox.error("Erro ao cadastrar cliente", {
+                        emphasizedAction: MessageBox.Action.CLOSE
+                    });
+                }
+                else 
+                {
+                    MessageBox.success("Cliente cadastrado com sucesso !", {
+                        emphasizedAction: MessageBox.Action.OK,
+                        title: "Sucesso",
+                        actions: [MessageBox.Action.OK], onClose: (acao) => {
+                            if (acao == MessageBox.Action.OK) 
+                            {
+                                this.limparTelaDeCadastro();
+                                this.navegarTelaDetalhes(res);
                             }
-                        })
-                    }
-                });
+                        }
+                    })
+                }
+            });
         },
 
         navegarTelaDetalhes: function (id) {
@@ -72,10 +77,12 @@ sap.ui.define([
             let historico = History.getInstance();
             let paginaAnterior = historico.getPreviousHash();
 
-            if (paginaAnterior !== undefined) {
+            if (paginaAnterior !== undefined) 
+            {
                 window.history.go(-1);
             }
-            else {
+            else 
+            {
                 let rota = this.getOwnerComponent().getRouter();
                 rota.navTo("ListaClientes", {}, true);
             }
@@ -84,9 +91,12 @@ sap.ui.define([
         aoClicarEmCancelar: function () {
 
             MessageBox.alert("Deseja mesmo cancelar ?", {
+                emphasizedAction: MessageBox.Action.YES,
+                initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO], onClose: (acao) => {
-                    if (acao == MessageBox.Action.YES) {
+                    if (acao == MessageBox.Action.YES) 
+                    {
                         this.aoClicarEmVoltar();
                         this.limparTelaDeCadastro();
                     }

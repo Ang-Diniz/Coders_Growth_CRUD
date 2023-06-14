@@ -46,7 +46,8 @@ namespace ClientesAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                throw new Exception(ex.Message);
+                //return BadRequest(ex.Message);
             }
         }
 
