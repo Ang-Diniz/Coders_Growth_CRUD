@@ -5,21 +5,24 @@
    xmlns:core="sap.ui.core">
    
    <App>
+
       <Page title="{i18n>TituloPagina}" titleAlignment="Center">
-         <Panel
-            class="sapUiResponsiveMargin"
-            width="auto">
+
+         <Panel class="sapUiResponsiveMargin" width="auto">
+
                <Toolbar class="sapUiTinyMarginBottom">
                   <Title text="{i18n>TituloPainel}"/>
                   <core:Icon src="sap-icon://person-placeholder"></core:Icon>
                </Toolbar>
+
          </Panel>
+
          <Table id = "ListaClientes" width="auto" items="{/cliente}">
             <headerToolbar>
                <Toolbar class="sapUiTinyMarginTop">
                   <Button text="{i18n>BotaoCadastrar}" width="10%" icon="sap-icon://add-employee"  class="sapUiTinyMarginBottom" type="Emphasized" press="aoClicarEmCadastrar"/>
                <ToolbarSpacer/>
-                  <SearchField width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" placeholder=" " search="buscarClientes"/>
+                  <SearchField width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" placeholder="Buscar..." search="buscarClientes"/>
                </Toolbar>
                </headerToolbar>
                   <columns> 
@@ -52,7 +55,11 @@
                            </cells>
                         </ColumnListItem>
                      </items>
+
             </Table>
+
          </Page>
+
    </App>
+   
 </mvc:View>

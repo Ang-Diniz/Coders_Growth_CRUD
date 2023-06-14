@@ -3,14 +3,14 @@
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/routing/History"
-], function (Controller, JSONModel, Filter, FilterOperator, History) {
+], function (Controller, JSONModel, Filter, FilterOperator) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.ListaClientes", {
 
         onInit: function () {
-
-            this.obterClientes();
+            
+            let rota = this.getOwnerComponent().getRouter();
+            rota.getRoute("ListaClientes").attachPatternMatched(this.obterClientes, this);
         },
 
         obterClientes: function () {
@@ -41,18 +41,8 @@
 
         aoClicarEmCadastrar: function () {
 
-            let historico = History.getInstance();
-            let paginaAnterior = historico.getPreviousHash();
-
-            if (paginaAnterior !== undefined) 
-            {
-                window.history.go(+1);
-            }
-            else 
-            {
-                let rota = this.getOwnerComponent().getRouter();
-                rota.navTo("cadastro", {}, true);
-            }
+            let rota = this.getOwnerComponent().getRouter();
+            rota.navTo("cadastro", {}, true);
         },
 
         aoClicarNaLinha: function (Evento) {

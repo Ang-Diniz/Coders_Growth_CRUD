@@ -40,14 +40,14 @@ namespace ClientesAPI.Controllers
                 _validator.ValidateAndThrow(clienteNovo);
 
                 _clienteRepositorio.Criar(clienteNovo);
+
                 var cliente = _clienteRepositorio.ObterPorCpf(clienteNovo.CPF);
 
                 return Ok(cliente.Id);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
-                //return BadRequest(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 

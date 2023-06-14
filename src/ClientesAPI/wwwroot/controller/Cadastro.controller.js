@@ -1,9 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
-], function (Controller, History, JSONModel, MessageBox) {
+], function (Controller, JSONModel, MessageBox) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
 
@@ -58,7 +57,7 @@ sap.ui.define([
                             if (acao == MessageBox.Action.OK) 
                             {
                                 this.limparTelaDeCadastro();
-                                this.navegarTelaDetalhes(res);
+                                this.navegarTelaDeDetalhes(res);
                             }
                         }
                     })
@@ -66,7 +65,7 @@ sap.ui.define([
             });
         },
 
-        navegarTelaDetalhes: function (id) {
+        navegarTelaDeDetalhes: function (id) {
 
             let rota = this.getOwnerComponent().getRouter();
             rota.navTo("detalhes", { id: id });
@@ -74,18 +73,10 @@ sap.ui.define([
 
         aoClicarEmVoltar: function () {
 
-            let historico = History.getInstance();
-            let paginaAnterior = historico.getPreviousHash();
+            let rota = this.getOwnerComponent().getRouter();
+            rota.navTo("ListaClientes", {}, true);
 
-            if (paginaAnterior !== undefined) 
-            {
-                window.history.go(-1);
-            }
-            else 
-            {
-                let rota = this.getOwnerComponent().getRouter();
-                rota.navTo("ListaClientes", {}, true);
-            }
+            this.limparTelaDeCadastro();
         },
 
         aoClicarEmCancelar: function () {
