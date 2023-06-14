@@ -5,9 +5,9 @@ namespace Dominio
 {
     public class ClienteFluentValidation : AbstractValidator<Cliente>
     {
-        private static ICliente _repositorioClienteLinq2Db;
+        private static IRepositorioCliente _repositorioClienteLinq2Db;
 
-        public ClienteFluentValidation(ICliente repositorioClienteLinq2Db)
+        public ClienteFluentValidation(IRepositorioCliente repositorioClienteLinq2Db)
         {
             _repositorioClienteLinq2Db = repositorioClienteLinq2Db;
 

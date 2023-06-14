@@ -7,14 +7,14 @@ sap.ui.define([
     return Controller.extend("sap.ui.cliente.controller.Detalhes", {
 
         onInit: function () {
-            let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.getRoute("detalhes").attachPatternMatched(this.aoCoincidirRota, this);
+
+            let rota = this.getOwnerComponent().getRouter();
+            rota.getRoute("detalhes").attachPatternMatched(this.aoCoincidirRota, this);
         },
 
-        aoCoincidirRota: function (oEvento) {
+        aoCoincidirRota: function (Evento) {
 
-            let id = oEvento.getParameter("arguments").id;
-
+            let id = Evento.getParameter("arguments").id;
             this.ObterClientes(id);
         },
 

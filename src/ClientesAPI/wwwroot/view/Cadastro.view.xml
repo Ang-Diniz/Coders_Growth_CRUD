@@ -1,0 +1,41 @@
+<mvc:view 
+	controllerName="sap.ui.cliente.controller.Cadastro"
+  	xmlns="sap.m"
+  	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">  
+	
+<Page title="{i18n>TituloPaginaDeCadastro}" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+		<Panel 
+            class="sapUiResponsiveMargin"
+			width="auto">
+				<Toolbar class="sapUiTinyMarginBottom">
+						<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
+						<core:Icon src="sap-icon://add-activity"></core:Icon>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://save" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
+						<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
+				</Toolbar>
+		</Panel>
+		
+	<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="35%">
+
+		<Label text="{i18n>LabelNome}" design="Bold" labelFor="inputNome"/>
+		<Input id="inputNome" required="true" placeholder="{i18n>InputNome}" value="{cliente>/nome}"/>
+
+        <Label text="{i18n>LabelEmail}" design="Bold" labelFor="inputEmail" />
+		<Input id="inputEmail" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}"/>
+
+        <Label text="{i18n>LabelCPF}" design="Bold" labelFor="inputCPF" />
+		<MaskInput mask="999.999.999-99" placeholderSymbol="_" id="inputCPF" required="true" placeholder="{i18n>InputCPF}" value="{cliente>/cpf}"/>
+
+        <Label text="{i18n>LabelDataDeNascimento}" design="Bold" labelFor="inputDataDeNascimento" />
+		<DatePicker id="inputDataDeNascimento" required="true" placeholder="{i18n>InputDataDeNascimento}"
+		value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{source:{pattern:'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/>
+
+		<Label text="{i18n>CampoObrigatorio}"/>
+
+    </l:VerticalLayout>
+
+</Page>
+</mvc:view> 

@@ -7,12 +7,12 @@ namespace GerenciamentodeClientes
 {
     public partial class TelaInicial : Form
     {
-        private static ICliente _repositorioClienteLinq2Db;
+        private static IRepositorioCliente _repositorioClienteLinq2Db;
 
         private readonly IValidator<Cliente> _validator;
 
         DialogResult respostaEventosTelaInicial;
-        public TelaInicial(IValidator<Cliente> validator, ICliente repositorioClienteLinq2Db)
+        public TelaInicial(IValidator<Cliente> validator, IRepositorioCliente repositorioClienteLinq2Db)
         {
             InitializeComponent();
             _validator = validator;

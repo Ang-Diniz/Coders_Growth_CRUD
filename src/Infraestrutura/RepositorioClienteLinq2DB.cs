@@ -6,7 +6,7 @@ using LinqToDB.DataProvider.SqlServer;
 
 namespace Infraestrutura
 {
-    public class RepositorioClienteLinq2DB : ICliente
+    public class RepositorioClienteLinq2DB : IRepositorioCliente
     {
         private DataConnection conexao;
         public ITable<Cliente> _clientes;
@@ -39,7 +39,7 @@ namespace Infraestrutura
 
             try
             {
-                var novoId = conexaoLinq2Db.Insert(clienteNovo);
+                conexaoLinq2Db.Insert(clienteNovo);
             }
             catch (Exception ex)
             {
@@ -62,6 +62,24 @@ namespace Infraestrutura
             catch (Exception ex)
             {
                 throw new Exception("Erro ao obter o ID do cliente.", ex);
+            }
+        }
+
+        public Cliente ObterPorCpf(string cpf)
+        {
+            using var conexaoLinq2Db = CriarConexao();
+
+            try
+            {
+                var cliente = conexaoLinq2Db.GetTable<Cliente>().
+                FirstOrDefault(c => c.CPF == cpf)
+                ?? throw new Exception($"O cpf: [ {cpf} ] não existe.");
+
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao obter o cliente pelo cpf.", ex);
             }
         }
 
@@ -129,6 +147,5 @@ namespace Infraestrutura
                 throw new Exception("Erro inesperado. Contate o administrador do sistema.", ex);
             }
         }
-
     }
 }

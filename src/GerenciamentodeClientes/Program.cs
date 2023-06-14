@@ -24,7 +24,7 @@ namespace GerenciamentodeClientes
 
             var validacao = servicesProvider.GetService<IValidator<Cliente>>();
 
-            var repositorioLinq2Db = servicesProvider.GetService<ICliente>();
+            var repositorioLinq2Db = servicesProvider.GetService<IRepositorioCliente>();
 
             ApplicationConfiguration.Initialize();
             Application.Run(new TelaInicial(validacao, repositorioLinq2Db));
@@ -59,7 +59,7 @@ namespace GerenciamentodeClientes
             return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) => {
                 services.AddScoped<IValidator<Cliente>, ClienteFluentValidation>();
-                services.AddScoped<ICliente, RepositorioClienteLinq2DB>();
+                services.AddScoped<IRepositorioCliente, RepositorioClienteLinq2DB>();
             });
         }
     }
