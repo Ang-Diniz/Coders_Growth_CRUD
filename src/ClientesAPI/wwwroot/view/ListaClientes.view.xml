@@ -8,6 +8,12 @@
 
       <Page title="{i18n>TituloPagina}" titleAlignment="Center">
 
+      <headerContent>
+
+         <Button icon="sap-icon://refresh" type="Transparent" press="atualizarTabela"/>
+
+      </headerContent>
+
          <Panel class="sapUiResponsiveMargin" width="auto">
 
                <Toolbar class="sapUiTinyMarginBottom">
@@ -22,7 +28,7 @@
                <Toolbar class="sapUiTinyMarginTop">
                   <Button text="{i18n>BotaoCadastrar}" width="10%" icon="sap-icon://add-employee"  class="sapUiTinyMarginBottom" type="Emphasized" press="aoClicarEmCadastrar"/>
                <ToolbarSpacer/>
-                  <SearchField width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" placeholder="Buscar..." search="buscarClientes"/>
+                  <SearchField width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" placeholder="{i18n>BarraDePesquisa}" search="buscarClientes"/>
                </Toolbar>
                </headerToolbar>
                   <columns> 
@@ -55,11 +61,8 @@
                            </cells>
                         </ColumnListItem>
                      </items>
-
-            </Table>
-
+               </Table>
          </Page>
-
    </App>
    
 </mvc:View>

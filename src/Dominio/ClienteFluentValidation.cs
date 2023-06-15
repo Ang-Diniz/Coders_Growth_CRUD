@@ -25,6 +25,7 @@ namespace Dominio
 
             RuleFor(c => c.CPF)
             .Matches(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$")
+            .WithMessage("\nCPF inválido. Por favor insira um CPF válido.\n")
             .Must(validarCPF)
             .WithMessage("\nCPF inválido. Por favor insira um CPF válido.\n")
             .Must((cliente, CPF) => VerificarCpfExiste(cliente, CPF))

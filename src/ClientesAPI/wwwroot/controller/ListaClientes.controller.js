@@ -51,6 +51,11 @@
             let rota = this.getOwnerComponent().getRouter();
             let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })
-        }
+        }, 
+
+        atualizarTabela: function () {
+
+            this.obterClientes();
+       },
     });
 });

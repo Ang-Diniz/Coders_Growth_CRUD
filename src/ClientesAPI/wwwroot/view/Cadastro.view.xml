@@ -3,7 +3,6 @@
   	xmlns="sap.m"
   	xmlns:mvc="sap.ui.core.mvc"
     xmlns:l="sap.ui.layout"
-	xmlns:tnt="sap.tnt"
 	xmlns:core="sap.ui.core">  
 	
 	<Page title="{i18n>TituloPaginaDeCadastro}" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
@@ -23,13 +22,13 @@
 	<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="32%">
 
 		<Label text="{i18n>LabelNome}" design="Bold" labelFor="inputNome"/>
-		<Input id="inputNome" required="true" placeholder="{i18n>InputNome}" value="{cliente>/nome}"/>
+		<Input id="inputNome" name="inputNome" showClearIcon="true" required="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}"/>
 
         <Label text="{i18n>LabelEmail}" design="Bold" labelFor="inputEmail"/>
-		<Input id="inputEmail" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}"/>
+		<Input id="inputEmail" name="inputEmail" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" showClearIcon="true" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}"/>
 
         <Label text="{i18n>LabelCPF}" design="Bold" labelFor="inputCPF"/>
-		<MaskInput mask="999.999.999-99" placeholderSymbol="_" id="inputCPF" required="true" placeholder="{i18n>InputCPF}" width="30%" value="{cliente>/cpf}"/>
+		<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" placeholderSymbol="_" valueState="None" valueLiveUpdate="true" change="aoMudarCampos" showClearIcon="true" required="true" placeholder="{i18n>InputCPF}" width="35%" value="{cliente>/cpf}"/>
 
         <Label text="{i18n>LabelDataDeNascimento}" design="Bold" labelFor="inputDataDeNascimento"/>
 		<DatePicker id="inputDataDeNascimento" required="true" width="40%" placeholder="{i18n>InputDataDeNascimento}"
