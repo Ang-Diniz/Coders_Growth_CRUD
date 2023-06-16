@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox",
-
+    "sap/m/MessageBox"
 ], function (Controller, JSONModel, MessageBox) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
@@ -31,11 +30,10 @@ sap.ui.define([
 
         aoClicarEmSalvar: function () {
 
-            // this.aoMudarCampos()
-
             let cliente = this.getView().getModel("cliente").getData();
 
-            if (cliente.dataDeNascimento == "") {
+            if (cliente.dataDeNascimento == "") 
+            {
                 delete cliente.dataDeNascimento;
             }
 
@@ -47,52 +45,64 @@ sap.ui.define([
 
                 body: JSON.stringify(cliente)
             })
-
-                .then(res => {
-                    if (res.status != 200) {
-                        return res.text();
-                    }
-                    return res.json()
-                })
-                .then(res => {
-                    if (!res.status) {
-                        MessageBox.error(`Erro ao cadastrar cliente \n ${res}`, {
-                            emphasizedAction: MessageBox.Action.CLOSE
-                        });
-                    }
-                    else {
-                        MessageBox.success("Cliente cadastrado com sucesso !", {
-                            emphasizedAction: MessageBox.Action.OK,
-                            title: "Sucesso",
-                            actions: [MessageBox.Action.OK], onClose: (acao) => {
-                                if (acao == MessageBox.Action.OK) {
-                                    this.limparTelaDeCadastro();
-                                    this.navegarTelaDeDetalhes(res);
-                                }
+            .then(res => {
+                if (res.status != 200) 
+                {
+                    return res.text();
+                }
+                return res.json()
+            })
+            .then(res => {
+                if (typeof res == "string") 
+                {
+                        MessageBox.error(`Erro ao cadastrar cliente: \n\n ${res}`, {
+                        emphasizedAction: MessageBox.Action.CLOSE
+                    });
+                }
+                else 
+                {
+                    MessageBox.success("Cliente cadastrado com sucesso !", {
+                        emphasizedAction: MessageBox.Action.OK,
+                        title: "Sucesso",
+                        actions: [MessageBox.Action.OK], onClose: (acao) => {
+                            if (acao == MessageBox.Action.OK) 
+                            {
+                                this.limparTelaDeCadastro();
+                                this.navegarTelaDeDetalhes(res);
                             }
-                        })
-                    }
-                })
+                        }
+                    })
+                }
+            })
         },
 
         aoMudarCampos: function (Evento) {
 
             let campo = Evento.getSource();
 
-            if (campo.getName() === "inputNome") {
+            if (campo.getName() === "inputNome") 
+            {
                 let erros = this.validarNome(campo.getValue());
 
                 this.mensagensErro(campo, erros);
             }
 
-            if (campo.getName() === "inputEmail") {
+            if (campo.getName() === "inputEmail") 
+            {
                 let erros = this.validarEmail(campo.getValue());
 
                 this.mensagensErro(campo, erros);
             }
 
-            if (campo.getName() === "inputCPF") {
+            if (campo.getName() === "inputCPF") 
+            {
                 let erros = this.validarCpf(campo.getValue());
+
+                this.mensagensErro(campo, erros);
+            }
+            if (campo.getName() === "inputDataDeNascimento") 
+            {
+                let erros = this.validarDataDeNascimento(campo.getValue());
 
                 this.mensagensErro(campo, erros);
             }
@@ -101,15 +111,24 @@ sap.ui.define([
         validarNome: function (nome) {
 
             let erros = [];
+            const decimalZero = 0;
+            const minimoEntradaInput = 1;
 
             let nomeRegex = /^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$/;
             nome = nome.trim();
 
-            if (nome.length < 4) {
-                erros.push("O campo Nome deve conter mais de 4 caracteres." + "\n");
+            if (nome == null || nome == "") 
+            {
+                erros.push("O campo 'Nome' deve ser preenchido." + "\n");
             }
 
-            if (!nome.match(nomeRegex)) {
+            if (nome.length < 4 && nome.length > decimalZero) 
+            {
+                erros.push("O campo 'Nome' deve conter mais de 4 caracteres." + "\n");
+            }
+
+            if (!nome.match(nomeRegex) && nome.length > minimoEntradaInput) 
+            {
                 erros.push("Nome inválido. Por favor insira um nome válido.");
             }
             return erros;
@@ -119,30 +138,102 @@ sap.ui.define([
 
             let erros = [];
 
-            let emailRegex = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/;
+            let emailRegex = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+))@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+))\.([A-Za-z]{2,})$/;
             email = email.trim();
 
-            if (!email.match(emailRegex)) {
+            if (email == null || email == "") 
+            {
+                erros.push("O campo 'E-mail' deve ser preenchido." + "\n");
+            }
+            if (!email.match(emailRegex) && email.length > 0) 
+            {
                 erros.push("E-mail inválido. Por favor insira um e-mail válido.");
             }
             return erros;
         },
 
         validarCpf: function (cpf) {
+
             let erros = [];
-
+            const minimoEntradaInput = 1;
+            const decimalZero = 0;
+            const tamanhoMaxCaracteresRepetidos = 11;
+            let strCPF = cpf.replaceAll(".", "").replace("-", "").replace(" ", "");
+            let entradaCPF = new RegExp(`${strCPF[0]}`, 'g');
+            let caracteresRepetidos = (strCPF.match(entradaCPF) || []).length;
             let cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-            cpf = cpf.trim();
+            let Soma;
+            let Resto;
+            Soma = 0;
 
-            if (!cpf.match(cpfRegex)) {
+            if (caracteresRepetidos == tamanhoMaxCaracteresRepetidos ) 
+            {
                 erros.push("Cpf inválido. Por favor insira um cpf válido.");
+            }
+
+            if (cpf == null || cpf == "" || cpf !== "_._._-__" && cpf.length < minimoEntradaInput) 
+            {
+                erros.push("O campo 'Cpf' deve ser preenchido." + "\n");
+            }
+            
+            for (let i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+            Resto = (Soma * 10) % 11;
+            
+            if ((Resto == 10) || (Resto == 11))  Resto = 0;
+            if (Resto != parseInt(strCPF.substring(9, 10)) );
+            
+            Soma = 0;
+            for (let i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+            Resto = (Soma * 10) % 11;
+            
+            if ((Resto == 10) || (Resto == 11))  Resto = 0;
+            if (Resto != parseInt(strCPF.substring(10, 11) ) ) 
+
+            if ( strCPF > 0 ) { erros.push("Cpf inválido. Por favor insira um cpf válido.")} 
+            
+            if (!cpf.match(cpfRegex) && cpf.length > decimalZero) 
+            {
+                erros.push("Cpf inválido. Por favor insira um cpf válido.");
+            }
+            return erros;
+        },
+
+        validarDataDeNascimento: function (data) 
+        {
+            const idadeMaxima = 80;
+            const idadeMinima = 18;
+            let erros = [];
+            let cliente = this.getView().getModel("cliente").getData();
+            
+            if (cliente.dataDeNascimento == "") 
+            {
+                delete cliente.dataDeNascimento;
+            }
+
+            data = cliente.dataDeNascimento;
+
+            data = new Date(data).getFullYear()
+
+            let dataAtual = new Date(Date.now()).getFullYear()
+
+            if (dataAtual - data > idadeMaxima) 
+            {
+                erros.push("Data inválida. A idade máxima é de 80 anos.")
+            }
+            
+            if (dataAtual - data < idadeMinima) 
+            {
+                erros.push("Data inválida. Cliente menor de 18 anos.")
             }
             return erros;
         },
 
         mensagensErro: function (campo, erros) {
 
-            if (erros.length > 0) {
+            const decimalZero = 0;
+
+            if (erros.length > decimalZero) 
+            {
                 let estadosErro = '';
                 campo.setValueState("Error");
 
@@ -150,15 +241,16 @@ sap.ui.define([
 
                     estadosErro = estadosErro + "\n" + erro;
                 })
-
                 campo.setValueStateText(estadosErro);
             }
-            else {
+            else 
+            {
                 campo.setValueState("Success");
             }
         },
 
         limparInputs: function (campo) {
+
             campo.setValueState("None");
         },
 

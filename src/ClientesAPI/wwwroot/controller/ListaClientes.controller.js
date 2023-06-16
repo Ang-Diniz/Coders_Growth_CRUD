@@ -3,7 +3,8 @@
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-], function (Controller, JSONModel, Filter, FilterOperator) {
+    "sap/m/MessageToast"
+], function (Controller, JSONModel, Filter, FilterOperator, MessageToast) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.ListaClientes", {
 
@@ -56,6 +57,7 @@
         atualizarTabela: function () {
 
             this.obterClientes();
+            MessageToast.show("Tabela atualizada.");
        },
     });
 });
