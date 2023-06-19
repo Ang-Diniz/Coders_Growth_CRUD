@@ -2,7 +2,7 @@
 {
     public interface IRepositorioCliente 
     {
-        public List<Cliente> ObterTodos();
+        public List<Cliente> ObterTodos(string nome);
         public void Criar(Cliente clienteNovo);
         public Cliente ObterPorId(int id);
         public Cliente ObterPorCpf(string cpf);

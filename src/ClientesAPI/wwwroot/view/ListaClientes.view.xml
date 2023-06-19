@@ -5,22 +5,17 @@
    xmlns:core="sap.ui.core">
    
    <App>
-
       <Page title="{i18n>TituloPagina}" titleAlignment="Center">
 
       <headerContent>
-
          <Button icon="sap-icon://refresh" type="Transparent" press="atualizarTabela"/>
-
       </headerContent>
 
          <Panel class="sapUiResponsiveMargin" width="auto">
-
-               <Toolbar class="sapUiTinyMarginBottom">
-                  <Title text="{i18n>TituloPainel}"/>
-                  <core:Icon src="sap-icon://person-placeholder"></core:Icon>
-               </Toolbar>
-
+            <Toolbar class="sapUiTinyMarginBottom">
+               <Title text="{i18n>TituloPainel}"/>
+               <core:Icon src="sap-icon://person-placeholder"></core:Icon>
+            </Toolbar>
          </Panel>
 
          <Table id = "ListaClientes" width="auto" items="{/cliente}">

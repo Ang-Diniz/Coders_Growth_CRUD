@@ -18,11 +18,11 @@ namespace ClientesAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos()
+        public IActionResult ObterTodos([FromQuery] string? nome)
         {
             try
             {
-                List<Cliente> cliente = _clienteRepositorio.ObterTodos();
+                List<Cliente> cliente = _clienteRepositorio.ObterTodos(nome);
 
                 return Ok(cliente);
             }

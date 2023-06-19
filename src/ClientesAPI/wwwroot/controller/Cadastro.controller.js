@@ -33,7 +33,7 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
 
-            if (cliente.dataDeNascimento == "") 
+            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) 
             {
                 delete cliente.dataDeNascimento;
             }
@@ -81,7 +81,7 @@ sap.ui.define([
         {
             let cliente = this.getView().getModel("cliente").getData();
             
-            if (cliente.dataDeNascimento == "") 
+            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) 
             {
                 delete cliente.dataDeNascimento;
             }
@@ -101,27 +101,27 @@ sap.ui.define([
             {
                 let erros = Validacoes.validarNome(campo.getValue());
 
-                Validacoes.mensagensErro(campo, erros);
+                Validacoes.mensagensDeErros(campo, erros);
             }
 
             if (campo.getName() === "inputEmail") 
             {
                 let erros = Validacoes.validarEmail(campo.getValue());
 
-                Validacoes.mensagensErro(campo, erros);
+                Validacoes.mensagensDeErros(campo, erros);
             }
 
             if (campo.getName() === "inputCPF") 
             {
                 let erros = Validacoes.validarCpf(campo.getValue());
 
-                Validacoes.mensagensErro(campo, erros);
+                Validacoes.mensagensDeErros(campo, erros);
             }
             if (campo.getName() === "inputDataDeNascimento") 
             {
                 let erros = this.checarEntradaDaData(campo.getValue());
 
-                Validacoes.mensagensErro(campo, erros);
+                Validacoes.mensagensDeErros(campo, erros);
             }
         },
 

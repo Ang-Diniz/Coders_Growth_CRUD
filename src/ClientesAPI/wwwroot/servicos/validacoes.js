@@ -128,7 +128,7 @@ sap.ui.define([
             return erros;
         },
 
-        mensagensErro: function (campo, erros) {
+        mensagensDeErros: function (campo, erros) {
 
             const decimalZero = 0;
 

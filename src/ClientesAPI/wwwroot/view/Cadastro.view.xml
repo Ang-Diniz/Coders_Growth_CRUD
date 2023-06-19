@@ -8,15 +8,13 @@
 	<Page title="{i18n>TituloPaginaDeCadastro}" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 
 		<Panel class="sapUiResponsiveMargin" width="auto">
-
-				<Toolbar class="sapUiTinyMarginBottom">
-						<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
-						<core:Icon src="sap-icon://add-activity"></core:Icon>
-						<ToolbarSpacer/>
-						<Button icon="sap-icon://save" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
-						<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
-				</Toolbar>
-				
+			<Toolbar class="sapUiTinyMarginBottom">
+				<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
+				<core:Icon src="sap-icon://add-activity"></core:Icon>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://save" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
+				<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
+			</Toolbar>
 		</Panel>
 		
 	<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="32%">

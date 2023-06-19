@@ -83,13 +83,21 @@ namespace Infraestrutura
             }
         }
 
-        public List<Cliente> ObterTodos()
+        public List<Cliente> ObterTodos(string nome = null)
         {
             using var conexaoLinq2Db = CriarConexao();
 
             try
             {
-                return conexaoLinq2Db.GetTable<Cliente>().ToList();
+                var query = from cliente in conexaoLinq2Db.GetTable<Cliente>()
+                            select cliente;
+                    
+
+                if (!string.IsNullOrWhiteSpace(nome))
+                {
+                    query = query.Where(c => c.Nome.StartsWith(nome));
+                }
+                return query.ToList();
             }
             catch (Exception ex)
             {
