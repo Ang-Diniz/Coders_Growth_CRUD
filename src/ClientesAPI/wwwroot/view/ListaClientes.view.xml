@@ -28,7 +28,7 @@
                <Toolbar class="sapUiTinyMarginTop">
                   <Button text="{i18n>BotaoCadastrar}" width="10%" icon="sap-icon://add-employee"  class="sapUiTinyMarginBottom" type="Emphasized" press="aoClicarEmCadastrar"/>
                <ToolbarSpacer/>
-                  <SearchField width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" placeholder="{i18n>BarraDePesquisa}" search="buscarClientes"/>
+                  <SearchField width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" placeholder="{i18n>BarraDePesquisa}" liveChange="buscarClientes"/>
                </Toolbar>
                </headerToolbar>
                   <columns> 

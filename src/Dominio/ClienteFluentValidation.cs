@@ -15,7 +15,7 @@ namespace Dominio
             .NotEmpty()
             .Matches(@"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$")
             .WithMessage("\nNome inválido. Por favor insira um nome válido.\n")
-            .MaximumLength(100)
+            .MaximumLength(60)
             .MinimumLength(4);
 
             RuleFor(c => c.DataDeNascimento)

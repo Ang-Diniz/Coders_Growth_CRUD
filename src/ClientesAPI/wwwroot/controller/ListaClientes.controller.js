@@ -27,7 +27,7 @@
 
         buscarClientes: function (Evento) {
 
-            let buscar = Evento.getParameter("query");
+            let buscar = Evento.getParameter("newValue");
             let filtro = [];
 
             if (buscar) 

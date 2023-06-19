@@ -23,6 +23,11 @@ sap.ui.define([
                 erros.push("O campo 'Nome' deve conter mais de 4 caracteres." + "\n");
             }
 
+            if (nome.length > 60) 
+            {
+                erros.push("O campo 'Nome' não deve conter mais de 60 caracteres." + "\n");
+            }
+
             if (!nome.match(nomeRegex) && nome.length > minimoEntradaInput) 
             {
                 erros.push("Nome inválido. Por favor insira um nome válido.");
@@ -33,6 +38,7 @@ sap.ui.define([
         validarEmail: function (email) {
 
             let erros = [];
+            const decimalZero = 0;
 
             let emailRegex = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+))@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+))\.([A-Za-z]{2,})$/;
             email = email.trim();
@@ -41,7 +47,8 @@ sap.ui.define([
             {
                 erros.push("O campo 'E-mail' deve ser preenchido." + "\n");
             }
-            if (!email.match(emailRegex) && email.length > 0) 
+
+            if (!email.match(emailRegex) && email.length > decimalZero) 
             {
                 erros.push("E-mail inválido. Por favor insira um e-mail válido.");
             }
@@ -97,19 +104,26 @@ sap.ui.define([
         validarDataDeNascimento: function (dataValida) 
         {
             let erros = [];
-            const idadeMaxima = 80;
+            const idadeMaxima = 120;
             const idadeMinima = 18;
             
             let dataAtual = new Date(Date.now()).getFullYear()
 
             if (dataAtual - dataValida > idadeMaxima) 
             {
-                erros.push("Data inválida. A idade máxima é de 80 anos.")
+                erros.push("Data inválida. A idade máxima é de 120 anos.")
             }
-            
-            if (dataAtual - dataValida < idadeMinima) 
+
+            if (dataValida <= dataAtual) 
             {
-                erros.push("Data inválida. Cliente menor de 18 anos.")
+                if (dataAtual - dataValida < idadeMinima) 
+                {
+                    erros.push("Data inválida. Cliente menor de 18 anos.")
+                }
+            }
+            else 
+            {
+                erros.push("Datas futuras não são permitidas.")
             }
             return erros;
         },
