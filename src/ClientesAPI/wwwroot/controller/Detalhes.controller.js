@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
-    "sap/ui/core/routing/History"
-], function (Controller, JSONModel, History) {
+    "sap/ui/model/json/JSONModel"
+], function (Controller, JSONModel) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.Detalhes", {
 
@@ -31,18 +30,8 @@ sap.ui.define([
 
         aoClicarEmVoltar: function () {
 
-            let historico = History.getInstance();
-            let paginaAnterior = historico.getPreviousHash();
-
-            if (paginaAnterior !== undefined) 
-            {
-                window.history.go(-1);
-            }
-            else 
-            {
-                let rota = this.getOwnerComponent().getRouter();
-                rota.navTo("ListaClientes", {}, true);
-            }
+            let rota = this.getOwnerComponent().getRouter();
+            rota.navTo("ListaClientes", {}, true);
         }
     });
 });

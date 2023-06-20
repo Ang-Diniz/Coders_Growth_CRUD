@@ -1,9 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
-], function (Controller, History, JSONModel, MessageBox) {
+    "sap/m/MessageBox",
+    "../servicos/Validacoes"
+], function (Controller, JSONModel, MessageBox, Validacoes) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
 
@@ -15,8 +15,8 @@ sap.ui.define([
 
         aoCoincidirRota: function () {
 
-            let dadosCliente =
-            {
+            let dadosCliente = {
+
                 "nome": "",
                 "dataDeNascimento": "",
                 "cpf": "",
@@ -33,6 +33,11 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
 
+            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) 
+            {
+                delete cliente.dataDeNascimento;
+            }
+
             fetch("https://localhost:7147/api/cliente/", {
                 method: 'POST',
                 headers: {
@@ -41,27 +46,103 @@ sap.ui.define([
 
                 body: JSON.stringify(cliente)
             })
-                .then(res => res.json())
-                .then(res => {
-                    if (res.status == 400) 
-                    {
-                        MessageBox.error("Erro ao cadastrar cliente");
-                    }
-                    else {
-                        MessageBox.success("Cliente cadastrado com sucesso !", {
-                            title: "Sucesso",
-                            actions: [MessageBox.Action.OK], onClose: (acao) => {
-                                if (acao == MessageBox.Action.OK) {
-                                    this.limparTelaDeCadastro();
-                                    this.navegarTelaDetalhes(res);
-                                }
+            .then(res => {
+                if (res.status != 200) 
+                {
+                    return res.text();
+                }
+                return res.json()
+            })
+            .then(res => {
+                if (typeof res == "string") 
+                {
+                        MessageBox.error(`Erro ao cadastrar cliente: \n\n ${res}`, {
+                        emphasizedAction: MessageBox.Action.CLOSE
+                    });
+
+                    this.mudarCamposAoSalvarComErros();
+                }
+                else 
+                {
+                    MessageBox.success("Cliente cadastrado com sucesso !", {
+                        emphasizedAction: MessageBox.Action.OK,
+                        title: "Sucesso",
+                        actions: [MessageBox.Action.OK], onClose: (acao) => {
+                            if (acao == MessageBox.Action.OK) 
+                            {
+                                this.limparTelaDeCadastro();
+                                this.navegarTelaDeDetalhes(res);
                             }
-                        })
-                    }
-                });
+                        }
+                    })
+                }
+            })
         },
 
-        navegarTelaDetalhes: function (id) {
+        checarEntradaDaData: function (data) 
+        {
+            let cliente = this.getView().getModel("cliente").getData();
+            
+            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) 
+            {
+                delete cliente.dataDeNascimento;
+            }
+            
+            data = cliente.dataDeNascimento;
+            
+            data = new Date(data).getFullYear()
+
+            return Validacoes.validarDataDeNascimento(data)
+        },
+
+        mudarCamposAoSalvarComErros: function () 
+        {
+            let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
+
+            campos.forEach (res => {
+
+                let campo = this.getView().byId(res);
+
+                if (campo.getValueState() !== "Success") 
+                {
+                    campo.setValueState("Error")
+                }
+            })
+        },
+
+        aoMudarCampos: function (Evento) {
+
+            let campo = Evento.getSource();
+
+            if (campo.getName() === "inputNome") 
+            {
+                let erros = Validacoes.validarNome(campo.getValue());
+
+                Validacoes.mensagensDeErros(campo, erros);
+            }
+
+            if (campo.getName() === "inputEmail") 
+            {
+                let erros = Validacoes.validarEmail(campo.getValue());
+
+                Validacoes.mensagensDeErros(campo, erros);
+            }
+
+            if (campo.getName() === "inputCPF") 
+            {
+                let erros = Validacoes.validarCpf(campo.getValue());
+
+                Validacoes.mensagensDeErros(campo, erros);
+            }
+            if (campo.getName() === "inputDataDeNascimento") 
+            {
+                let erros = this.checarEntradaDaData(campo.getValue());
+
+                Validacoes.mensagensDeErros(campo, erros);
+            }
+        },
+
+        navegarTelaDeDetalhes: function (id) {
 
             let rota = this.getOwnerComponent().getRouter();
             rota.navTo("detalhes", { id: id });
@@ -69,21 +150,17 @@ sap.ui.define([
 
         aoClicarEmVoltar: function () {
 
-            let historico = History.getInstance();
-            let paginaAnterior = historico.getPreviousHash();
+            let rota = this.getOwnerComponent().getRouter();
+            rota.navTo("ListaClientes", {}, true);
 
-            if (paginaAnterior !== undefined) {
-                window.history.go(-1);
-            }
-            else {
-                let rota = this.getOwnerComponent().getRouter();
-                rota.navTo("ListaClientes", {}, true);
-            }
+            this.limparTelaDeCadastro();
         },
 
         aoClicarEmCancelar: function () {
 
-            MessageBox.alert("Deseja mesmo cancelar ?", {
+            MessageBox.alert("Deseja mesmo cancelar ? \n\n\n Os dados preenchidos serão perdidos.", {
+                emphasizedAction: MessageBox.Action.YES,
+                initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO], onClose: (acao) => {
                     if (acao == MessageBox.Action.YES) {
@@ -96,15 +173,16 @@ sap.ui.define([
 
         limparTelaDeCadastro: function () {
 
-            let Nome = this.byId("inputNome");
-            let Email = this.byId("inputEmail");
-            let CPF = this.byId("inputCPF");
-            let DataDeNascimento = this.byId("inputDataDeNascimento");
+            let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
 
-            Nome.setValue("");
-            Email.setValue("");
-            CPF.setValue("");
-            DataDeNascimento.setValue("");
+            campos.forEach (res => {
+
+                let campo = this.getView().byId(res);
+
+                campo.setValue("");
+
+                Validacoes.limparInputs(campo)
+            });
         }
     });
 });

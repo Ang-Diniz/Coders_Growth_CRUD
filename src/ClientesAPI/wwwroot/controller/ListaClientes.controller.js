@@ -3,14 +3,15 @@
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/routing/History"
-], function (Controller, JSONModel, Filter, FilterOperator, History) {
+    "sap/m/MessageToast"
+], function (Controller, JSONModel, Filter, FilterOperator, MessageToast) {
     "use strict";
     return Controller.extend("sap.ui.cliente.controller.ListaClientes", {
 
         onInit: function () {
-
-            this.obterClientes();
+            
+            let rota = this.getOwnerComponent().getRouter();
+            rota.getRoute("ListaClientes").attachPatternMatched(this.obterClientes, this);
         },
 
         obterClientes: function () {
@@ -26,7 +27,7 @@
 
         buscarClientes: function (Evento) {
 
-            let buscar = Evento.getParameter("query");
+            let buscar = Evento.getParameter("newValue");
             let filtro = [];
 
             if (buscar) {
@@ -40,16 +41,8 @@
 
         aoClicarEmCadastrar: function () {
 
-            let historico = History.getInstance();
-            let paginaAnterior = historico.getPreviousHash();
-
-            if (paginaAnterior !== undefined) {
-                window.history.go(+1);
-            }
-            else {
-                let rota = this.getOwnerComponent().getRouter();
-                rota.navTo("cadastro", {}, true);
-            }
+            let rota = this.getOwnerComponent().getRouter();
+            rota.navTo("cadastro", {}, true);
         },
 
         aoClicarNaLinha: function (Evento) {
@@ -58,6 +51,12 @@
             let rota = this.getOwnerComponent().getRouter();
             let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })
-        }
+        }, 
+
+        atualizarTabela: function () {
+
+            this.obterClientes();
+            MessageToast.show("Tabela atualizada.");
+       },
     });
 });

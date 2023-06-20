@@ -15,7 +15,7 @@ namespace Dominio
             .NotEmpty()
             .Matches(@"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$")
             .WithMessage("\nNome inválido. Por favor insira um nome válido.\n")
-            .MaximumLength(100)
+            .MaximumLength(60)
             .MinimumLength(4);
 
             RuleFor(c => c.DataDeNascimento)
@@ -25,6 +25,7 @@ namespace Dominio
 
             RuleFor(c => c.CPF)
             .Matches(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$")
+            .WithMessage("\nCPF inválido. Por favor insira um CPF válido.\n")
             .Must(validarCPF)
             .WithMessage("\nCPF inválido. Por favor insira um CPF válido.\n")
             .Must((cliente, CPF) => VerificarCpfExiste(cliente, CPF))
