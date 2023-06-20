@@ -20,7 +20,7 @@
 	<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="32%">
 
 		<Label text="{i18n>LabelNome}:" design="Bold" labelFor="inputNome"/>
-		<Input id="inputNome" name="inputNome" showClearIcon="true" required="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}"/>
+		<Input id="inputNome" name="inputNome" showClearIcon="true" required="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
 
         <Label text="{i18n>LabelEmail}:" design="Bold" labelFor="inputEmail"/>
 		<Input id="inputEmail" name="inputEmail" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" showClearIcon="true" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}"/>

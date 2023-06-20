@@ -13,7 +13,6 @@ namespace Dominio
 
             RuleFor(c => c.Nome)
             .NotEmpty()
-            .WithSeverity(Severity.Warning)
             .Matches(@"^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$")
             .WithMessage("\nNome inválido. Por favor insira um nome válido.\n")
             .MaximumLength(60)

@@ -59,6 +59,8 @@ sap.ui.define([
                         MessageBox.error(`Erro ao cadastrar cliente: \n\n ${res}`, {
                         emphasizedAction: MessageBox.Action.CLOSE
                     });
+
+                    this.mudarCamposAoSalvarComErros();
                 }
                 else 
                 {
@@ -91,6 +93,21 @@ sap.ui.define([
             data = new Date(data).getFullYear()
 
             return Validacoes.validarDataDeNascimento(data)
+        },
+
+        mudarCamposAoSalvarComErros: function () 
+        {
+            let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
+
+            campos.forEach (res => {
+
+                let campo = this.getView().byId(res);
+
+                if (campo.getValueState() !== "Success") 
+                {
+                    campo.setValueState("Error")
+                }
+            })
         },
 
         aoMudarCampos: function (Evento) {
@@ -141,7 +158,7 @@ sap.ui.define([
 
         aoClicarEmCancelar: function () {
 
-            MessageBox.alert("Deseja mesmo cancelar ? \n\n Os dados preenchidos serão perdidos.", {
+            MessageBox.alert("Deseja mesmo cancelar ? \n\n\n Os dados preenchidos serão perdidos.", {
                 emphasizedAction: MessageBox.Action.YES,
                 initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
@@ -156,19 +173,16 @@ sap.ui.define([
 
         limparTelaDeCadastro: function () {
 
-            let Nome = this.byId("inputNome");
-            let Email = this.byId("inputEmail");
-            let CPF = this.byId("inputCPF");
-            let DataDeNascimento = this.byId("inputDataDeNascimento");
+            let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
 
-            Nome.setValue("");
-            Email.setValue("");
-            CPF.setValue("");
-            DataDeNascimento.setValue("");
+            campos.forEach (res => {
 
-            let campos = [Nome, Email, CPF, DataDeNascimento]
+                let campo = this.getView().byId(res);
 
-            campos.forEach(inputs => Validacoes.limparInputs(inputs))
+                campo.setValue("");
+
+                Validacoes.limparInputs(campo)
+            });
         }
     });
 });
