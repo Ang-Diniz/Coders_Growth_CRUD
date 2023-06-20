@@ -17,10 +17,10 @@
             </Toolbar>
          </Panel>
 
-         <Table class="sapUiResponsiveMargin" id = "ListaClientes" width="auto" items="{/cliente}">
+         <Table class="sapUiResponsiveMargin" id="ListaClientes" width="auto" items="{/cliente}">
             <headerToolbar>
                <Toolbar class="sapUiTinyMarginTop">
-                  <Button text="{i18n>BotaoCadastrar}"  icon="sap-icon://add-employee"  class="sapUiTinyMarginBottom" type="Emphasized" press="aoClicarEmCadastrar"/>
+                  <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee" class="sapUiTinyMarginBottom" type="Emphasized" press="aoClicarEmCadastrar"/>
                <ToolbarSpacer/>
                   <SearchField width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" placeholder="{i18n>BarraDePesquisa}" liveChange="buscarClientes"/>
                </Toolbar>

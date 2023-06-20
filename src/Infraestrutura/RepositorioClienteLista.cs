@@ -4,7 +4,7 @@ namespace Infraestrutura
 {
     public class RepositorioClienteLista : IRepositorioCliente
     {
-        public List<Cliente> ObterTodos(string nome)
+        public List<Cliente> ObterTodos()
         {
             return ClienteListSingleton.Instancia.ClienteList;
         }

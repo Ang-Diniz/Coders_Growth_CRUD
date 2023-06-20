@@ -27,21 +27,10 @@
 
         buscarClientes: function (Evento) {
 
-            let jsonCliente = new JSONModel();
             let buscar = Evento.getParameter("newValue");
             let filtro = [];
 
-            fetch(`https://localhost:7147/api/cliente?nome=${buscar}`)
-                .then(function (res)
-                {
-                    return res.json()
-                })
-                .then(res => jsonCliente.setData({ cliente: res }))
-
-                this.getView().setModel(jsonCliente);
-
-            if (buscar) 
-            {
+            if (buscar) {
                 filtro.push(new Filter("nome", FilterOperator.Contains, buscar));
             }
 

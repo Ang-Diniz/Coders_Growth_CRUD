@@ -9,7 +9,7 @@ namespace Infraestrutura
         public static IRepositorioCliente _repositorioClienteBD;
         public static string connectionString = ConfigurationManager.ConnectionStrings["Cliente"].ConnectionString;
 
-        public List<Cliente> ObterTodos(string nome)
+        public List<Cliente> ObterTodos()
         {
             SqlConnection ConexaoSQL = new(connectionString);
 

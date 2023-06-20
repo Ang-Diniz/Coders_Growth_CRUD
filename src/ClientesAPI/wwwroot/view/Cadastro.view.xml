@@ -23,14 +23,14 @@
 		<Input id="inputNome" name="inputNome" showClearIcon="true" required="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
 
         <Label text="{i18n>LabelEmail}:" design="Bold" labelFor="inputEmail"/>
-		<Input id="inputEmail" name="inputEmail" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" showClearIcon="true" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}"/>
+		<Input id="inputEmail" name="inputEmail" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" showClearIcon="true" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
 
         <Label text="{i18n>LabelCPF}:" design="Bold" labelFor="inputCPF"/>
-		<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" placeholderSymbol="_" valueState="None" valueLiveUpdate="true" change="aoMudarCampos" showClearIcon="true" required="true" placeholder="{i18n>InputCPF}" width="40%" value="{cliente>/cpf}"/>
+		<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" placeholderSymbol="_" valueState="None" valueLiveUpdate="true" change="aoMudarCampos" showClearIcon="true" required="true" placeholder="{i18n>InputCPF}" width="40%" value="{cliente>/cpf}" submit="aoClicarEmSalvar"/>
 
         <Label text="{i18n>LabelDataDeNascimento}:" design="Bold" labelFor="inputDataDeNascimento"/>
 		<DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" valueLiveUpdate="true" change="aoMudarCampos" required="true" width="40%" placeholder="{i18n>InputDataDeNascimento}"
-		value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd / MM / yyyy'}}"/>
+		value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd / MM / yyyy'}}" submit="aoClicarEmSalvar"/>
 
 		<Label text="{i18n>CampoObrigatorio}"/>
 
