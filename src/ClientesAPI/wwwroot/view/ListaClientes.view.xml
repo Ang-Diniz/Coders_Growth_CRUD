@@ -40,7 +40,7 @@
                      <Text text = "{i18n>colunaCPF}"/>
                   </Column>
                   <Column
-                     >
+                     width="15em">
                      <Text text = "{i18n>colunaDataDeNascimento}"/>
                   </Column>
                </columns>
