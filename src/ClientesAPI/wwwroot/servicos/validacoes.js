@@ -8,7 +8,6 @@ sap.ui.define([
 
             let erros = [];
             const decimalZero = 0;
-            const minimoEntradaInput = 1;
 
             let nomeRegex = /^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$/;
             nome = nome.trim();
@@ -18,7 +17,7 @@ sap.ui.define([
                 erros.push("O campo 'Nome' deve ser preenchido." + "\n");
             }
 
-            if (nome.length < 4 && nome.length > decimalZero) 
+            if (nome.length < 4 && nome.length > decimalZero && nome.match(nomeRegex)) 
             {
                 erros.push("O campo 'Nome' deve conter mais de 4 caracteres." + "\n");
             }
@@ -28,7 +27,7 @@ sap.ui.define([
                 erros.push("O campo 'Nome' não deve conter mais de 60 caracteres." + "\n");
             }
 
-            if (!nome.match(nomeRegex) && nome.length > minimoEntradaInput) 
+            if (!nome.match(nomeRegex) && nome.length > decimalZero) 
             {
                 erros.push("Nome inválido. Por favor insira um nome válido.");
             }
@@ -67,7 +66,7 @@ sap.ui.define([
             let cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
             let Soma;
             let Resto;
-            Soma = 0;
+            Soma = decimalZero;
 
             if (caracteresRepetidos == tamanhoMaxCaracteresRepetidos ) 
             {
@@ -85,14 +84,14 @@ sap.ui.define([
             if ((Resto == 10) || (Resto == 11))  Resto = 0;
             if (Resto != parseInt(strCPF.substring(9, 10)) );
             
-            Soma = 0;
+            Soma = decimalZero;
             for (let i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
             Resto = (Soma * 10) % 11;
             
-            if ((Resto == 10) || (Resto == 11))  Resto = 0;
+            if ((Resto == 10) || (Resto == 11))  Resto = decimalZero;
             if (Resto != parseInt(strCPF.substring(10, 11) ) ) 
 
-            if ( strCPF > 0 ) { erros.push("Cpf inválido. Por favor insira um cpf válido.")} 
+            if ( strCPF > decimalZero ) { erros.push("Cpf inválido. Por favor insira um cpf válido.")} 
             
             if (!cpf.match(cpfRegex) && cpf.length > decimalZero) 
             {
