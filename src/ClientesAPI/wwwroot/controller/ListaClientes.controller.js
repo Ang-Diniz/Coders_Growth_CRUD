@@ -56,7 +56,7 @@
         atualizarTabela: function () {
 
             this.obterClientes();
-            MessageToast.show("Tabela atualizada.");
+            MessageToast.show("Tabela atualizada !");
        },
     });
 });

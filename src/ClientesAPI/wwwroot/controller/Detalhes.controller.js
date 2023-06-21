@@ -14,18 +14,23 @@ sap.ui.define([
         aoCoincidirRota: function (Evento) {
 
             let id = Evento.getParameter("arguments").id;
-            this.ObterClientes(id);
+            this.obterClientes(id);
         },
 
-        ObterClientes: function (id) {
-
-            let jsonCliente = new JSONModel();
+        obterClientes: function (id) {
 
             fetch("https://localhost:7147/api/cliente/" + id)
                 .then(res => res.json())
-                .then(res => jsonCliente.setData({ cliente: res }))
+                .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
+        },
 
-            this.getView().setModel(jsonCliente);
+        aoClicarEmEditar: function (id) {
+
+            let cliente = this.getView().getModel("cliente").getData();
+            id = cliente.id
+
+            let rota = this.getOwnerComponent().getRouter();
+            rota.navTo("edicao", { id: id });
         },
 
         aoClicarEmVoltar: function () {
