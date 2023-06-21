@@ -12,7 +12,6 @@ sap.ui.define([
             let rota = this.getOwnerComponent().getRouter();
 
             rota.getRoute("edicao").attachPatternMatched(this.aoCoincidirRotaEdicao, this);
-
             rota.getRoute("cadastro").attachPatternMatched(this.aoCoincidirRota, this);
 
         },
@@ -37,33 +36,107 @@ sap.ui.define([
 
             fetch("https://localhost:7147/api/cliente/" + id)
                 .then(res => res.json())
-                .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
+                .then(res => {
+                    res.dataDeNascimento = new Date(res.dataDeNascimento);
+                    this.getView().setModel(new JSONModel(res), "cliente")
+                })
         },
 
         aoCoincidirRotaEdicao: function (Evento) {
+
+            let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
+
+            campos.forEach(res => {
+
+                let campo = this.getView().byId(res);
+
+                campo.setValueState("Success")
+            })
 
             let id = Evento.getParameter("arguments").id;
             this.obterClientes(id);
         },
 
-        aoClicarEmSalvar: function () {
+        editarCliente: function (id) {
+
+            let cliente = this.getView().getModel("cliente").getData();
+            id = cliente.id;
+
+            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) {
+
+                delete cliente.dataDeNascimento;
+            }
+
+            return fetch("https://localhost:7147/api/cliente/" + id, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+
+                    body: JSON.stringify(cliente)
+                });
+
+        },
+
+        cadastrarCliente: function () {
 
             let cliente = this.getView().getModel("cliente").getData();
 
             if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) {
+
                 delete cliente.dataDeNascimento;
             }
 
-            fetch("https://localhost:7147/api/cliente/", {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
+            return fetch("https://localhost:7147/api/cliente/", {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
 
-                body: JSON.stringify(cliente)
-            })
+                    body: JSON.stringify(cliente)
+                })
+        },
+
+        aoClicarEmSalvar: function () {
+
+            let cliente = this.getView().getModel("cliente").getData();
+            let id = cliente.id;
+            
+            if (id) {
+                this.editarCliente(id)
                 .then(res => {
                     if (res.status !== 200) {
+
+                        return res.text();
+                    }
+                    return res.json()
+                })
+                .then(res => {
+                    if (typeof res == "string") {
+                        MessageBox.error(`Erro ao editar cliente: \n\n ${res}`, {
+                            emphasizedAction: MessageBox.Action.CLOSE
+                        });
+                    }
+                    else {
+                        MessageBox.success("Cliente editado com sucesso !", {
+                            emphasizedAction: MessageBox.Action.OK,
+                            title: "Sucesso",
+                            actions: [MessageBox.Action.OK], onClose: (acao) => {
+                                if (acao == MessageBox.Action.OK) {
+                                    this.limparTelaDeCadastro();
+                                    this.aoClicarEmVoltar();
+                                }
+                            }
+                        })
+                    }
+                })
+                this.mudarCamposAoSalvarComErros();
+            }
+            else {
+                this.cadastrarCliente() 
+                .then(res => {
+                    if (res.status !== 200) {
+
                         return res.text();
                     }
                     return res.json()
@@ -89,6 +162,7 @@ sap.ui.define([
                         })
                     }
                 })
+            }
         },
 
         checarEntradaDaData: function (data) {
@@ -96,6 +170,7 @@ sap.ui.define([
             let cliente = this.getView().getModel("cliente").getData();
 
             if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) {
+
                 delete cliente.dataDeNascimento;
             }
 
@@ -115,6 +190,7 @@ sap.ui.define([
                 let campo = this.getView().byId(res);
 
                 if (campo.getValueState() !== "Success") {
+
                     campo.setValueState("Error")
                 }
             })
@@ -125,23 +201,27 @@ sap.ui.define([
             let campo = Evento.getSource();
 
             if (campo.getName() == "inputNome") {
+
                 let erros = Validacoes.validarNome(campo.getValue());
 
                 Validacoes.mensagensDeErros(campo, erros);
             }
 
             if (campo.getName() == "inputEmail") {
+
                 let erros = Validacoes.validarEmail(campo.getValue());
 
                 Validacoes.mensagensDeErros(campo, erros);
             }
 
             if (campo.getName() == "inputCPF") {
+
                 let erros = Validacoes.validarCpf(campo.getValue());
 
                 Validacoes.mensagensDeErros(campo, erros);
             }
             if (campo.getName() == "inputDataDeNascimento") {
+
                 let erros = this.checarEntradaDaData(campo.getValue());
 
                 Validacoes.mensagensDeErros(campo, erros);
@@ -170,6 +250,7 @@ sap.ui.define([
                 icon: MessageBox.Icon.WARNING,
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO], onClose: (acao) => {
                     if (acao == MessageBox.Action.YES) {
+
                         this.aoClicarEmVoltar();
                         this.limparTelaDeCadastro();
                     }
@@ -186,7 +267,6 @@ sap.ui.define([
                 let campo = this.getView().byId(res);
 
                 campo.setValue("");
-
                 Validacoes.limparInputs(campo)
             });
         }
