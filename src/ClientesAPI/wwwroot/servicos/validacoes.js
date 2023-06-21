@@ -8,6 +8,7 @@ sap.ui.define([
 
             let erros = [];
             const decimalZero = 0;
+            const tamanhoMax = 60;
 
             let nomeRegex = /^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$/;
             nome = nome.trim();
@@ -17,7 +18,7 @@ sap.ui.define([
                 erros.push("O campo 'Nome' deve ser preenchido." + "\n");
             }
 
-            if (nome.length > 60) 
+            if (nome.length > tamanhoMax) 
             {
                 erros.push("O campo 'Nome' não deve conter mais de 60 caracteres." + "\n");
             }
