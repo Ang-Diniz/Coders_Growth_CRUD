@@ -75,7 +75,6 @@ sap.ui.define([
 
                     body: JSON.stringify(cliente)
                 });
-
         },
 
         cadastrarCliente: function () {
@@ -244,7 +243,7 @@ sap.ui.define([
 
         aoClicarEmCancelar: function () {
 
-            MessageBox.alert("Deseja mesmo cancelar ? \n\n\n Os dados preenchidos serão perdidos.", {
+            MessageBox.alert("Deseja mesmo cancelar ? \n\n Os dados preenchidos serão perdidos.", {
                 emphasizedAction: MessageBox.Action.YES,
                 initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
