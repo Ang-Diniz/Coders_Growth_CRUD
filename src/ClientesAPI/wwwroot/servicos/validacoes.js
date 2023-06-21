@@ -17,11 +17,6 @@ sap.ui.define([
                 erros.push("O campo 'Nome' deve ser preenchido." + "\n");
             }
 
-            if (nome.length < 4 && nome.length > decimalZero && nome.match(nomeRegex)) 
-            {
-                erros.push("O campo 'Nome' deve conter mais de 4 caracteres." + "\n");
-            }
-
             if (nome.length > 60) 
             {
                 erros.push("O campo 'Nome' não deve conter mais de 60 caracteres." + "\n");

@@ -36,7 +36,7 @@ sap.ui.define([
             let cliente = this.getView().getModel("cliente").getData();
             let id = cliente.id;
 
-            MessageBox.confirm("Tem certeza que deseja remover esse cliente ?", {
+            MessageBox.confirm("Deseja mesmo remover esse cliente ?", {
                 emphasizedAction: MessageBox.Action.YES,
                 initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
