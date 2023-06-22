@@ -5,17 +5,21 @@ sap.ui.define([
     "../servicos/Validacoes"
 ], function (Controller, JSONModel, MessageBox, Validacoes) {
     "use strict";
+
+    const API = "https://localhost:7147/api/cliente/";
+
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
 
+        
         onInit: function () {
-
+            
             let rota = this.getOwnerComponent().getRouter();
-
+            
             rota.getRoute("edicao").attachPatternMatched(this.aoCoincidirRotaEdicao, this);
             rota.getRoute("cadastro").attachPatternMatched(this.aoCoincidirRota, this);
-
+            
         },
-
+        
         aoCoincidirRota: function () {
 
             let dadosCliente = {
@@ -34,7 +38,7 @@ sap.ui.define([
 
         obterClientes: function (id) {
 
-            fetch("https://localhost:7147/api/cliente/" + id)
+            fetch(API + id)
                 .then(res => res.json())
                 .then(res => {
                     res.dataDeNascimento = new Date(res.dataDeNascimento);
@@ -49,7 +53,6 @@ sap.ui.define([
             campos.forEach(res => {
 
                 let campo = this.getView().byId(res);
-
                 campo.setValueState("Success")
             })
 
@@ -67,15 +70,14 @@ sap.ui.define([
                 delete cliente.dataDeNascimento;
             }
 
-            return fetch("https://localhost:7147/api/cliente/" + id, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
+            return fetch(API + id, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json'
+                },
 
-                    body: JSON.stringify(cliente)
-                });
-
+                body: JSON.stringify(cliente)
+            });
         },
 
         cadastrarCliente: function () {
@@ -87,14 +89,14 @@ sap.ui.define([
                 delete cliente.dataDeNascimento;
             }
 
-            return fetch("https://localhost:7147/api/cliente/", {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
+            return fetch(API, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
 
-                    body: JSON.stringify(cliente)
-                })
+                body: JSON.stringify(cliente)
+            })
         },
 
         aoClicarEmSalvar: function () {
@@ -244,7 +246,7 @@ sap.ui.define([
 
         aoClicarEmCancelar: function () {
 
-            MessageBox.alert("Deseja mesmo cancelar ? \n\n\n Os dados preenchidos serão perdidos.", {
+            MessageBox.confirm("Deseja mesmo cancelar ? \n\n Os dados preenchidos serão perdidos.", {
                 emphasizedAction: MessageBox.Action.YES,
                 initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
