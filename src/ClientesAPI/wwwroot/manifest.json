@@ -73,6 +73,12 @@
                     "name": "edicao",
                     "target": "cadastro"
                 }
+                ,
+                {
+                    "pattern": "notFound",
+                    "name": "notFound",
+                    "target": "notFound"
+                }
             ],
             "targets": {
                 "ListaClientes": {
@@ -86,7 +92,11 @@
                 "cadastro": {
                     "id": "cadastro",
                     "name": "Cadastro"
-                }
+                },
+                "notFound" : {
+                   "id" : "notFound" ,
+                   "name" : "NotFound" 
+               }
             }
         }
     }

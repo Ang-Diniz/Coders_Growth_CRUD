@@ -73,8 +73,18 @@ sap.ui.define([
         obterClientes: function (id) {
 
             fetch(API + id)
-                .then(res => res.json())
-                .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
+                .then(res => {
+                    if(res.status == 404) {
+
+                        let rota = this.getOwnerComponent().getRouter();
+                        rota.navTo("notFound", {}, true);
+                    }
+                    else {
+
+                        res.json()
+                        .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
+                    }
+                })
         },
 
         aoClicarEmEditar: function (id) {
