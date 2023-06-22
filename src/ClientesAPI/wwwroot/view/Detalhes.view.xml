@@ -8,11 +8,11 @@
 	
 		<Panel class="sapUiResponsiveMargin" width="auto">
 			<Toolbar class="sapUiTinyMarginBottom">
-					<Title text="{i18n>TituloPainelTelaDeDetalhes}"/>
-					<core:Icon src="sap-icon://database"></core:Icon>
-					<ToolbarSpacer/>
-					<Button icon="sap-icon://user-edit" width="7%" text="{i18n>BotaoEditar}" type="Emphasized" press="aoClicarEmEditar"/>
-					<Button icon="sap-icon://delete" class="sapUiSmallMarginEnd" text="{i18n>BotaoRemover}" type="Negative" press="aoClicarEmRemover"/>
+				<Title text="{i18n>TituloPainelTelaDeDetalhes}"/>
+				<core:Icon src="sap-icon://database"></core:Icon>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://user-edit" width="7%" text="{i18n>BotaoEditar}" type="Emphasized" press="aoClicarEmEditar"/>
+				<Button icon="sap-icon://delete" class="sapUiSmallMarginEnd" text="{i18n>BotaoRemover}" type="Negative" press="aoClicarEmRemover"/>
 			</Toolbar>
 		</Panel>
 

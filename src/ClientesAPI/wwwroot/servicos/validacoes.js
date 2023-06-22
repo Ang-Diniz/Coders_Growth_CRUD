@@ -2,12 +2,13 @@ sap.ui.define([
 ], function () {
     "use strict";
     
-    return {
+    const decimalZero = 0;
 
+    return {
+        
         validarNome: function (nome) {
 
             let erros = [];
-            const decimalZero = 0;
             const tamanhoMax = 60;
 
             let nomeRegex = /^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$/;
@@ -33,7 +34,6 @@ sap.ui.define([
         validarEmail: function (email) {
 
             let erros = [];
-            const decimalZero = 0;
 
             let emailRegex = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+))@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+))\.([A-Za-z]{2,})$/;
             email = email.trim();
@@ -54,7 +54,6 @@ sap.ui.define([
 
             let erros = [];
             const minimoEntradaInput = 1;
-            const decimalZero = 0;
             const tamanhoMaxCaracteresRepetidos = 11;
             let strCPF = cpf.replaceAll(".", "").replace("-", "").replace(" ", "");
             let entradaCPF = new RegExp(`${strCPF[0]}`, 'g');
@@ -124,8 +123,6 @@ sap.ui.define([
         },
 
         mensagensDeErros: function (campo, erros) {
-
-            const decimalZero = 0;
 
             if (erros.length > decimalZero) 
             {

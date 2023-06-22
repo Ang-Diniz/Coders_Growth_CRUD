@@ -4,6 +4,9 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], function (Controller, JSONModel, MessageBox) {
     "use strict";
+
+    const API = "https://localhost:7147/api/cliente/";
+
     return Controller.extend("sap.ui.cliente.controller.Detalhes", {
 
         onInit: function () {
@@ -23,12 +26,12 @@ sap.ui.define([
             let cliente = this.getView().getModel("cliente").getData();
             id = cliente.id;
             
-            return fetch("https://localhost:7147/api/cliente/" + id, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-type': 'application/json'
-                    }
-                })
+            return fetch(API + id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
         },
 
         aoClicarEmRemover: function () {
@@ -55,7 +58,8 @@ sap.ui.define([
                                         }
                                     }
                             });
-                        } else {
+                        } 
+                        else {
                                 MessageBox.error("Erro ao remover cliente.", {
                                     emphasizedAction: MessageBox.Action.CLOSE
                                 });
@@ -68,7 +72,7 @@ sap.ui.define([
 
         obterClientes: function (id) {
 
-            fetch("https://localhost:7147/api/cliente/" + id)
+            fetch(API + id)
                 .then(res => res.json())
                 .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
         },

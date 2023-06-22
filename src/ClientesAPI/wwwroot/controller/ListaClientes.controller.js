@@ -6,6 +6,9 @@
     "sap/m/MessageToast"
 ], function (Controller, JSONModel, Filter, FilterOperator, MessageToast) {
     "use strict";
+
+    const API = "https://localhost:7147/api/cliente/";
+
     return Controller.extend("sap.ui.cliente.controller.ListaClientes", {
 
         onInit: function () {
@@ -18,7 +21,7 @@
 
             let jsonCliente = new JSONModel();
 
-            fetch("https://localhost:7147/api/cliente/")
+            fetch(API)
                 .then(res => res.json())
                 .then(res => jsonCliente.setData({ cliente: res }))
 
