@@ -3,8 +3,7 @@
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/m/MessageToast"
-], function (Controller, JSONModel, Filter, FilterOperator, MessageToast) {
+], function (Controller, JSONModel, Filter, FilterOperator) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
@@ -55,11 +54,5 @@
             let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })
         }, 
-
-        atualizarTabela: function () {
-
-            this.obterClientes();
-            MessageToast.show("Tabela atualizada !");
-       },
     });
 });

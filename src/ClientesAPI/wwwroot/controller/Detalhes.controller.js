@@ -41,11 +41,11 @@ sap.ui.define([
 
             MessageBox.confirm("Deseja mesmo remover esse cliente ?", {
                 emphasizedAction: MessageBox.Action.YES,
-                initialFocus: MessageBox.Action.NO,
+                initialFocus: MessageBox.Action.CANCEL,
                 icon: MessageBox.Icon.WARNING,
-                actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
                 onClose: (acao) => {
-                    if (acao === MessageBox.Action.YES) {
+                    if (acao == MessageBox.Action.YES) {
                         this.removerCliente(id)
                         .then(res => {
                             if (res.status == 200) {

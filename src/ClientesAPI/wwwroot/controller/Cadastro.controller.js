@@ -2,15 +2,15 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
-    "../servicos/Validacoes"
-], function (Controller, JSONModel, MessageBox, Validacoes) {
+    "../servicos/Validacoes",
+    "sap/ui/core/routing/History"
+], function (Controller, JSONModel, MessageBox, Validacoes, History) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
 
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
 
-        
         onInit: function () {
             
             let rota = this.getOwnerComponent().getRouter();
@@ -238,8 +238,18 @@ sap.ui.define([
 
         aoClicarEmVoltar: function () {
 
-            let rota = this.getOwnerComponent().getRouter();
-            rota.navTo("ListaClientes", {}, true);
+            let historico = History.getInstance();
+			let paginaAnterior = historico.getPreviousHash();
+
+			if (paginaAnterior !== undefined) {
+
+				window.history.go(-1);
+			} 
+            else {
+
+                let rota = this.getOwnerComponent().getRouter();
+                rota.navTo("ListaClientes", {}, true);
+            }
 
             this.limparTelaDeCadastro();
         },
