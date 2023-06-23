@@ -50,7 +50,10 @@
                 "viewType": "XML",
                 "path": "sap.ui.cliente.view",
                 "controlId": "app",
-                "controlAggregation": "pages"
+                "controlAggregation": "pages",
+                "bypassed":{
+                    "target":"notFound"
+                }
             },
             "routes": [
                 {

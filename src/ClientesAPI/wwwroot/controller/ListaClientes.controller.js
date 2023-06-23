@@ -3,7 +3,8 @@
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-], function (Controller, JSONModel, Filter, FilterOperator) {
+    "sap/ui/core/BusyIndicator"
+], function (Controller, JSONModel, Filter, FilterOperator, BusyIndicator) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
@@ -18,6 +19,8 @@
 
         obterClientes: function () {
 
+            BusyIndicator.show(0)
+
             let jsonCliente = new JSONModel();
 
             fetch(API)
@@ -25,6 +28,8 @@
                 .then(res => jsonCliente.setData({ cliente: res }))
 
             this.getView().setModel(jsonCliente);
+
+            BusyIndicator.hide()
         },
 
         buscarClientes: function (Evento) {
@@ -49,10 +54,14 @@
 
         aoClicarNaLinha: function (Evento) {
 
+            BusyIndicator.show(0)
+
             let Item = Evento.getSource();
             let rota = this.getOwnerComponent().getRouter();
             let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })
+            
+            BusyIndicator.hide()
         }, 
     });
 });

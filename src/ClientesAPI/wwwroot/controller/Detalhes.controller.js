@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
-], function (Controller, JSONModel, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/ui/core/BusyIndicator"
+], function (Controller, JSONModel, MessageBox, BusyIndicator) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
@@ -46,6 +47,7 @@ sap.ui.define([
                 actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
                 onClose: (acao) => {
                     if (acao == MessageBox.Action.YES) {
+                        BusyIndicator.show(0)
                         this.removerCliente(id)
                         .then(res => {
                             if (res.status == 200) {
@@ -64,6 +66,7 @@ sap.ui.define([
                                     emphasizedAction: MessageBox.Action.CLOSE
                                 });
                             }
+                            BusyIndicator.hide()
                         });
                     }
                 }
@@ -80,7 +83,6 @@ sap.ui.define([
                         rota.navTo("notFound", {}, true);
                     }
                     else {
-
                         res.json()
                         .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
                     }
@@ -89,11 +91,15 @@ sap.ui.define([
 
         aoClicarEmEditar: function (id) {
 
+            BusyIndicator.show(0)
+
             let cliente = this.getView().getModel("cliente").getData();
             id = cliente.id
 
             let rota = this.getOwnerComponent().getRouter();
             rota.navTo("edicao", { id: id });
+
+            BusyIndicator.hide()
         },
 
         aoClicarEmVoltar: function () {

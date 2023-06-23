@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
     "../servicos/Validacoes",
-    "sap/ui/core/routing/History"
-], function (Controller, JSONModel, MessageBox, Validacoes, History) {
+    "sap/ui/core/routing/History",
+    "sap/ui/core/BusyIndicator"
+], function (Controller, JSONModel, MessageBox, Validacoes, History, BusyIndicator) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
@@ -39,14 +40,25 @@ sap.ui.define([
         obterClientes: function (id) {
 
             fetch(API + id)
-                .then(res => res.json())
                 .then(res => {
-                    res.dataDeNascimento = new Date(res.dataDeNascimento);
-                    this.getView().setModel(new JSONModel(res), "cliente")
-                })
+                    if(res.status == 404) {
+
+                        let rota = this.getOwnerComponent().getRouter();
+                        rota.navTo("notFound", {}, true);
+                    }
+                    else {
+                        res.json()
+                        .then(res => {
+                            res.dataDeNascimento = new Date(res.dataDeNascimento);
+                            this.getView().setModel(new JSONModel(res), "cliente")
+                    })
+                }
+            })
         },
 
         aoCoincidirRotaEdicao: function (Evento) {
+
+            BusyIndicator.show(0)
 
             let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
 
@@ -58,6 +70,8 @@ sap.ui.define([
 
             let id = Evento.getParameter("arguments").id;
             this.obterClientes(id);
+
+            BusyIndicator.hide()
         },
 
         editarCliente: function (id) {
@@ -105,6 +119,8 @@ sap.ui.define([
             let id = cliente.id;
             
             if (id) {
+                BusyIndicator.show(0)
+
                 this.editarCliente(id)
                 .then(res => {
                     if (res.status !== 200) {
@@ -132,9 +148,13 @@ sap.ui.define([
                         })
                     }
                 })
+                BusyIndicator.hide()
+
                 this.mudarCamposAoSalvarComErros();
             }
             else {
+                BusyIndicator.show(0)
+
                 this.cadastrarCliente() 
                 .then(res => {
                     if (res.status !== 200) {
@@ -163,6 +183,8 @@ sap.ui.define([
                             }
                         })
                     }
+                    BusyIndicator.hide()
+
                 })
             }
         },
@@ -232,11 +254,17 @@ sap.ui.define([
 
         navegarTelaDeDetalhes: function (id) {
 
+            BusyIndicator.show(0)
+
             let rota = this.getOwnerComponent().getRouter();
             rota.navTo("detalhes", { id: id });
+            
+            BusyIndicator.hide()
         },
 
         aoClicarEmVoltar: function () {
+
+            BusyIndicator.show(0)
 
             let historico = History.getInstance();
 			let paginaAnterior = historico.getPreviousHash();
@@ -252,6 +280,8 @@ sap.ui.define([
             }
 
             this.limparTelaDeCadastro();
+
+            BusyIndicator.hide()
         },
 
         aoClicarEmCancelar: function () {
@@ -261,11 +291,13 @@ sap.ui.define([
                 initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO], onClose: (acao) => {
+                    BusyIndicator.show(0)
                     if (acao == MessageBox.Action.YES) {
 
                         this.aoClicarEmVoltar();
                         this.limparTelaDeCadastro();
                     }
+                    BusyIndicator.hide()
                 }
             })
         },

@@ -5,7 +5,7 @@
    xmlns:core="sap.ui.core">
    
    <App>
-      <Page title="{i18n>TituloPagina}" titleAlignment="Center">
+      <Page title="{i18n>TituloPagina}" titleAlignment="Center" >
 
          <Panel class="sapUiResponsiveMargin" width="auto">
             <Toolbar class="sapUiTinyMarginBottom">
