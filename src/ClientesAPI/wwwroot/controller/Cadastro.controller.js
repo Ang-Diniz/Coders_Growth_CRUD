@@ -41,7 +41,7 @@ sap.ui.define([
 
             fetch(API + id)
                 .then(res => {
-                    if(res.status == 404) {
+                    if(res.status === 404) {
 
                         let rota = this.getOwnerComponent().getRouter();
                         rota.navTo("notFound", {}, true);
@@ -79,7 +79,7 @@ sap.ui.define([
             let cliente = this.getView().getModel("cliente").getData();
             id = cliente.id;
 
-            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) {
+            if (cliente.dataDeNascimento === "" || cliente.dataDeNascimento === null) {
 
                 delete cliente.dataDeNascimento;
             }
@@ -98,7 +98,7 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
 
-            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) {
+            if (cliente.dataDeNascimento === "" || cliente.dataDeNascimento === null) {
 
                 delete cliente.dataDeNascimento;
             }
@@ -130,7 +130,7 @@ sap.ui.define([
                     return res.json()
                 })
                 .then(res => {
-                    if (typeof res == "string") {
+                    if (typeof res === "string") {
                         MessageBox.error(`Erro ao editar cliente: \n\n ${res}`, {
                             emphasizedAction: MessageBox.Action.CLOSE
                         });
@@ -140,7 +140,7 @@ sap.ui.define([
                             emphasizedAction: MessageBox.Action.OK,
                             title: "Sucesso",
                             actions: [MessageBox.Action.OK], onClose: (acao) => {
-                                if (acao == MessageBox.Action.OK) {
+                                if (acao === MessageBox.Action.OK) {
                                     this.limparTelaDeCadastro();
                                     this.aoClicarEmVoltar();
                                 }
@@ -164,7 +164,7 @@ sap.ui.define([
                     return res.json()
                 })
                 .then(res => {
-                    if (typeof res == "string") {
+                    if (typeof res === "string") {
                         MessageBox.error(`Erro ao cadastrar cliente: \n\n ${res}`, {
                             emphasizedAction: MessageBox.Action.CLOSE
                         });
@@ -176,7 +176,7 @@ sap.ui.define([
                             emphasizedAction: MessageBox.Action.OK,
                             title: "Sucesso",
                             actions: [MessageBox.Action.OK], onClose: (acao) => {
-                                if (acao == MessageBox.Action.OK) {
+                                if (acao === MessageBox.Action.OK) {
                                     this.limparTelaDeCadastro();
                                     this.navegarTelaDeDetalhes(res);
                                 }
@@ -193,7 +193,7 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
 
-            if (cliente.dataDeNascimento == "" || cliente.dataDeNascimento == null) {
+            if (cliente.dataDeNascimento === "" || cliente.dataDeNascimento === null) {
 
                 delete cliente.dataDeNascimento;
             }
@@ -212,10 +212,11 @@ sap.ui.define([
             campos.forEach(res => {
 
                 let campo = this.getView().byId(res);
-
-                if (campo.getValueState() !== "Success") {
+                
+                if (campo.getValueState() !== "Success" || campo.getValueState() === "Success" && campo.getValue() === "") {
 
                     campo.setValueState("Error")
+                    campo.setValueStateText("Campo obrigatório")
                 }
             })
         },
@@ -224,27 +225,27 @@ sap.ui.define([
 
             let campo = Evento.getSource();
 
-            if (campo.getName() == "inputNome") {
+            if (campo.getName() === "inputNome") {
 
                 let erros = Validacoes.validarNome(campo.getValue());
 
                 Validacoes.mensagensDeErros(campo, erros);
             }
 
-            if (campo.getName() == "inputEmail") {
+            if (campo.getName() === "inputEmail") {
 
                 let erros = Validacoes.validarEmail(campo.getValue());
 
                 Validacoes.mensagensDeErros(campo, erros);
             }
 
-            if (campo.getName() == "inputCPF") {
+            if (campo.getName() === "inputCPF") {
 
                 let erros = Validacoes.validarCpf(campo.getValue());
 
                 Validacoes.mensagensDeErros(campo, erros);
             }
-            if (campo.getName() == "inputDataDeNascimento") {
+            if (campo.getName() === "inputDataDeNascimento") {
 
                 let erros = this.checarEntradaDaData(campo.getValue());
 
@@ -292,7 +293,7 @@ sap.ui.define([
                 icon: MessageBox.Icon.WARNING,
                 actions: [MessageBox.Action.YES, MessageBox.Action.NO], onClose: (acao) => {
                     BusyIndicator.show(0)
-                    if (acao == MessageBox.Action.YES) {
+                    if (acao === MessageBox.Action.YES) {
 
                         this.aoClicarEmVoltar();
                         this.limparTelaDeCadastro();

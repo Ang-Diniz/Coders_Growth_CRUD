@@ -46,16 +46,17 @@ sap.ui.define([
                 icon: MessageBox.Icon.WARNING,
                 actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
                 onClose: (acao) => {
-                    if (acao == MessageBox.Action.YES) {
+                    if (acao === MessageBox.Action.YES) {
                         BusyIndicator.show(0)
                         this.removerCliente(id)
                         .then(res => {
-                            if (res.status == 200) {
+                            if (res.status === 200) {
                                 MessageBox.success("Cliente removido com sucesso !", {
                                     emphasizedAction: MessageBox.Action.OK,
                                     title: "Sucesso",
                                     actions: [MessageBox.Action.OK], onClose : (acao) => {
-                                        if (acao == MessageBox.Action.OK) {
+                                        if (acao === MessageBox.Action.OK) {
+
                                             this.aoClicarEmVoltar();
                                         }
                                     }
@@ -77,7 +78,7 @@ sap.ui.define([
 
             fetch(API + id)
                 .then(res => {
-                    if(res.status == 404) {
+                    if(res.status === 404) {
 
                         let rota = this.getOwnerComponent().getRouter();
                         rota.navTo("notFound", {}, true);

@@ -19,7 +19,7 @@
 
         obterClientes: function () {
 
-            BusyIndicator.show(0)
+            BusyIndicator.show()
 
             let jsonCliente = new JSONModel();
 
@@ -60,7 +60,7 @@
             let rota = this.getOwnerComponent().getRouter();
             let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })
-            
+
             BusyIndicator.hide()
         }, 
     });

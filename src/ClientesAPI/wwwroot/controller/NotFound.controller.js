@@ -17,7 +17,6 @@ sap.ui.define([
             window.history.go(-1);
          } 
             else {
-
                let rota = this.getOwnerComponent().getRouter();
                rota.navTo("ListaClientes", {}, true);
             }

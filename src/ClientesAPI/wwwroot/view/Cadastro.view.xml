@@ -18,13 +18,13 @@
 		
 			<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="45%">
 				<Label text="{i18n>LabelNome}:" design="Bold" labelFor="inputNome"/>
-				<Input id="inputNome" name="inputNome" required="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
+				<Input id="inputNome" name="inputNome" required="true" showClearIcon="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
 
 				<Label text="{i18n>LabelEmail}:" design="Bold" labelFor="inputEmail"/>
-				<Input id="inputEmail" name="inputEmail" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
+				<Input id="inputEmail" name="inputEmail" valueState="None" showClearIcon="true" valueLiveUpdate="true" liveChange="aoMudarCampos" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
 
 				<Label text="{i18n>LabelCPF}:" design="Bold" labelFor="inputCPF"/>
-				<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="60%" value="{cliente>/cpf}"/>
+				<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" showClearIcon="true" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="60%" value="{cliente>/cpf}"/>
 
 				<Label text="{i18n>LabelDataDeNascimento}:" design="Bold" labelFor="inputDataDeNascimento"/>
 				<DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" change="aoMudarCampos" required="true" width="60%" placeholder="{i18n>InputDataDeNascimento}"
