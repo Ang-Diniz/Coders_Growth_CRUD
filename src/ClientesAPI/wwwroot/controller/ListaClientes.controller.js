@@ -19,7 +19,7 @@
 
         obterClientes: function () {
 
-            BusyIndicator.show()
+            BusyIndicator.show(0)
 
             let jsonCliente = new JSONModel();
 
