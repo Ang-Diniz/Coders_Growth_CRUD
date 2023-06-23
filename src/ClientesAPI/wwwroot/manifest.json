@@ -50,7 +50,10 @@
                 "viewType": "XML",
                 "path": "sap.ui.cliente.view",
                 "controlId": "app",
-                "controlAggregation": "pages"
+                "controlAggregation": "pages",
+                "bypassed":{
+                    "target":"notFound"
+                }
             },
             "routes": [
                 {
@@ -73,6 +76,12 @@
                     "name": "edicao",
                     "target": "cadastro"
                 }
+                ,
+                {
+                    "pattern": "notFound",
+                    "name": "notFound",
+                    "target": "notFound"
+                }
             ],
             "targets": {
                 "ListaClientes": {
@@ -86,7 +95,11 @@
                 "cadastro": {
                     "id": "cadastro",
                     "name": "Cadastro"
-                }
+                },
+                "notFound" : {
+                   "id" : "notFound" ,
+                   "name" : "NotFound" 
+               }
             }
         }
     }

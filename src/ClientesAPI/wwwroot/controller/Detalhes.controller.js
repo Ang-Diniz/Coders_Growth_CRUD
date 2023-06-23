@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
-], function (Controller, JSONModel, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/ui/core/BusyIndicator"
+], function (Controller, JSONModel, MessageBox, BusyIndicator) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
@@ -41,19 +42,21 @@ sap.ui.define([
 
             MessageBox.confirm("Deseja mesmo remover esse cliente ?", {
                 emphasizedAction: MessageBox.Action.YES,
-                initialFocus: MessageBox.Action.NO,
+                initialFocus: MessageBox.Action.CANCEL,
                 icon: MessageBox.Icon.WARNING,
-                actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
                 onClose: (acao) => {
                     if (acao === MessageBox.Action.YES) {
+                        BusyIndicator.show(0)
                         this.removerCliente(id)
                         .then(res => {
-                            if (res.status == 200) {
+                            if (res.status === 200) {
                                 MessageBox.success("Cliente removido com sucesso !", {
                                     emphasizedAction: MessageBox.Action.OK,
                                     title: "Sucesso",
                                     actions: [MessageBox.Action.OK], onClose : (acao) => {
-                                        if (acao == MessageBox.Action.OK) {
+                                        if (acao === MessageBox.Action.OK) {
+
                                             this.aoClicarEmVoltar();
                                         }
                                     }
@@ -64,6 +67,7 @@ sap.ui.define([
                                     emphasizedAction: MessageBox.Action.CLOSE
                                 });
                             }
+                            BusyIndicator.hide()
                         });
                     }
                 }
@@ -73,17 +77,30 @@ sap.ui.define([
         obterClientes: function (id) {
 
             fetch(API + id)
-                .then(res => res.json())
-                .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
+                .then(res => {
+                    if(res.status === 404) {
+
+                        let rota = this.getOwnerComponent().getRouter();
+                        rota.navTo("notFound", {}, true);
+                    }
+                    else {
+                        res.json()
+                        .then(res => this.getView().setModel(new JSONModel(res), "cliente"))
+                    }
+                })
         },
 
         aoClicarEmEditar: function (id) {
+
+            BusyIndicator.show(0)
 
             let cliente = this.getView().getModel("cliente").getData();
             id = cliente.id
 
             let rota = this.getOwnerComponent().getRouter();
             rota.navTo("edicao", { id: id });
+
+            BusyIndicator.hide()
         },
 
         aoClicarEmVoltar: function () {
