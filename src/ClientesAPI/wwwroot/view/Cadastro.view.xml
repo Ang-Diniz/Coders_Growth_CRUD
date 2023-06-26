@@ -12,11 +12,11 @@
 					<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
 					<core:Icon src="sap-icon://add-activity"></core:Icon>
 					<ToolbarSpacer/>
-					<Button icon="sap-icon://save" id="botaoSalvar" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
+					<Button icon="sap-icon://save" id="botaoSalvar" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
 					<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
 				</Toolbar>
 			
-				<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="55%">
+				<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="70%">
 					<Label text="{i18n>LabelNome}:" design="Bold" labelFor="inputNome"/>
 					<Input id="inputNome" name="inputNome" required="true" showClearIcon="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
 
@@ -24,10 +24,10 @@
 					<Input id="inputEmail" name="inputEmail" valueState="None" showClearIcon="true" valueLiveUpdate="true" liveChange="aoMudarCampos" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
 
 					<Label text="{i18n>LabelCPF}:" design="Bold" labelFor="inputCPF"/>
-					<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" showClearIcon="true" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="75%" value="{cliente>/cpf}"/>
+					<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" showClearIcon="true" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="80%" value="{cliente>/cpf}"/>
 
 					<Label text="{i18n>LabelDataDeNascimento}:" design="Bold" labelFor="inputDataDeNascimento"/>
-					<DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" change="aoMudarCampos" required="true" width="75%" placeholder="{i18n>InputDataDeNascimento}"
+					<DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" change="aoMudarCampos" required="true" width="80%" placeholder="{i18n>InputDataDeNascimento}"
 					value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd / MM / yyyy'}}"/>
 				</l:VerticalLayout>
 
