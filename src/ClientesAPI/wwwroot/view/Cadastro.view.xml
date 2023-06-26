@@ -6,31 +6,32 @@
 	xmlns:core="sap.ui.core">  
 	
 	<Page title="{i18n>TituloPaginaDeCadastro}" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+		<Shell>
+			<Panel class="sapUiResponsiveMargin" width="auto">
+				<Toolbar class="sapUiTinyMarginBottom">
+					<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
+					<core:Icon src="sap-icon://add-activity"></core:Icon>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://save" id="botaoSalvar" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
+					<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
+				</Toolbar>
+			
+				<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="55%">
+					<Label text="{i18n>LabelNome}:" design="Bold" labelFor="inputNome"/>
+					<Input id="inputNome" name="inputNome" required="true" showClearIcon="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
 
-		<Panel class="sapUiResponsiveMargin" width="auto">
-			<Toolbar class="sapUiTinyMarginBottom">
-				<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
-				<core:Icon src="sap-icon://add-activity"></core:Icon>
-				<ToolbarSpacer/>
-				<Button icon="sap-icon://save" id="botaoSalvar" width="7%" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
-				<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
-			</Toolbar>
-		
-			<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="45%">
-				<Label text="{i18n>LabelNome}:" design="Bold" labelFor="inputNome"/>
-				<Input id="inputNome" name="inputNome" required="true" showClearIcon="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
+					<Label text="{i18n>LabelEmail}:" design="Bold" labelFor="inputEmail"/>
+					<Input id="inputEmail" name="inputEmail" valueState="None" showClearIcon="true" valueLiveUpdate="true" liveChange="aoMudarCampos" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
 
-				<Label text="{i18n>LabelEmail}:" design="Bold" labelFor="inputEmail"/>
-				<Input id="inputEmail" name="inputEmail" valueState="None" showClearIcon="true" valueLiveUpdate="true" liveChange="aoMudarCampos" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
+					<Label text="{i18n>LabelCPF}:" design="Bold" labelFor="inputCPF"/>
+					<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" showClearIcon="true" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="75%" value="{cliente>/cpf}"/>
 
-				<Label text="{i18n>LabelCPF}:" design="Bold" labelFor="inputCPF"/>
-				<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" showClearIcon="true" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="60%" value="{cliente>/cpf}"/>
+					<Label text="{i18n>LabelDataDeNascimento}:" design="Bold" labelFor="inputDataDeNascimento"/>
+					<DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" change="aoMudarCampos" required="true" width="75%" placeholder="{i18n>InputDataDeNascimento}"
+					value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd / MM / yyyy'}}"/>
+				</l:VerticalLayout>
 
-				<Label text="{i18n>LabelDataDeNascimento}:" design="Bold" labelFor="inputDataDeNascimento"/>
-				<DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" change="aoMudarCampos" required="true" width="60%" placeholder="{i18n>InputDataDeNascimento}"
-				value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd / MM / yyyy'}}"/>
-			</l:VerticalLayout>
-
-		</Panel>
+			</Panel>
+		</Shell>	
 	</Page>
 </mvc:view> 

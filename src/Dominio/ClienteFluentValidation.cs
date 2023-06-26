@@ -28,14 +28,14 @@ namespace Dominio
             .Must(validarCPF)
             .WithMessage("\nCPF inválido. Por favor insira um CPF válido.\n")
             .Must((cliente, CPF) => VerificarCpfExiste(cliente, CPF))
-            .WithMessage("\nCPF já cadastrado na base da dados.\n");
+            .WithMessage("\nCPF já cadastrado na base de dados.\n");
 
             RuleFor(c => c.Email)
             .NotEmpty()
             .Must(ValidarEmail)
             .WithMessage("\nE-mail inválido. Por favor insira um E-mail válido.\n")
             .Must((cliente, EMAIL) => VerificarEmailExiste(cliente, EMAIL))
-            .WithMessage("\nE-mail já cadastrado na base da dados.\n")
+            .WithMessage("\nE-mail já cadastrado na base de dados.\n")
             .MaximumLength(40);
         }
 
