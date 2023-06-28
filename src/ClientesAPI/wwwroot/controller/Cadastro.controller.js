@@ -34,6 +34,9 @@ sap.ui.define([
             let jsonCliente = new JSONModel(dadosCliente);
             this.getView().setModel(jsonCliente, "cliente");
 
+            this.byId("tituloPagina").setTitle("Tela de cadastro")
+            this.byId("tituloPainel").setText("Cadastrar cliente")
+
             this.limparTelaDeCadastro();
         },
 
@@ -70,6 +73,9 @@ sap.ui.define([
 
             let id = Evento.getParameter("arguments").id;
             this.obterClientes(id);
+
+            this.byId("tituloPagina").setTitle("Tela de edição");
+            this.byId("tituloPainel").setText("Editar cliente");
 
             BusyIndicator.hide()
         },

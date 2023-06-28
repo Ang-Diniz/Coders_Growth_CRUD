@@ -5,11 +5,11 @@
     xmlns:l="sap.ui.layout"
 	xmlns:core="sap.ui.core">  
 	
-	<Page title="{i18n>TituloPaginaDeCadastro}" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+	<Page id="tituloPagina" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 		<Shell>
 			<Panel class="sapUiResponsiveMargin" width="auto">
 				<Toolbar class="sapUiTinyMarginBottom">
-					<Title text="{i18n>TituloPainelTelaDeCadastro}"/>
+					<Title id="tituloPainel"/>
 					<core:Icon src="sap-icon://add-activity"></core:Icon>
 					<ToolbarSpacer/>
 					<Button icon="sap-icon://save" id="botaoSalvar" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
