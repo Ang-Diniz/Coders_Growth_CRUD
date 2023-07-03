@@ -7,6 +7,8 @@ sap.ui.define([
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
+    let i18n = null;
+    const modeloi18n = "i18n";
 
     return Controller.extend("sap.ui.cliente.controller.Detalhes", {
 
@@ -14,6 +16,7 @@ sap.ui.define([
 
             let rota = this.getOwnerComponent().getRouter();
             rota.getRoute("detalhes").attachPatternMatched(this.aoCoincidirRota, this);
+            i18n = this.getOwnerComponent().getModel(modeloi18n).getResourceBundle();
         },
 
         aoCoincidirRota: function (Evento) {
@@ -39,8 +42,11 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
             let id = cliente.id;
+            const confirmarRemocaoDoCliente = "MensagemConfirmarRemocaoDoCliente";
+            const sucessoAoRemover = "MensagemSucessoAoRemover";
+            const erroAoRemover = "MensagemErroAoRemover"
 
-            MessageBox.confirm("Deseja mesmo remover esse cliente ?", {
+            MessageBox.confirm(i18n.getText(confirmarRemocaoDoCliente), {
                 emphasizedAction: MessageBox.Action.YES,
                 initialFocus: MessageBox.Action.CANCEL,
                 icon: MessageBox.Icon.WARNING,
@@ -51,7 +57,7 @@ sap.ui.define([
                         this.removerCliente(id)
                         .then(res => {
                             if (res.status === 200) {
-                                MessageBox.success("Cliente removido com sucesso !", {
+                                MessageBox.success(i18n.getText(sucessoAoRemover), {
                                     emphasizedAction: MessageBox.Action.OK,
                                     title: "Sucesso",
                                     actions: [MessageBox.Action.OK], onClose : (acao) => {
@@ -63,7 +69,7 @@ sap.ui.define([
                             });
                         } 
                         else {
-                                MessageBox.error("Erro ao remover cliente.", {
+                                MessageBox.error(i18n.getText(erroAoRemover), {
                                     emphasizedAction: MessageBox.Action.CLOSE
                                 });
                             }
