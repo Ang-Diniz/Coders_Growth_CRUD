@@ -21,9 +21,13 @@ sap.ui.define([
             rota.getRoute("edicao").attachPatternMatched(this.aoCoincidirRotaEdicao, this);
             rota.getRoute("cadastro").attachPatternMatched(this.aoCoincidirRota, this);
             i18n = this.getOwnerComponent().getModel(modeloi18n).getResourceBundle();
+            Validacoes.criarModeloi18n(i18n);
         },
         
         aoCoincidirRota: function () {
+
+            const tituloTelaDeCadastro = "TituloTelaDeCadastro";
+            const tituloPainelTelaDeCadastro = "TituloPainelTelaDeCadastro";
 
             let dadosCliente = {
 
@@ -36,8 +40,8 @@ sap.ui.define([
             let jsonCliente = new JSONModel(dadosCliente);
             this.getView().setModel(jsonCliente, "cliente");
 
-            this.byId("tituloPagina").setTitle("Tela de cadastro")
-            this.byId("tituloPainel").setText("Cadastrar cliente")
+            this.byId("tituloPagina").setTitle(i18n.getText(tituloTelaDeCadastro))
+            this.byId("tituloPainel").setText(i18n.getText(tituloPainelTelaDeCadastro))
 
             this.limparTelaDeCadastro();
         },
@@ -63,6 +67,9 @@ sap.ui.define([
 
         aoCoincidirRotaEdicao: function (Evento) {
 
+            const tituloTelaDeEdicao = "TituloTelaDeEdicao";
+            const tituloPainelTelaDeEdicao = "TituloPainelTelaDeEdicao";
+
             BusyIndicator.show(0)
 
             let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
@@ -76,8 +83,8 @@ sap.ui.define([
             let id = Evento.getParameter("arguments").id;
             this.obterClientes(id);
 
-            this.byId("tituloPagina").setTitle("Tela de edição");
-            this.byId("tituloPainel").setText("Editar cliente");
+            this.byId("tituloPagina").setTitle(i18n.getText(tituloTelaDeEdicao));
+            this.byId("tituloPainel").setText(i18n.getText(tituloPainelTelaDeEdicao));
 
             BusyIndicator.hide()
         },
@@ -196,7 +203,6 @@ sap.ui.define([
                         })
                     }
                     BusyIndicator.hide()
-
                 })
             }
         },
@@ -220,6 +226,7 @@ sap.ui.define([
         mudarCamposAoSalvarComErros: function () {
 
             const campoObrigatorio = "MensagemCampoObrigatorio";
+
             let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
 
             campos.forEach(res => {

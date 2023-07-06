@@ -3,30 +3,39 @@ sap.ui.define([
     "use strict";
     
     const decimalZero = 0;
+    let i18n = null
 
     return {
+
+        criarModeloi18n: function (modeloI18n) {
+
+            this.i18n = modeloI18n;
+        },
         
         validarNome: function (nome) {
 
             let erros = [];
             const tamanhoMax = 60;
+            const nomeDeveSerPreenchido = "MensagemNomeDeveSerPreenchido";
+            const tamanhoMaxNome = "MensagemTamanhoMaxCaracteres";
+            const nomeInválido = "MensagemNomeInvalido";
 
             let nomeRegex = /^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$/;
             nome = nome.trim();
 
             if (nome == null || nome == "") 
             {
-                erros.push("O campo 'Nome' deve ser preenchido." + "\n");
+                erros.push(this.i18n.getText(nomeDeveSerPreenchido) + "\n");
             }
 
             if (nome.length > tamanhoMax) 
             {
-                erros.push("O campo 'Nome' não deve conter mais de 60 caracteres." + "\n");
+                erros.push(this.i18n.getText(tamanhoMaxNome) + "\n");
             }
 
             if (!nome.match(nomeRegex) && nome.length > decimalZero) 
             {
-                erros.push("Nome inválido. Por favor insira um nome válido.");
+                erros.push(this.i18n.getText(nomeInválido));
             }
             return erros;
         },
@@ -34,18 +43,20 @@ sap.ui.define([
         validarEmail: function (email) {
 
             let erros = [];
+            const emailDeveSerPreenchido = "MensagemEmailDeveSerPreenchido";
+            const emailInválido = "MensagemEmailInvalido";
 
             let emailRegex = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+))@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+))\.([A-Za-z]{2,})$/;
             email = email.trim();
 
             if (email == null || email == "") 
             {
-                erros.push("O campo 'E-mail' deve ser preenchido." + "\n");
+                erros.push(this.i18n.getText(emailDeveSerPreenchido) + "\n");
             }
 
             if (!email.match(emailRegex) && email.length > decimalZero) 
             {
-                erros.push("E-mail inválido. Por favor insira um e-mail válido.");
+                erros.push(this.i18n.getText(emailInválido));
             }
             return erros;
         },
@@ -53,6 +64,8 @@ sap.ui.define([
         validarCpf: function (cpf) {
 
             let erros = [];
+            const cpfInválido = "MensagemCpfInvalido";
+            const cpfDeveSerPreenchido = "MensagemCpfDeveSerPreenchido";
             const minimoEntradaInput = 1;
             const tamanhoMaxCaracteresRepetidos = 11;
             let strCPF = cpf.replaceAll(".", "").replace("-", "").replace(" ", "");
@@ -65,12 +78,12 @@ sap.ui.define([
 
             if (caracteresRepetidos == tamanhoMaxCaracteresRepetidos ) 
             {
-                erros.push("Cpf inválido. Por favor insira um cpf válido.");
+                erros.push(this.i18n.getText(cpfInválido));
             }
 
             if (cpf == null || cpf == "" || cpf !== "_._._-__" && cpf.length < minimoEntradaInput) 
             {
-                erros.push("O campo 'Cpf' deve ser preenchido." + "\n");
+                erros.push(this.i18n.getText(cpfDeveSerPreenchido) + "\n");
             }
             
             for (let i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
@@ -86,11 +99,11 @@ sap.ui.define([
             if ((Resto == 10) || (Resto == 11))  Resto = decimalZero;
             if (Resto != parseInt(strCPF.substring(10, 11) ) ) 
 
-            if ( strCPF > decimalZero ) { erros.push("Cpf inválido. Por favor insira um cpf válido.")} 
+            if ( strCPF > decimalZero ) { erros.push(this.i18n.getText(cpfInválido))} 
             
             if (!cpf.match(cpfRegex) && cpf.length > decimalZero) 
             {
-                erros.push("Cpf inválido. Por favor insira um cpf válido.");
+                erros.push(this.i18n.getText(cpfInválido));
             }
             return erros;
         },
@@ -98,26 +111,29 @@ sap.ui.define([
         validarDataDeNascimento: function (dataValida) 
         {
             let erros = [];
-            const idadeMaxima = 120;
-            const idadeMinima = 18;
+            const idadeMaximaPermitida = 120;
+            const idadeMinimaPermitida = 18;
+            const idadeMaximaCliente = "MensagemIdadeMax";
+            const dataMininaPermitida = "MensagemDataMinima";
+            const dataFuturaInválida = "MensagemDatasFuturas"; 
             
             let dataAtual = new Date(Date.now()).getFullYear()
 
-            if (dataAtual - dataValida > idadeMaxima) 
+            if (dataAtual - dataValida > idadeMaximaPermitida) 
             {
-                erros.push("Data inválida. A idade máxima é de 120 anos.")
+                erros.push(this.i18n.getText(idadeMaximaCliente))
             }
 
             if (dataValida <= dataAtual) 
             {
-                if (dataAtual - dataValida < idadeMinima) 
+                if (dataAtual - dataValida < idadeMinimaPermitida) 
                 {
-                    erros.push("Data inválida. Cliente menor de 18 anos.")
+                    erros.push(this.i18n.getText(dataMininaPermitida))
                 }
             }
             else 
             {
-                erros.push("Datas futuras não são permitidas.")
+                erros.push(this.i18n.getText(dataFuturaInválida))
             }
             return erros;
         },
