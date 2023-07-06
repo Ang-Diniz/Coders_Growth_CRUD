@@ -11,6 +11,7 @@ sap.ui.define([
     const API = "https://localhost:7147/api/cliente/";
     let i18n = null;
     const modeloi18n = "i18n";
+    const stringVazia = "";
 
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
 
@@ -31,10 +32,10 @@ sap.ui.define([
 
             let dadosCliente = {
 
-                "nome": "",
-                "dataDeNascimento": "",
-                "cpf": "",
-                "email": ""
+                "nome": stringVazia,
+                "dataDeNascimento": stringVazia,
+                "cpf": stringVazia,
+                "email": stringVazia
             };
 
             let jsonCliente = new JSONModel(dadosCliente);
@@ -94,7 +95,7 @@ sap.ui.define([
             let cliente = this.getView().getModel("cliente").getData();
             id = cliente.id;
 
-            if (cliente.dataDeNascimento === "" || cliente.dataDeNascimento === null) {
+            if (cliente.dataDeNascimento === stringVazia || cliente.dataDeNascimento === null) {
 
                 delete cliente.dataDeNascimento;
             }
@@ -113,7 +114,7 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
 
-            if (cliente.dataDeNascimento === "" || cliente.dataDeNascimento === null) {
+            if (cliente.dataDeNascimento === stringVazia || cliente.dataDeNascimento === null) {
 
                 delete cliente.dataDeNascimento;
             }
@@ -211,7 +212,7 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
 
-            if (cliente.dataDeNascimento === "" || cliente.dataDeNascimento === null) {
+            if (cliente.dataDeNascimento === stringVazia || cliente.dataDeNascimento === null) {
 
                 delete cliente.dataDeNascimento;
             }
@@ -233,7 +234,7 @@ sap.ui.define([
 
                 let campo = this.getView().byId(res);
                 
-                if (campo.getValueState() !== "Success" || campo.getValueState() === "Success" && campo.getValue() === "") {
+                if (campo.getValueState() !== "Success" || campo.getValueState() === "Success" && campo.getValue() === stringVazia) {
 
                     campo.setValueState("Error")
                     campo.setValueStateText(i18n.getText(campoObrigatorio))
@@ -333,7 +334,7 @@ sap.ui.define([
 
                 let campo = this.getView().byId(res);
 
-                campo.setValue("");
+                campo.setValue(stringVazia);
                 Validacoes.limparInputs(campo)
             });
         }

@@ -3,7 +3,8 @@ sap.ui.define([
     "use strict";
     
     const decimalZero = 0;
-    let i18n = null
+    let i18n = null;
+    const stringVazia = "";
 
     return {
 
@@ -23,7 +24,7 @@ sap.ui.define([
             let nomeRegex = /^[a-záàâãéèêíïóôõöúçñA-ZÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+$/;
             nome = nome.trim();
 
-            if (nome == null || nome == "") 
+            if (nome == null || nome == stringVazia) 
             {
                 erros.push(this.i18n.getText(nomeDeveSerPreenchido) + "\n");
             }
@@ -49,7 +50,7 @@ sap.ui.define([
             let emailRegex = /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+))@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+))\.([A-Za-z]{2,})$/;
             email = email.trim();
 
-            if (email == null || email == "") 
+            if (email == null || email == stringVazia) 
             {
                 erros.push(this.i18n.getText(emailDeveSerPreenchido) + "\n");
             }
@@ -68,7 +69,7 @@ sap.ui.define([
             const cpfDeveSerPreenchido = "MensagemCpfDeveSerPreenchido";
             const minimoEntradaInput = 1;
             const tamanhoMaxCaracteresRepetidos = 11;
-            let strCPF = cpf.replaceAll(".", "").replace("-", "").replace(" ", "");
+            let strCPF = cpf.replaceAll(".", stringVazia).replace("-", stringVazia).replace(" ", stringVazia);
             let entradaCPF = new RegExp(`${strCPF[0]}`, 'g');
             let caracteresRepetidos = (strCPF.match(entradaCPF) || []).length;
             let cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
@@ -81,7 +82,7 @@ sap.ui.define([
                 erros.push(this.i18n.getText(cpfInválido));
             }
 
-            if (cpf == null || cpf == "" || cpf !== "_._._-__" && cpf.length < minimoEntradaInput) 
+            if (cpf == null || cpf == stringVazia || cpf !== "_._._-__" && cpf.length < minimoEntradaInput) 
             {
                 erros.push(this.i18n.getText(cpfDeveSerPreenchido) + "\n");
             }
