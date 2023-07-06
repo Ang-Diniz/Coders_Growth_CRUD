@@ -9,6 +9,8 @@ sap.ui.define([
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
+    let i18n = null;
+    const modeloi18n = "i18n";
 
     return Controller.extend("sap.ui.cliente.controller.Cadastro", {
 
@@ -18,10 +20,14 @@ sap.ui.define([
             
             rota.getRoute("edicao").attachPatternMatched(this.aoCoincidirRotaEdicao, this);
             rota.getRoute("cadastro").attachPatternMatched(this.aoCoincidirRota, this);
-            
+            i18n = this.getOwnerComponent().getModel(modeloi18n).getResourceBundle();
+            Validacoes.criarModeloi18n(i18n);
         },
         
         aoCoincidirRota: function () {
+
+            const tituloTelaDeCadastro = "TituloTelaDeCadastro";
+            const tituloPainelTelaDeCadastro = "TituloPainelTelaDeCadastro";
 
             let dadosCliente = {
 
@@ -34,8 +40,8 @@ sap.ui.define([
             let jsonCliente = new JSONModel(dadosCliente);
             this.getView().setModel(jsonCliente, "cliente");
 
-            this.byId("tituloPagina").setTitle("Tela de cadastro")
-            this.byId("tituloPainel").setText("Cadastrar cliente")
+            this.byId("tituloPagina").setTitle(i18n.getText(tituloTelaDeCadastro))
+            this.byId("tituloPainel").setText(i18n.getText(tituloPainelTelaDeCadastro))
 
             this.limparTelaDeCadastro();
         },
@@ -61,6 +67,9 @@ sap.ui.define([
 
         aoCoincidirRotaEdicao: function (Evento) {
 
+            const tituloTelaDeEdicao = "TituloTelaDeEdicao";
+            const tituloPainelTelaDeEdicao = "TituloPainelTelaDeEdicao";
+
             BusyIndicator.show(0)
 
             let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
@@ -74,8 +83,8 @@ sap.ui.define([
             let id = Evento.getParameter("arguments").id;
             this.obterClientes(id);
 
-            this.byId("tituloPagina").setTitle("Tela de edição");
-            this.byId("tituloPainel").setText("Editar cliente");
+            this.byId("tituloPagina").setTitle(i18n.getText(tituloTelaDeEdicao));
+            this.byId("tituloPainel").setText(i18n.getText(tituloPainelTelaDeEdicao));
 
             BusyIndicator.hide()
         },
@@ -123,6 +132,10 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
             let id = cliente.id;
+            const SucessoAoEditar = "MensagemSucessoAoEditar";
+            const SucessoAoCadastrar = "MensagemSucessoAoCadastrar";
+            const ErroAoEditar = "MensagemErroAoEditar";
+            const ErroAoCadastrar = "MensagemErroAoCadastrar";
             
             if (id) {
                 BusyIndicator.show(0)
@@ -137,12 +150,12 @@ sap.ui.define([
                 })
                 .then(res => {
                     if (typeof res === "string") {
-                        MessageBox.error(`Erro ao editar cliente: \n\n ${res}`, {
+                        MessageBox.error(i18n.getText(ErroAoEditar) + `\n\n ${res}`, {
                             emphasizedAction: MessageBox.Action.CLOSE
                         });
                     }
                     else {
-                        MessageBox.success("Cliente editado com sucesso !", {
+                        MessageBox.success(i18n.getText(SucessoAoEditar), {
                             emphasizedAction: MessageBox.Action.OK,
                             title: "Sucesso",
                             actions: [MessageBox.Action.OK], onClose: (acao) => {
@@ -171,14 +184,14 @@ sap.ui.define([
                 })
                 .then(res => {
                     if (typeof res === "string") {
-                        MessageBox.error(`Erro ao cadastrar cliente: \n\n ${res}`, {
+                        MessageBox.error(i18n.getText(ErroAoCadastrar) + `\n\n ${res}`, {
                             emphasizedAction: MessageBox.Action.CLOSE
                         });
 
                         this.mudarCamposAoSalvarComErros();
                     }
                     else {
-                        MessageBox.success("Cliente cadastrado com sucesso !", {
+                        MessageBox.success(i18n.getText(SucessoAoCadastrar), {
                             emphasizedAction: MessageBox.Action.OK,
                             title: "Sucesso",
                             actions: [MessageBox.Action.OK], onClose: (acao) => {
@@ -190,7 +203,6 @@ sap.ui.define([
                         })
                     }
                     BusyIndicator.hide()
-
                 })
             }
         },
@@ -213,6 +225,8 @@ sap.ui.define([
 
         mudarCamposAoSalvarComErros: function () {
 
+            const campoObrigatorio = "MensagemCampoObrigatorio";
+
             let campos = ["inputNome", "inputEmail", "inputCPF", "inputDataDeNascimento"];
 
             campos.forEach(res => {
@@ -222,7 +236,7 @@ sap.ui.define([
                 if (campo.getValueState() !== "Success" || campo.getValueState() === "Success" && campo.getValue() === "") {
 
                     campo.setValueState("Error")
-                    campo.setValueStateText("Campo obrigatório")
+                    campo.setValueStateText(i18n.getText(campoObrigatorio))
                 }
             })
         },
@@ -293,7 +307,9 @@ sap.ui.define([
 
         aoClicarEmCancelar: function () {
 
-            MessageBox.confirm("Deseja mesmo cancelar ? \n\n Os dados preenchidos serão perdidos.", {
+            const confirmarCancelamento = "MensagemConfirmarCancelamento";
+
+            MessageBox.confirm(i18n.getText(confirmarCancelamento), {
                 emphasizedAction: MessageBox.Action.YES,
                 initialFocus: MessageBox.Action.NO,
                 icon: MessageBox.Icon.WARNING,
