@@ -117,6 +117,7 @@ sap.ui.define([
             const idadeMaximaCliente = "MensagemIdadeMax";
             const dataMininaPermitida = "MensagemDataMinima";
             const dataFuturaInválida = "MensagemDatasFuturas"; 
+            const dataDeveSerPreenchida = "MensagemDataDeveSerPreenchida";
             
             let dataAtual = new Date(Date.now()).getFullYear()
 
@@ -125,7 +126,11 @@ sap.ui.define([
                 erros.push(this.i18n.getText(idadeMaximaCliente))
             }
 
-            if (dataValida <= dataAtual) 
+            if (!dataValida) 
+            {
+                erros.push(this.i18n.getText(dataDeveSerPreenchida)) 
+            } 
+            else if (dataValida <= dataAtual) 
             {
                 if (dataAtual - dataValida < idadeMinimaPermitida) 
                 {
