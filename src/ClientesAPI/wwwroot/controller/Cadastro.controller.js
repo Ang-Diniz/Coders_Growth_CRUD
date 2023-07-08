@@ -25,11 +25,8 @@ sap.ui.define([
             i18n = this.getOwnerComponent().getModel(modeloi18n).getResourceBundle();
             Validacoes.criarModeloi18n(i18n);
         },
-        
-        aoCoincidirRotaCadastro: function () {
 
-            const tituloTelaDeCadastro = "TituloTelaDeCadastro";
-            const tituloPainelTelaDeCadastro = "TituloPainelTelaDeCadastro";
+        setarModeloAluno: function () {
 
             let dadosCliente = {
 
@@ -40,9 +37,17 @@ sap.ui.define([
             };
 
             this.getView().setModel(new JSONModel(dadosCliente), "cliente");
+        },
+        
+        aoCoincidirRotaCadastro: function () {
 
-            this.byId("tituloPagina").setTitle(i18n.getText(tituloTelaDeCadastro))
-            this.byId("tituloPainel").setText(i18n.getText(tituloPainelTelaDeCadastro))
+            const tituloTelaDeCadastro = "TituloTelaDeCadastro";
+            const tituloPainelTelaDeCadastro = "TituloPainelTelaDeCadastro";
+
+            this.setarModeloAluno();
+
+            this.byId("tituloPagina").setTitle(i18n.getText(tituloTelaDeCadastro));
+            this.byId("tituloPainel").setText(i18n.getText(tituloPainelTelaDeCadastro));
 
             this.limparTelaDeCadastro();
         },
@@ -190,7 +195,6 @@ sap.ui.define([
             this.deletarDataSeForNulaOuVazia(cliente)
 
             data = cliente.dataDeNascimento;
-
             data = new Date(data).getFullYear()
 
             return Validacoes.validarDataDeNascimento(data)
@@ -238,6 +242,7 @@ sap.ui.define([
 
                 Validacoes.mensagensDeErros(campo, erros);
             }
+
             if (campo.getName() === "inputDataDeNascimento") {
 
                 let erros = this.checarEntradaDaData(campo.getValue());
@@ -261,7 +266,6 @@ sap.ui.define([
             BusyIndicator.show(0)
 
             let historico = History.getInstance();
-
             let paginaAnterior = historico.getPreviousHash();
 
             if (paginaAnterior !== undefined) {

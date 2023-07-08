@@ -43,9 +43,7 @@
                 filtro.push(new Filter("nome", FilterOperator.Contains, buscar));
             }
 
-            let tabela = this.byId("ListaClientes")
-            let items = tabela.getBinding("items");
-            items.filter(filtro);
+            this.byId("ListaClientes").getBinding("items").filter(filtro);
         },
 
         aoClicarEmCadastrar: function () {
@@ -58,9 +56,8 @@
 
             BusyIndicator.show(0)
 
-            let Item = Evento.getSource();
             let rota = this.getOwnerComponent().getRouter();
-            let idDaLinhaSelecionada = Item.getBindingContext().getProperty("id")
+            let idDaLinhaSelecionada = Evento.getSource().getBindingContext().getProperty("id")
             rota.navTo("detalhes", { id: idDaLinhaSelecionada })
 
             BusyIndicator.hide()
