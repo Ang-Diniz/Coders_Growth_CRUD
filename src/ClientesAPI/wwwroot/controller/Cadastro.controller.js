@@ -26,7 +26,7 @@ sap.ui.define([
             Validacoes.criarModeloi18n(i18n);
         },
 
-        setarModeloAluno: function () {
+        setarModeloCliente: function () {
 
             let dadosCliente = {
 
@@ -44,10 +44,14 @@ sap.ui.define([
             const tituloTelaDeCadastro = "TituloTelaDeCadastro";
             const tituloPainelTelaDeCadastro = "TituloPainelTelaDeCadastro";
 
-            this.setarModeloAluno();
+            BusyIndicator.show(0)
+
+            this.setarModeloCliente();
 
             this.byId("tituloPagina").setTitle(i18n.getText(tituloTelaDeCadastro));
             this.byId("tituloPainel").setText(i18n.getText(tituloPainelTelaDeCadastro));
+
+            BusyIndicator.hide()
 
             this.limparTelaDeCadastro();
         },

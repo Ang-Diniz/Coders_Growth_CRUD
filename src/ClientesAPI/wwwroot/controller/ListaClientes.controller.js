@@ -16,6 +16,8 @@
             
             let rota = this.getOwnerComponent().getRouter();
             rota.getRoute("ListaClientes").attachPatternMatched(this.obterClientes, this);
+
+            this.byId("searchField").setVisible(false);
         },
 
         obterClientes: function () {
@@ -32,6 +34,28 @@
                 })
 
             BusyIndicator.hide()
+        },
+
+        abrirBarraPesquisa: function () {
+
+            const searchField = this.byId("searchField");
+            const searchButton = this.byId("searchButton");
+            const closeButton = this.byId("closeButton");
+         
+            searchField.setVisible(true);
+            searchButton.setVisible(false);
+            closeButton.setVisible(true);
+        },
+
+        fecharBarraPesquisa: function () {
+
+            const searchField = this.byId("searchField");
+            const searchButton = this.byId("searchButton");
+            const closeButton = this.byId("closeButton");
+         
+            searchField.setVisible(false);
+            searchButton.setVisible(true);
+            closeButton.setVisible(false);
         },
 
         buscarClientes: function (Evento) {
