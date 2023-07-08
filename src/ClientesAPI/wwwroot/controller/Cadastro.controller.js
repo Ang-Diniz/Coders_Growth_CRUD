@@ -261,13 +261,13 @@ sap.ui.define([
             BusyIndicator.show(0)
 
             let historico = History.getInstance();
-            
-			let paginaAnterior = historico.getPreviousHash();
 
-			if (paginaAnterior !== undefined) {
+            let paginaAnterior = historico.getPreviousHash();
 
-				window.history.go(-1);
-			} 
+            if (paginaAnterior !== undefined) {
+
+                window.history.go(-1);
+            } 
             else {
 
                 let rota = this.getOwnerComponent().getRouter();
