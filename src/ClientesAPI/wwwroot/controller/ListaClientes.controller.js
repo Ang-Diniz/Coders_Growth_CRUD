@@ -3,8 +3,9 @@
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/ui/core/BusyIndicator"
-], function (Controller, JSONModel, Filter, FilterOperator, BusyIndicator) {
+    "sap/ui/core/BusyIndicator",
+    "../servicos/Repositorio"
+], function (Controller, JSONModel, Filter, FilterOperator, BusyIndicator, Repositorio) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
@@ -21,13 +22,14 @@
 
             BusyIndicator.show(0)
 
-            let jsonCliente = new JSONModel();
+            let url = API;
 
-            fetch(API)
+            Repositorio.gerarRequisicao(url)
                 .then(res => res.json())
-                .then(res => jsonCliente.setData({ cliente: res }))
-
-            this.getView().setModel(jsonCliente);
+                .then(res => { 
+                    let jsonCliente = new JSONModel({ cliente: res })
+                    this.getView().setModel(jsonCliente);
+                })
 
             BusyIndicator.hide()
         },

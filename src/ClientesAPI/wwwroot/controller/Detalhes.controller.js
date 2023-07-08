@@ -2,8 +2,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
-    "sap/ui/core/BusyIndicator"
-], function (Controller, JSONModel, MessageBox, BusyIndicator) {
+    "sap/ui/core/BusyIndicator",
+    "../servicos/Repositorio"
+], function (Controller, JSONModel, MessageBox, BusyIndicator, Repositorio) {
     "use strict";
 
     const API = "https://localhost:7147/api/cliente/";
@@ -29,13 +30,30 @@ sap.ui.define([
 
             let cliente = this.getView().getModel("cliente").getData();
             id = cliente.id;
-            
-            return fetch(API + id, {
-                method: 'DELETE',
-                headers: {
-                    'Content-type': 'application/json'
+            let url = API + id
+            const sucessoAoRemover = "MensagemSucessoAoRemover";
+            const erroAoRemover = "MensagemErroAoRemover"
+
+            return Repositorio.gerarRequisicao(url, 'DELETE')
+            .then(res => {
+                if (res.status === 200) {
+                    MessageBox.success(i18n.getText(sucessoAoRemover), {
+                    emphasizedAction: MessageBox.Action.OK,
+                    title: "Sucesso",
+                    actions: [MessageBox.Action.OK], onClose : (acao) => {
+                        if (acao === MessageBox.Action.OK) {
+
+                            this.aoClicarEmVoltar();
+                        }
+                    }
+                });
+            } 
+            else {
+                    MessageBox.error(i18n.getText(erroAoRemover), {
+                        emphasizedAction: MessageBox.Action.CLOSE
+                    });
                 }
-            })
+            });
         },
 
         aoClicarEmRemover: function () {
@@ -43,9 +61,7 @@ sap.ui.define([
             let cliente = this.getView().getModel("cliente").getData();
             let id = cliente.id;
             const confirmarRemocaoDoCliente = "MensagemConfirmarRemocaoDoCliente";
-            const sucessoAoRemover = "MensagemSucessoAoRemover";
-            const erroAoRemover = "MensagemErroAoRemover"
-
+            
             MessageBox.confirm(i18n.getText(confirmarRemocaoDoCliente), {
                 emphasizedAction: MessageBox.Action.YES,
                 initialFocus: MessageBox.Action.CANCEL,
@@ -55,26 +71,7 @@ sap.ui.define([
                     if (acao === MessageBox.Action.YES) {
                         BusyIndicator.show(0)
                         this.removerCliente(id)
-                        .then(res => {
-                            if (res.status === 200) {
-                                MessageBox.success(i18n.getText(sucessoAoRemover), {
-                                    emphasizedAction: MessageBox.Action.OK,
-                                    title: "Sucesso",
-                                    actions: [MessageBox.Action.OK], onClose : (acao) => {
-                                        if (acao === MessageBox.Action.OK) {
-
-                                            this.aoClicarEmVoltar();
-                                        }
-                                    }
-                            });
-                        } 
-                        else {
-                                MessageBox.error(i18n.getText(erroAoRemover), {
-                                    emphasizedAction: MessageBox.Action.CLOSE
-                                });
-                            }
-                            BusyIndicator.hide()
-                        });
+                        BusyIndicator.hide()
                     }
                 }
             });
@@ -82,7 +79,9 @@ sap.ui.define([
 
         obterClientes: function (id) {
 
-            fetch(API + id)
+            let url = API + id;
+
+            Repositorio.gerarRequisicao(url)
                 .then(res => {
                     if(res.status === 404) {
 

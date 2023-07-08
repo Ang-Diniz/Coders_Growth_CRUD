@@ -11,8 +11,8 @@
 				<Title text="{i18n>TituloPainelTelaDeDetalhes}"/>
 				<core:Icon src="sap-icon://customer"></core:Icon>
 				<ToolbarSpacer/>
-				<Button icon="sap-icon://user-edit" width="7%" text="{i18n>BotaoEditar}" type="Emphasized" press="aoClicarEmEditar"/>
-				<Button icon="sap-icon://delete" class="sapUiSmallMarginEnd" text="{i18n>BotaoRemover}" type="Negative" press="aoClicarEmRemover"/>
+				<Button icon="sap-icon://user-edit" text="{i18n>BotaoEditar}" type="Emphasized" press="aoClicarEmEditar"/>
+				<Button icon="sap-icon://delete" class="sapUiSmallMarginEnd" text="{i18n>BotaoRemover}" type="Reject" press="aoClicarEmRemover"/>
 			</Toolbar>
 		</Panel>
 

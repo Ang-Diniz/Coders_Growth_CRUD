@@ -1,37 +1,55 @@
-<mvc:view 
-	controllerName="sap.ui.cliente.controller.Cadastro"
-  	xmlns="sap.m"
-  	xmlns:mvc="sap.ui.core.mvc"
+<mvc:view
+    controllerName="sap.ui.cliente.controller.Cadastro"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
     xmlns:l="sap.ui.layout"
-	xmlns:core="sap.ui.core">  
+    xmlns:core="sap.ui.core">  
 	
-	<Page id="tituloPagina" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
-		<Shell>
-			<Panel class="sapUiResponsiveMargin" width="auto">
-				<Toolbar class="sapUiTinyMarginBottom">
-					<Title id="tituloPainel"/>
-					<core:Icon src="sap-icon://add-activity"></core:Icon>
-					<ToolbarSpacer/>
-					<Button icon="sap-icon://save" id="botaoSalvar" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
-					<Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Negative" press="aoClicarEmCancelar"/>
-				</Toolbar>
-			
-				<l:VerticalLayout class="sapUiContentPadding sapUiLargeMarginBegin" width="70%">
-					<Label text="{i18n>LabelNome}:" design="Bold" labelFor="inputNome"/>
-					<Input id="inputNome" name="inputNome" required="true" showClearIcon="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
+    <Page id="tituloPagina" titleAlignment="Center" binding= "{/cliente}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 
-					<Label text="{i18n>LabelEmail}:" design="Bold" labelFor="inputEmail"/>
-					<Input id="inputEmail" name="inputEmail" valueState="None" showClearIcon="true" valueLiveUpdate="true" liveChange="aoMudarCampos" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
+        <Panel class="sapUiResponsiveMargin" width="auto">
+            <Toolbar class="sapUiTinyMarginBottom">
+                <Title id="tituloPainel"/>
+                <core:Icon src="sap-icon://add-activity"></core:Icon>
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://save" text="{i18n>BotaoSalvar}" type="Emphasized" press="aoClicarEmSalvar"/>
+                <Button icon="sap-icon://cancel" class="sapUiSmallMarginEnd" text="{i18n>BotaoCancelar}" type="Reject" press="aoClicarEmCancelar"/>
+            </Toolbar>
+        </Panel>
 
-					<Label text="{i18n>LabelCPF}:" design="Bold" labelFor="inputCPF"/>
-					<MaskInput id="inputCPF" name="inputCPF" mask="999.999.999-99" showClearIcon="true" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="80%" value="{cliente>/cpf}"/>
+        <FlexBox height="30%" width="100%" justifyContent="Center" alignItems="Center">
 
-					<Label text="{i18n>LabelDataDeNascimento}:" design="Bold" labelFor="inputDataDeNascimento"/>
-					<DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" change="aoMudarCampos" required="true" width="80%" placeholder="{i18n>InputDataDeNascimento}"
-					value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd / MM / yyyy'}}"/>
-				</l:VerticalLayout>
+            <VBox justifyContent="Center" class="sapUiSmallMargin">
+                <HBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label text="{i18n>LabelNome}" labelFor="inputNome"/>
+                        <Input width="450px" id="inputNome" name="inputNome" required="true" showClearIcon="true" valueState="None" valueLiveUpdate="true" liveChange="aoMudarCampos" placeholder="{i18n>InputNome}" value="{cliente>/nome}" submit="aoClicarEmSalvar"/>
+                    </VBox>
+                    <VBox class="sapUiSmallMarginEnd">
+                        <Label text="{i18n>LabelEmail}" labelFor="inputEmail"/>
+                        <Input width="450px" id="inputEmail" name="inputEmail" valueState="None" showClearIcon="true" valueLiveUpdate="true" liveChange="aoMudarCampos" required="true" placeholder="{i18n>InputEmail}" value="{cliente>/email}" submit="aoClicarEmSalvar"/>
+                    </VBox>
+                </HBox>
+            </VBox>
 
-			</Panel>
-		</Shell>	
-	</Page>
-</mvc:view> 
+        </FlexBox>
+
+        <FlexBox height="5px" width="100%" justifyContent="Center" alignItems="Center">
+
+            <HBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>LabelCPF}" labelFor="inputCPF"/>
+                    <MaskInput  id="inputCPF" name="inputCPF" mask="999.999.999-99" showClearIcon="true" placeholderSymbol="_" valueState="None" change="aoMudarCampos" required="true" placeholder="{i18n>InputCPF}" width="450px" value="{cliente>/cpf}"/>
+                </VBox>
+            </HBox>
+            <HBox>
+                <VBox class="sapUiSmallMarginEnd">
+                    <Label text="{i18n>LabelDataDeNascimento}" labelFor="inputDataDeNascimento"/>
+                    <DatePicker id="inputDataDeNascimento" name="inputDataDeNascimento" valueState="None" change="aoMudarCampos" required="true" width="450px" placeholder="{i18n>InputDataDeNascimento}"
+                    value="{path:'cliente>/dataDeNascimento', type:'sap.ui.model.type.Date', formatOptions:{pattern:'dd / MM / yyyy'}}"/>
+                </VBox>
+            </HBox>
+
+        </FlexBox>
+    </Page>
+</mvc:view>

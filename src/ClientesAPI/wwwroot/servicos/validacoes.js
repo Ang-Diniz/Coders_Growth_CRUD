@@ -159,7 +159,7 @@ sap.ui.define([
             }
             else 
             {
-                campo.setValueState("Success");
+                campo.setValueState("None");
             }
         },
 
