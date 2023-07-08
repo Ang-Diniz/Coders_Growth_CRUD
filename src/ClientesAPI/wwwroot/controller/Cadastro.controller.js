@@ -172,17 +172,13 @@ sap.ui.define([
             if (id) {
 
                 BusyIndicator.show(0)
-
                 this.editarCliente(id)
-               
                 BusyIndicator.hide()
             }
             else {
                 
                 BusyIndicator.show(0)
-
                 this.cadastrarCliente() 
-                
                 BusyIndicator.hide()
             }
         },
@@ -265,6 +261,7 @@ sap.ui.define([
             BusyIndicator.show(0)
 
             let historico = History.getInstance();
+            
 			let paginaAnterior = historico.getPreviousHash();
 
 			if (paginaAnterior !== undefined) {
