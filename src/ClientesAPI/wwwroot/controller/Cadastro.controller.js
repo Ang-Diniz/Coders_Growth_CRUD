@@ -224,33 +224,21 @@ sap.ui.define([
 
         aoMudarCampos: function (Evento) {
 
-            let campo = Evento.getSource();
+            const campo = Evento.getSource();
+            const nomeDoCampo = campo.getName();
+            const valorDoCampo = campo.getValue();
 
-            if (campo.getName() === "inputNome") {
+            const validacoes = {
 
-                let erros = Validacoes.validarNome(campo.getValue());
+                inputNome: () => Validacoes.validarNome(valorDoCampo),
+                inputEmail: () => Validacoes.validarEmail(valorDoCampo),
+                inputCPF: () => Validacoes.validarCpf(valorDoCampo),
+                inputDataDeNascimento: () => this.checarEntradaDaData(valorDoCampo)
+            };
 
-                Validacoes.mensagensDeErros(campo, erros);
-            }
-
-            if (campo.getName() === "inputEmail") {
-
-                let erros = Validacoes.validarEmail(campo.getValue());
-
-                Validacoes.mensagensDeErros(campo, erros);
-            }
-
-            if (campo.getName() === "inputCPF") {
-
-                let erros = Validacoes.validarCpf(campo.getValue());
-
-                Validacoes.mensagensDeErros(campo, erros);
-            }
-
-            if (campo.getName() === "inputDataDeNascimento") {
-
-                let erros = this.checarEntradaDaData(campo.getValue());
-
+            if (validacoes[nomeDoCampo]) {
+                
+                const erros = validacoes[nomeDoCampo]();
                 Validacoes.mensagensDeErros(campo, erros);
             }
         },
