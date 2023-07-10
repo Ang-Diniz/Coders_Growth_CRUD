@@ -1,4 +1,4 @@
-﻿<mvc:View 
+﻿<mvc:view 
    controllerName="sap.ui.cliente.controller.ListaClientes"
    xmlns="sap.m"
    xmlns:mvc="sap.ui.core.mvc"
@@ -20,8 +20,8 @@
                   <Button text="{i18n>BotaoCadastrar}" icon="sap-icon://add-employee" class="sapUiTinyMarginBottom" type="Emphasized" press="aoClicarEmCadastrar"/>
                <ToolbarSpacer/>
                   <SearchField id="searchField" width="25%" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" showSearchButton="false" placeholder="{i18n>BarraDePesquisa}" liveChange="buscarClientes"/>
-                  <Button id="searchButton" class=" sapUiTinyMarginEnd" icon="sap-icon://search" press="abrirBarraPesquisa"/>
-                  <Button id="closeButton" class=" sapUiTinyMarginEnd" icon="sap-icon://decline" press="fecharBarraPesquisa" visible="false"/>
+                  <Button id="searchButton" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" icon="sap-icon://search" press="alternarBarraDePesquisa"/>
+                  <Button id="closeButton" class="sapUiTinyMarginBottom sapUiTinyMarginEnd" icon="sap-icon://decline" press="alternarBarraDePesquisa" visible="false"/>
                </Toolbar>
             </headerToolbar>
                <columns> 
@@ -57,4 +57,4 @@
           </Table> 
       </Page>
    </App>
-</mvc:View>
+</mvc:view>

@@ -36,26 +36,28 @@
             BusyIndicator.hide()
         },
 
-        abrirBarraPesquisa: function () {
+        alternarBarraDePesquisa: function () {
 
-            const searchField = this.byId("searchField");
-            const searchButton = this.byId("searchButton");
-            const closeButton = this.byId("closeButton");
-         
-            searchField.setVisible(true);
-            searchButton.setVisible(false);
-            closeButton.setVisible(true);
-        },
+            if (this.byId("searchField").getVisible() === false) {
 
-        fecharBarraPesquisa: function () {
+                const searchField = this.byId("searchField");
+                const searchButton = this.byId("searchButton");
+                const closeButton = this.byId("closeButton");
+             
+                searchField.setVisible(true);
+                searchButton.setVisible(false);
+                closeButton.setVisible(true);
+            }
+            else {
 
-            const searchField = this.byId("searchField");
-            const searchButton = this.byId("searchButton");
-            const closeButton = this.byId("closeButton");
-         
-            searchField.setVisible(false);
-            searchButton.setVisible(true);
-            closeButton.setVisible(false);
+                const searchField = this.byId("searchField");
+                const searchButton = this.byId("searchButton");
+                const closeButton = this.byId("closeButton");
+            
+                searchField.setVisible(false);
+                searchButton.setVisible(true);
+                closeButton.setVisible(false);
+            }
         },
 
         buscarClientes: function (Evento) {
